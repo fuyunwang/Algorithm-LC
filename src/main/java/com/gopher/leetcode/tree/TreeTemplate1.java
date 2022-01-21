@@ -9,7 +9,7 @@ import java.util.List;
  * @Date 2022/1/21 15:03
  * @Description: 相同的树，对称二叉树，叶子结点相似的二叉树
  */
-public class TreeModel1 {
+public class TreeTemplate1 {
     // 递归解决对称二叉树
     public boolean isSymmetricRecur(TreeNode root) {
         return recur(root.left,root.right);
