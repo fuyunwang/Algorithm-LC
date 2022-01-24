@@ -25,21 +25,23 @@ public class QuickSort2 {
         }
     }
 
-    public static int[] partition(int[] arr, int l, int r) {
-        int less = l - 1;
-        int more = r;
-        while (l < more) {
-            if (arr[l] < arr[r]) {
-                swap(arr, ++less, l++);
-            } else if (arr[l] > arr[r]) {
-                swap(arr, --more, l);
-            } else {
-                l++;
+    private static int[] partition(int[] arr,int L, int R){
+        int less=L-1;
+        int more=R;
+        int cur=L;
+        while (cur<more){
+            if (arr[cur]<arr[R]){
+                swap(arr,++less,cur++);
+            }else if (arr[cur]>arr[R]){
+                swap(arr,--more,cur);
+            }else {
+                cur++;
             }
         }
-        swap(arr, more, r);
-        return new int[] { less + 1, more };
+        swap(arr,more,R);
+        return new int[]{less+1,more};
     }
+
 
     public static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
