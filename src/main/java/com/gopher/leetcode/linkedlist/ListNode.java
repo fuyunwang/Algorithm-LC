@@ -1,4 +1,4 @@
-package com.gopher.leetcode;
+package com.gopher.leetcode.linkedlist;
 
 /**
  * @Title ListNode

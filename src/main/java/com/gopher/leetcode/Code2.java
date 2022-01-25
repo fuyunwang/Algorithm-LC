@@ -1,5 +1,7 @@
 package com.gopher.leetcode;
 
+import com.gopher.leetcode.linkedlist.ListNode;
+
 /**
  * @Title Code2
  * @Author fyw

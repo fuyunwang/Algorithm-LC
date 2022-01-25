@@ -1,5 +1,7 @@
 package com.gopher.leetcode;
 
+import com.gopher.leetcode.linkedlist.ListNode;
+
 import java.util.PriorityQueue;
 
 /**
