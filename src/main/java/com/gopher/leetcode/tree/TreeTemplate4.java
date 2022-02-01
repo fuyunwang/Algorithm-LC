@@ -6,7 +6,7 @@ import java.util.*;
  * @Title TreeTemplate4
  * @Author fyw
  * @Date 2022/2/1 20:19
- * @Description:
+ * @Description: 二叉树的遍历
  */
 public class TreeTemplate4 {
     public int[] levelOrder(TreeNode root){
@@ -111,7 +111,7 @@ public class TreeTemplate4 {
         return res;
     }
 
-    // 中序遍历使用栈辅助迭代
+    // 中序遍历使用栈辅助迭代，核心在于首先将所有最左子树节点依次加入
     public List<Integer> inorderTraversal(TreeNode root){
         List<Integer> res=new ArrayList<>();
         Stack<TreeNode> stack=new Stack<>();
@@ -128,4 +128,24 @@ public class TreeTemplate4 {
         }
         return res;
     }
+    // 前序遍历使用栈辅助迭代，核心在于层序遍历类似
+    public List<Integer> preorderTraversal(TreeNode root) {
+        if (root==null)
+            return new ArrayList<>();
+        List<Integer> res=new ArrayList<>();
+        Stack<TreeNode> stack=new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            final TreeNode pop = stack.pop();
+            res.add(pop.val);
+            if(pop.right!=null){
+                stack.push(pop.right);
+            }
+            if (pop.left!=null){
+                stack.push(pop.left);
+            }
+        }
+        return res;
+    }
+
 }
