@@ -4,7 +4,7 @@ package com.gopher.leetcode;
  * @Title Code190
  * @Author fyw
  * @Date 2022/1/29 19:27
- * @Description:
+ * @Description: 颠倒二进制位
  */
 public class Code190 {
     // you need treat n as an unsigned value

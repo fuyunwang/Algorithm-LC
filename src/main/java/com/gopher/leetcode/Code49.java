@@ -6,7 +6,7 @@ import java.util.*;
  * @Title Code49
  * @Author fyw
  * @Date 2022/1/31 23:01
- * @Description:
+ * @Description: 类似Code187
  */
 public class Code49 {
     public List<List<String>> groupAnagrams(String[] strs) {

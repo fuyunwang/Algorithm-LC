@@ -6,7 +6,7 @@ import java.util.*;
  * @Title Code884
  * @Author fyw
  * @Date 2022/1/30 13:21
- * @Description:
+ * @Description: 类似Code187
  */
 public class Code884 {
     public String[] uncommonFromSentences(String s1, String s2) {
