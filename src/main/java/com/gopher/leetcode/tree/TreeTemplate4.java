@@ -147,5 +147,108 @@ public class TreeTemplate4 {
         }
         return res;
     }
+    // 二叉树的后序遍历，在前序遍历的基础上增加栈实现，左右中 压栈就是中右左
+    public List<Integer> postorderTraversal(TreeNode root) {
+        if (root==null)
+            return new ArrayList<>();
+        List<Integer> res=new ArrayList<>();
+        Stack<TreeNode> stack1=new Stack<>();
+        Stack<TreeNode> stack2=new Stack<>();
+        stack1.push(root);
+        while (!stack1.isEmpty()){
+            final TreeNode pop = stack1.pop();
+            stack2.push(pop);
+            if (pop.left!=null){
+                stack1.push(pop.left);
+            }
+            if (pop.right!=null){
+                stack1.push(pop.right);
+            }
+        }
+        while (!stack2.isEmpty()){
+            res.add(stack2.pop().val);
+        }
+        return res;
+    }
 
+
+    // N叉树的前序遍历
+    public List<Integer> preorder(Node root) {
+        if (root==null)
+            return new ArrayList<>();
+        List<Integer> res=new ArrayList<>();
+        Stack<Node> stack=new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            final Node pop = stack.pop();
+            res.add(pop.val);
+            for (int i = pop.children.size()-1; i >= 0 ; i--) {
+                stack.push(pop.children.get(i));
+            }
+        }
+        return res;
+    }
+    // N叉树的后序遍历
+    public List<Integer> postorder(Node root) {
+        if (root==null)
+            return new ArrayList<>();
+        Stack<Node> stack1=new Stack<>();
+        Stack<Node> stack2=new Stack<>();
+        stack1.push(root);
+        while (!stack1.isEmpty()){
+            final Node pop = stack1.pop();
+            stack2.push(pop);
+            for (int i = 0; i < pop.children.size(); i++) {
+                stack1.push(pop.children.get(i));
+            }
+        }
+        List<Integer> res=new ArrayList<>();
+        while (!stack2.isEmpty()){
+            res.add(stack2.pop().val);
+        }
+        return res;
+    }
+    // N叉树层序遍历
+    public List<List<Integer>> levelOrder(Node root) {
+        if (root==null)
+            return new ArrayList<>();
+        List<List<Integer>> res=new ArrayList<>();
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int size=queue.size();
+            List<Integer> list=new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                final Node poll = queue.poll();
+                list.add(poll.val);
+                for (Node node:poll.children) {
+                    if (node!=null){
+                        queue.offer(node);
+                    }
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
 }
+
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+
+
+
+

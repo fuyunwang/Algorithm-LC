@@ -28,6 +28,23 @@ public class TreeTemplate3 {
         root.right=buildTreePreIn(preorder,p_start+leftNum+1,p_end,inorder,inIndex+1,i_end,map);
         return root;
     }
+    public TreeNode constructFromPrePost(int[] pre, int[] post) {
+        return helper(pre,post,0,pre.length-1,0,post.length-1);
+    }
+    public TreeNode helper(int[] pre,int[] post,int prestart,int preend,int poststart,int postend){
+        if(prestart>preend||poststart>postend)return null;
+        TreeNode root=new TreeNode(pre[prestart]);
+        if (prestart == preend)
+            return root;
+        int index=0;
+        while(post[index]!=pre[prestart+1]){
+            index++;
+        }
+        root.left=helper(pre,post,prestart+1,prestart+1+index-poststart,poststart,index);
+        root.right=helper(pre,post,prestart+2+index-poststart,preend,index+1,preend-1);
+        return root;
+
+    }
 
     // 中序和后序构造二叉树
     public TreeNode buildTree2(int[] inorder, int[] postorder) {
@@ -48,4 +65,22 @@ public class TreeTemplate3 {
         return root;
     }
 
+    // 前序遍历构造二叉搜索树
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode root=null;
+        for (int i = 0; i < preorder.length; i++) {
+            root=buildBST(root,preorder[i]);
+        }
+        return root;
+    }
+    public TreeNode buildBST(TreeNode root, int num){
+        if (root==null)
+            return new TreeNode(num);
+        if (num> root.val){
+            root.right=buildBST(root.right,num);
+        }else{
+            root.left=buildBST(root.left,num);
+        }
+        return root;
+    }
 }
