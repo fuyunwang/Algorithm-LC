@@ -1,134 +1,39 @@
 package com.gopher.leetcode.sort.quick;
 
-import java.util.Arrays;
+import com.gopher.leetcode.linkedlist.ListNode;
 
 /**
- * @Title QuickSort1
+ * @Title QuickSort3
  * @Author fyw
- * @Date 2022/1/23 16:27
- * @Description:
+ * @Date 2022/2/3 20:19
+ * @Description: 基于链表的快速排序
  */
 public class QuickSort3 {
-    public static void quickSort(int[] arr) {
-        if (arr == null || arr.length < 2) {
-            return;
+    ListNode quickSort(ListNode head){
+        if (head==null||head.next==null)
+            return head;
+        ListNode left=new ListNode(-1), mid=new ListNode(-1), right=new ListNode(-1);
+        ListNode ltail=left,mtail=mid,rtail=right;
+        // 处理三个链表
+        int val=head.val;
+        for (ListNode cur=head;cur!=null;cur=cur.next){
+            if (cur.val<val) ltail=ltail.next=cur;
+            else if (cur.val==val) mtail=mtail.next=cur;
+            else rtail=rtail.next=cur;
         }
-        quickSort(arr, 0, arr.length - 1);
+        ltail.next=mtail.next=rtail.next=null;
+        // 递归处理链表
+        left.next=quickSort(left.next);
+        right.next=quickSort(right.next);
+        //拼接三个链表
+        getTail(left).next=mid.next;
+        getTail(left).next=right.next;
+        return left.next;
     }
 
-    public static void quickSort(int[] arr, int l, int r) {
-        if (l < r) {
-            swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
-            int[] p = partition(arr, l, r);
-            quickSort(arr, l, p[0] - 1);
-            quickSort(arr, p[1] + 1, r);
-        }
-    }
-
-    private static int[] partition(int[] arr,int L, int R){
-        int less=L-1;
-        int more=R;
-        int cur=L;
-        while (cur<more){
-            if (arr[cur]<arr[R]){
-                swap(arr,++less,cur++);
-            }else if (arr[cur]>arr[R]){
-                swap(arr,--more,cur);
-            }else {
-                cur++;
-            }
-        }
-        swap(arr,more,R);
-        return new int[]{less+1,more};
-    }
-
-
-    public static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-
-    // for test
-    public static void comparator(int[] arr) {
-        Arrays.sort(arr);
-    }
-
-    // for test
-    public static int[] generateRandomArray(int maxSize, int maxValue) {
-        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
-        }
-        return arr;
-    }
-
-    // for test
-    public static int[] copyArray(int[] arr) {
-        if (arr == null) {
-            return null;
-        }
-        int[] res = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            res[i] = arr[i];
-        }
-        return res;
-    }
-
-    // for test
-    public static boolean isEqual(int[] arr1, int[] arr2) {
-        if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
-            return false;
-        }
-        if (arr1 == null && arr2 == null) {
-            return true;
-        }
-        if (arr1.length != arr2.length) {
-            return false;
-        }
-        for (int i = 0; i < arr1.length; i++) {
-            if (arr1[i] != arr2[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // for test
-    public static void printArray(int[] arr) {
-        if (arr == null) {
-            return;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-    }
-
-    // for test
-    public static void main(String[] args) {
-        int testTime = 500000;
-        int maxSize = 100;
-        int maxValue = 100;
-        boolean succeed = true;
-        for (int i = 0; i < testTime; i++) {
-            int[] arr1 = generateRandomArray(maxSize, maxValue);
-            int[] arr2 = copyArray(arr1);
-            quickSort(arr1);
-            comparator(arr2);
-            if (!isEqual(arr1, arr2)) {
-                succeed = false;
-                printArray(arr1);
-                printArray(arr2);
-                break;
-            }
-        }
-        System.out.println(succeed ? "Nice!" : "Fucking fucked!");
-
-        int[] arr = generateRandomArray(maxSize, maxValue);
-        printArray(arr);
-        quickSort(arr);
-        printArray(arr);
-
+    ListNode getTail(ListNode head){
+        while (head.next!=null)
+            head=head.next;
+        return head;
     }
 }

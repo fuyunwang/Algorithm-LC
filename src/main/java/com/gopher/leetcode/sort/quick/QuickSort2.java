@@ -3,28 +3,51 @@ package com.gopher.leetcode.sort.quick;
 import java.util.Arrays;
 
 /**
- * @Title Quick3
+ * @Title QuickSort1
  * @Author fyw
- * @Date 2022/1/24 12:20
- * @Description: 快排的代码模板
+ * @Date 2022/1/23 16:27
+ * @Description:
  */
 public class QuickSort2 {
-    public static void quickSort(int[] q, int l, int r){
-        if(l >= r) return;
-        int x = q[l], i = l - 1, j = r + 1;
-        while(i < j){
-            while( q[++i] < x );
-            while( q[--j] > x) ;
-            if(i < j){
-                int t = q[i];
-                q[i] = q[j];
-                q[j] = t;
-            }
+    public static void quickSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
         }
-        quickSort(q, l, j);
-        quickSort(q, j + 1, r);
+        quickSort(arr, 0, arr.length - 1);
     }
 
+    public static void quickSort(int[] arr, int l, int r) {
+        if (l < r) {
+            swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
+            int[] p = partition(arr, l, r);
+            quickSort(arr, l, p[0] - 1);
+            quickSort(arr, p[1] + 1, r);
+        }
+    }
+
+    private static int[] partition(int[] arr,int L, int R){
+        int less=L-1;
+        int more=R;
+        int cur=L;
+        while (cur<more){
+            if (arr[cur]<arr[R]){
+                swap(arr,++less,cur++);
+            }else if (arr[cur]>arr[R]){
+                swap(arr,--more,cur);
+            }else {
+                cur++;
+            }
+        }
+        swap(arr,more,R);
+        return new int[]{less+1,more};
+    }
+
+
+    public static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
 
     // for test
     public static void comparator(int[] arr) {
@@ -91,7 +114,7 @@ public class QuickSort2 {
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = generateRandomArray(maxSize, maxValue);
             int[] arr2 = copyArray(arr1);
-            quickSort(arr1,0,arr1.length-1);
+            quickSort(arr1);
             comparator(arr2);
             if (!isEqual(arr1, arr2)) {
                 succeed = false;
@@ -104,10 +127,8 @@ public class QuickSort2 {
 
         int[] arr = generateRandomArray(maxSize, maxValue);
         printArray(arr);
-        quickSort(arr,0,arr.length-1);
+        quickSort(arr);
         printArray(arr);
 
     }
-
-
 }

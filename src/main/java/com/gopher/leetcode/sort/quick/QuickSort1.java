@@ -3,42 +3,29 @@ package com.gopher.leetcode.sort.quick;
 import java.util.Arrays;
 
 /**
- * @Title QuickSort1
+ * @Title Quick3
  * @Author fyw
- * @Date 2022/1/23 16:33
- * @Description:
+ * @Date 2022/1/24 12:20
+ * @Description: 快排的代码模板
  */
 public class QuickSort1 {
-    public static void quickSort(int[] arr, int low, int high){
-        if (low>=high)
-            return;
-        swap(arr,low+((int)Math.random()*(high-low+1)),high);
-        int p=partition(arr,low,high);
-        quickSort(arr,low,p-1);
-        quickSort(arr,p+1,high);
-    }
-    private static int partition(int[] arr,int low,int high){
-        int v=arr[low];
-        int left=low;
-        int right=high+1;
-        while (true){
-            while (++left<=high&&arr[left]<v);
-            while (--right>=low&&arr[right]>v);
-            if (left>=right)
-                break;
-            int temp=arr[left];
-            arr[left]=arr[right];
-            arr[right]=temp;
+    public static void quickSort(int[] q, int l, int r){
+        if(l >= r) return;
+        int x = q[l], i = l - 1, j = r + 1;
+        while(i < j){
+            while( q[++i] < x );
+            while( q[--j] > x) ;
+            if(i < j){
+                int t = q[i];
+                q[i] = q[j];
+                q[j] = t;
+            }
         }
-        arr[low]=arr[right];
-        arr[right]=v;
-        return right;
+        quickSort(q, l, j);
+        quickSort(q, j + 1, r);
     }
-    private static void swap(int[] arr,int i,int j){
-        int temp=arr[i];
-        arr[i]=arr[j];
-        arr[j]=temp;
-    }
+
+
     // for test
     public static void comparator(int[] arr) {
         Arrays.sort(arr);
@@ -121,4 +108,6 @@ public class QuickSort1 {
         printArray(arr);
 
     }
+
+
 }
