@@ -20,6 +20,7 @@ import java.util.Stack;
  *
  */
 public class Code1124 {
+    // 求 presum 数组中的一个最长的上坡，可以用单调栈实现,presum = [0, 1, 2, 1, 0, -1, -2, -1]
     public int longestWPI(int[] hours) {
         int[] sum=new int[hours.length+1];
         sum[0]=0;
