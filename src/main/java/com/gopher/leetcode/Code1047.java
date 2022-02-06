@@ -1,5 +1,9 @@
 package com.gopher.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 /**
  * @Title Code1047
  * @Author fyw
@@ -9,6 +13,23 @@ package com.gopher.leetcode;
  */
 public class Code1047 {
     public String removeDuplicates(String s) {
-
+        LinkedList<Character> stack=new LinkedList<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c=s.charAt(i);
+            if (stack.isEmpty())
+                stack.addLast(c);
+            else if (stack.peekLast()==c){
+                stack.pollLast();
+            }else{
+                stack.addLast(c);
+            }
+        }
+        if (stack.isEmpty())
+            return "";
+        StringBuilder sb=new StringBuilder();
+        while (!stack.isEmpty()){
+            sb.append(stack.pollFirst());
+        }
+        return sb.toString();
     }
 }
