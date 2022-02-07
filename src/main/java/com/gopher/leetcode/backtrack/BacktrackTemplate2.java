@@ -8,7 +8,7 @@ import java.util.List;
  * @Title BacktrackTemplate2
  * @Author fyw
  * @Date 2022/1/29 20:09
- * @Description: 组合总和、
+ * @Description: 组合总和
  */
 public class BacktrackTemplate2 {
     //组合总和1,2,3,4

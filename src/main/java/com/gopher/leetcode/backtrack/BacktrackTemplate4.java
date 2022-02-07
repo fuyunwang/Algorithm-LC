@@ -71,6 +71,7 @@ public class BacktrackTemplate4 {
 
             if (root.left!=null){
                 // 注意此处的技巧，使用new StringBuilder创建了新的对象，原始上下文中的sb对象是保存在操作数栈中的，避免回溯过程中删除操作
+                // 手动删除是删不干净的，因为树的路径与全排列还是不一样的
                 dfs(root.left,new StringBuilder(sb).append("->"));
             }
 
