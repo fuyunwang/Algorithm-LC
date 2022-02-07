@@ -1,4 +1,6 @@
-package com.gopher.leetcode.tree;
+package com.gopher.leetcode.tree.normal;
+
+import com.gopher.leetcode.tree.TreeNode;
 
 /**
  * @Title Code111
