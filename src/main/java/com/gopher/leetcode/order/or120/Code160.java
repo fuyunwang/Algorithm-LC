@@ -1,4 +1,4 @@
-package com.gopher.leetcode;
+package com.gopher.leetcode.order.or120;
 
 import com.gopher.leetcode.linkedlist.ListNode;
 
