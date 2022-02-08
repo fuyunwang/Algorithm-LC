@@ -8,7 +8,7 @@ import java.util.*;
  * @Title BacktrackTemplate4
  * @Author fyw
  * @Date 2022/2/7 19:18
- * @Description: Code113路径总和、活字印刷、Code257输出叶子结点路径
+ * @Description: Code113路径总和、活字印刷、Code257输出叶子结点路径、括号生成
  */
 public class BacktrackTemplate4 {
     class Code113{
@@ -79,6 +79,26 @@ public class BacktrackTemplate4 {
                 dfs(root.right,new StringBuilder(sb).append("->"));
             }
 
+        }
+    }
+
+    class Code22{
+        List<String> res=new ArrayList<>();
+        public List<String> generateParenthesis(int n) {
+            dfs(n,0,0,"");
+            return res;
+        }
+        public void dfs(int n,int l,int r,String state){
+            if (l==n&&r==n){
+                res.add(state);
+                return;
+            }
+            if (l<n){
+                dfs(n,l+1,r,state+"(");
+            }
+            if (r<n&&r<l){
+                dfs(n,l,r+1,state+")");
+            }
         }
     }
 
