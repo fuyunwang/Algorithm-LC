@@ -8,7 +8,7 @@ import java.util.Map;
  * @Author fyw
  * @Date 2022/2/6 13:23
  * @Description: 不同字符的最小子序列
- * 与316同一道题目
+ * 与316同一道题目，类似402 321
  */
 public class Code1081 {
     public String smallestSubsequence(String s) {
