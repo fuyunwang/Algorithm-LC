@@ -11,10 +11,21 @@ public class Code125 {
         int l=0,r=s.length()-1;
         final char[] chars = s.toCharArray();
         while (l<r){
-//            Character.is
-            if (Character.toLowerCase(chars[l++])!=Character.toLowerCase(chars[r++])){
+            char lc=chars[l];
+            char rc=chars[r];
+            if(!Character.isLetterOrDigit(lc)){
+                l++;
+                continue;
+            }
+            if(!Character.isLetterOrDigit(rc)){
+                r--;
+                continue;
+            }
+            if (Character.toLowerCase(lc)!=Character.toLowerCase(rc)){
                 return false;
             }
+            l++;
+            r--;
         }
         return true;
     }
