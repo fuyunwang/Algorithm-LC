@@ -5,7 +5,7 @@ package com.gopher.leetcode.order.or60;
  * @Author fyw
  * @Date 2022/2/8 21:11
  * @Description: x的平方根 即找一个最大的y使得y的平方小于等于x
- * 高频题
+ * 高频题，注意边界
  */
 public class Code69 {
     public int mySqrt(int x) {
