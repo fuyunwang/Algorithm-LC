@@ -2,16 +2,13 @@ package com.gopher.leetcode.backtrack;
 
 import com.gopher.leetcode.tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Title BacktrackTemplate5
  * @Author fyw
  * @Date 2022/2/9 12:30
- * @Description: 电话号码的字母组合、不同的搜索二叉树
+ * @Description: 电话号码的字母组合、不同的搜索二叉树、Code491递增子序列、Code93复原IP地址
  */
 public class BacktrackTemplate5 {
     class Code17{
@@ -31,7 +28,7 @@ public class BacktrackTemplate5 {
         };
         public List<String> letterCombinations(String digits) {
             if (digits==null||digits.length()<1)
-                return new ArrayList<>();
+                return Collections.emptyList();
             backtrack(digits,"",0);
             return res;
         }
