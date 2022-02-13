@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @Date 2022/1/25 13:05
  * @Description:
  */
-public class MergeSort {
+public class MergeSort1 {
     public static void mergeSort(int[] arr){
         if (arr==null||arr.length<2)
             return;
