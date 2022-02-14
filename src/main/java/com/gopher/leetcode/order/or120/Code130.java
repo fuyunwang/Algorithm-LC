@@ -5,8 +5,8 @@ package com.gopher.leetcode.order.or120;
  * @Author fyw
  * @Date 2022/2/9 14:47
  * @Description: 被围绕的区域
- * flod fill算法
- * 逆向思维，对边界的‘O’进行替换、Code200岛屿数量
+ * flood fill算法
+ * 逆向思维，对边界的‘O’进行替换、Code200岛屿数量、Code749隔离病毒
  */
 public class Code130 {
     char[][] grid;
