@@ -6,6 +6,7 @@ package com.gopher.leetcode.order.or40;
  * @Date 2022/2/2 16:56
  * @Description: 在排序数组中查找元素的第一个和最后一个位置
  * 高频题目，即二分，左右边界的二分、
+ * Code540二分
  */
 public class Code34 {
     public int[] searchRange(int[] nums, int target) {

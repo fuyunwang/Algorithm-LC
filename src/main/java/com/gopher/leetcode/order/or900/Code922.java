@@ -5,6 +5,7 @@ package com.gopher.leetcode.order.or900;
  * @Author fyw
  * @Date 2022/1/29 19:57
  * @Description:
+ * 两个指针分别枚举奇数位置和偶数位置，找到第一个不满足条件的数字然后交换
  */
 public class Code922 {
     public int[] sortArrayByParityII(int[] nums) {

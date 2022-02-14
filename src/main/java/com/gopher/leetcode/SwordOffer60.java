@@ -1,4 +1,4 @@
-package com.gopher.leetcode.order;
+package com.gopher.leetcode;
 
 /**
  * @Title SwordOffer60

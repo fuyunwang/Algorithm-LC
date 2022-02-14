@@ -5,7 +5,7 @@ package com.gopher.leetcode.order.or200;
  * @Author fyw
  * @Date 2022/2/1 19:44
  * @Description: 岛屿数量
- * 类似题目看Code1034
+ * 类似题目看Code1034、Code130
  */
 public class Code200 {
     public int numIslands(char[][] grid) {
