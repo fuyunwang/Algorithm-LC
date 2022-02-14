@@ -22,4 +22,13 @@ public class Code540 {
         }
         return nums[l];
     }
+    // 解法2、两两分组
+    public int singleNonDuplicate1(int[] nums) {
+        for (int i = 0; i < nums.length / 2; i++) {
+            if (nums[i * 2] != nums[i * 2 + 1]) {
+                return nums[i * 2];
+            }
+        }
+        return nums[nums.length - 1];
+    }
 }
