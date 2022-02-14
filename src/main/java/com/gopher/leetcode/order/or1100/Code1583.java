@@ -1,4 +1,4 @@
-package com.gopher.leetcode.order.or1000;
+package com.gopher.leetcode.order.or1100;
 
 /**
  * @Title Code1583

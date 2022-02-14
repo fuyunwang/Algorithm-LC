@@ -7,4 +7,4 @@ package com.gopher.leetcode.order.or1100;
  * @Description:
  */
 public class Code1221 {
-        }
+}

@@ -49,9 +49,10 @@ public class Code1095 {
         }
         return -1;
     }
+    interface MountainArray {
+        public int get(int index);
+        public int length();
+    }
 }
 
-interface MountainArray {
-    public int get(int index);
-    public int length();
-}
+
