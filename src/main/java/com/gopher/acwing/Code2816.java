@@ -7,5 +7,5 @@ package com.gopher.acwing;
  * @Description: 双指针的模板题之判断子序列
  */
 public class Code2816 {
-    
+
 }
