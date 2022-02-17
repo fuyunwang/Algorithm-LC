@@ -7,4 +7,5 @@ package com.gopher.leetcode.order.or500;
  * @Description:
  */
 public class Code503 {
+
 }
