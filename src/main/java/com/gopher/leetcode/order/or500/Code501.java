@@ -10,6 +10,7 @@ import java.util.List;
  * @Author fyw
  * @Date 2022/2/9 14:39
  * @Description: 二叉搜索树中的众数
+ * 类似Code508
  */
 public class Code501 {
 
