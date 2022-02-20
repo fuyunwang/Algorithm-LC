@@ -9,7 +9,7 @@ package com.gopher.leetcode.order.or200;
  * 本质是求在原串中使其成为回文串的最长前缀
  */
 public class Code214 {
-    public String shortestPalindrome(String s) {
-
-    }
+//    public String shortestPalindrome(String s) {
+//
+//    }
 }
