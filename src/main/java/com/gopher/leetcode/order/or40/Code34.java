@@ -8,31 +8,45 @@ package com.gopher.leetcode.order.or40;
  * 高频题目，即二分，左右边界的二分、
  * Code540二分
  * Code1894二分
+ * Code34
+ * Code35
  */
 public class Code34 {
     public int[] searchRange(int[] nums, int target) {
-        int[] res=new int[]{-1,-1};
-        res[0]=search(nums,target,true);
-        res[1]=search(nums,target,false);
-        return res;
-    }
-    int search(int[] nums,int target,boolean isLeft){
-        int left=0,right=nums.length-1;
-        int res=-1;
-        while (left<=right){            // 只有左闭右开时不取等号其他的都取
-            int mid=(left+right)/2;
-            if (nums[mid]<target){
-                left=mid+1;
-            }else if (nums[mid]>target){
-                right=mid-1;
+        if(nums==null||nums.length==0)
+            return new int[]{-1,-1};
+        int[] res=new int[2];
+        // 查找左侧边界
+        int n=nums.length;
+        int l=0,r=n-1;
+        while(l<r){
+            int mid=l+r>>1;
+            if(nums[mid]>=target){
+                r=mid;
             }else{
-                res=mid;
-                if (isLeft){
-                    right=mid-1;
-                }else{
-                    left=mid+1;
-                }
+                l=mid+1;
             }
+        }
+        if(nums[l]==target){
+            res[0]=l;
+        }else{
+            res[0]=-1;
+        }
+        // 查找右侧边界
+        l=0;
+        r=n-1;
+        while(l<r){
+            int mid=l+r+1>>1;
+            if(nums[mid]<=target){
+                l=mid;
+            }else{
+                r=mid-1;
+            }
+        }
+        if(nums[l]==target){
+            res[1]=l;
+        }else{
+            res[1]=-1;
         }
         return res;
     }
