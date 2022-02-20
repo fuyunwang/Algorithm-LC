@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @Date 2022/2/20 15:39
  * @Description:
  */
-public class Big {
+public class Big01 {
     // big number是逆序存放到数组
     class Add{
         public void add1(){
