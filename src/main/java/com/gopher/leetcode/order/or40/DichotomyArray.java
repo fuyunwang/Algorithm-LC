@@ -109,7 +109,7 @@ public class DichotomyArray {
             while (l<r){
                 int mid = l+r>>1;
                 if (q[mid]>=target){
-                    r=mid;
+                    r=mid;      // if决定了要查询的值可能等于mid，可能小于mid。所以r=mid
                 }else{
                     l=mid+1;
                 }

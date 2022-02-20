@@ -9,7 +9,42 @@ package com.gopher.leetcode.order.or40;
  * 我们只要在有序的半段里用首尾两个数组来判断目标值是否在这一区域内，这样就可以确定保留哪半边了
  */
 public class Code33 {
-    public int search(int[] nums, int target) {
+    public int search(int[] nums, int target){
+        if (nums==null||nums.length==0)
+            return -1;
+        // 思路就是首先枚举中间边界，旋转点。考虑的二段性就是是否比nums[0]大
+        int l=0,r=nums.length-1;
+        while (l<r){
+            int mid=l+r+1>>1;
+            if (nums[mid]>=nums[0]){
+                l=mid;
+            }else{
+                r=mid-1;
+            }
+        }
+        // 此时l=r=旋转点
+        if (target==nums[l]) return l;
+        if (target<nums[0]){
+            l=l+1;
+            r=nums.length-1;
+        }else{
+            l=0;
+        }
+
+        while (l<r){
+            int mid=l+r>>1;
+            if (nums[mid]>=target){
+                r=mid;
+            }else{
+                l=mid+1;
+            }
+        }
+        if (nums[r]==target){
+            return l;
+        }
+        return -1;
+    }
+    public int search1(int[] nums, int target) {
         int len=nums.length;
         int left=0,right=len-1;
         while (left<=right){
