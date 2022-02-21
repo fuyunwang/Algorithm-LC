@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 /**
  * @Title BipartiteGraph
@@ -103,6 +104,59 @@ public class BipartiteGraph {
 
     // 二分图最大匹配，匈牙利算法
     static class Code2{
-
+        static int N = 510,M = 100010,n1,n2,m,idx;
+        static int[] h = new int[N],e = new int[M],ne = new int[M];
+        static int[] match = new int[M];
+        static boolean[] st = new boolean[N];
+        public static void add(int a,int b){
+            e[idx] = b;
+            ne[idx] = h[a];
+            h[a] = idx++;
+        }
+        public static boolean find(int x){
+            //每一次遍历一遍传进来的左边集合x对应的右边集合中的点
+            for(int i = h[x]; i != -1; i = ne[i]){
+                int  j = e[i];
+                // 判断这个点是不是已经用过了，没用过继续
+                if(!st[j]){
+                    //这里st的作用大致就是递归时候起到判重的作用，因为下一位男生遍历时候一开始都会将st初始化为false
+                    //然后将这个点标记为有了，然后如果刚好标记之后这个位置的女生已经被上一个男生约定俗成了，
+                    //就递归看看这个男生是不是还有其他可以喜欢的女生，这个时候判重的作用就体现了，因为在这个过程中
+                    //st已经被true标记了，所以上一个男生重新遍历时候遍历到这个女生就知道要让给下一个男生，所以找到
+                    //自己的其他中意的女生，然后将自己与另外以为女生绑定，如果没有其他喜欢的女生，就返回flase，
+                    //然后下一个男生就是单生，或者看看自己还有没有其他喜欢的女生，以此类推，得出最完美结果！！！
+                    st[j] = true;
+                    if(match[j] == 0 || find(match[j])){
+                        match[j] = x; //match是表示女生对应的男生是谁
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public static void main(String[] args){
+            Scanner scan = new Scanner(System.in);
+            n1 = scan.nextInt();
+            n2 = scan.nextInt();
+            m = scan.nextInt();
+            Arrays.fill(h,-1);
+            while(m -- > 0){
+                int a = scan.nextInt();
+                int b = scan.nextInt();
+                add(a,b);
+            }
+            //统计最大匹配
+            int res = 0;
+            //遍历一下所有左半边集合的点，即所有的男生
+            for(int  i = 1 ; i <= n1 ; i ++ ){
+                //每一次模拟都要将st数组清空,这个判断重复的点,match是物有所主了
+                //st数组用来保证本次匹配过程中，右边集合中的每个点只被遍历一次，防止死循环。
+                //match存的是右边集合中的每个点当前匹配的点是哪个，但就算某个点当前已经匹配了某个点，
+                //也有可能被再次遍历，所以不能起到判重的作用。
+                Arrays.fill(st,false);
+                if(find(i)) res ++ ;
+            }
+            System.out.println(res);
+        }
     }
 }
