@@ -3,6 +3,7 @@ package com.gopher.coding;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * @Title BFS
@@ -55,30 +56,76 @@ public class BFS {
             }
             return d[n - 1][m - 1];
         }
-
     }
 
     static class PII {
         private int first;
         private int second;
-
         public PII(int first, int second) {
             this.first = first;
             this.second = second;
         }
-
         public PII() {
-
         }
-
         public int getFirst() {
             return first;
         }
-
         public int getSecond() {
             return second;
         }
     }
 
+    // 8数码
+        // 状态表示。一个是表示，一个是距离，可以分别用queue<String>和Map<String,Integer>来表示
+        // 状态转移。状态表示可以看做序列化的结果，采用反序列化后再状态转移
+    static class Digit{
+        static Map<String, Integer> map = new HashMap<>(); // 记录最小步数
 
+        public static void main(String[] args){
+            Scanner cin = new Scanner(System.in);
+
+            String str = "";
+
+            for (int i = 0; i < 9; i ++){
+                str += cin.next();
+            }
+
+            System.out.print(bfs(str));
+        }
+
+        static int bfs(String str){
+
+            int[] dx = {0, 1, 0, -1};
+            int[] dy = {1, 0, -1, 0};
+
+            Queue<String> q = new LinkedList<>();
+            q.add(str);
+            map.put(str, 0);
+            while (!q.isEmpty()){
+                String t = q.remove();
+                if (t.equals("12345678x")) return map.get(t);
+                int pos = t.indexOf('x');
+                // 注意一位数组对应二位数组索引的变换
+                int x = pos / 3;
+                int y = pos % 3;
+                for (int i = 0; i < 4; i ++){
+                    int tx = x + dx[i];
+                    int ty = y + dy[i];
+                    if (tx < 0 || tx >= 3 || ty < 0 || ty >= 3) continue;
+                    String tstr = makeStr(t, pos, tx * 3 + ty);
+                    if (map.containsKey(tstr)) continue;
+                    map.put(tstr, map.get(t) + 1);
+                    q.add(tstr);
+                }
+            }
+            return -1;
+        }
+
+        static String makeStr(String t, int originPos, int targetPos){
+            StringBuilder str = new StringBuilder(t);
+            str.setCharAt(originPos, t.charAt(targetPos));
+            str.setCharAt(targetPos, 'x');
+            return str.toString();
+        }
+    }
 }
