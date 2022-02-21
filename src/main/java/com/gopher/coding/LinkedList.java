@@ -1,5 +1,8 @@
 package com.gopher.coding;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -62,6 +65,66 @@ public class LinkedList {
         public static void delete(int k) {
             ne[k] = ne[ne[k]];
         }
+    }
 
+    // 双向链表，头尾指针
+    static class Code2{
+        static int N=100010;
+        static int[] l=new int[N];
+        static int[] r=new int[N];
+        static int[] e=new int[N];
+        static int idx;
+
+        static void init(){
+            r[0]=1;
+            l[1]=0;
+            idx=2;
+        }
+        // 在索引为k的节点后插入值为x的节点
+        static void add(int k,int x){
+            e[idx]=x;
+            l[idx]=k;
+            r[idx]=r[k];
+            l[r[k]]=idx;
+            r[k]=idx;
+            idx++;
+        }
+
+        static void delete(int k){
+            l[r[k]]=l[k];
+            r[l[k]]=r[k];
+        }
+
+        public static void main(String[]args)throws IOException {
+            BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+            int m=Integer.parseInt(in.readLine());
+
+            init();
+            while(m-->0){
+                String[]arr=in.readLine().split(" ");
+                String op=arr[0];
+
+                if(op.equals("L")){
+                    int x=Integer.parseInt(arr[1]);
+                    add(0,x);
+                }else if(op.equals("R")){
+                    int x=Integer.parseInt(arr[1]);
+                    add(l[1],x);
+                }else if(op.equals("D")){
+                    int k=Integer.parseInt(arr[1]);
+                    delete(k+1);
+                }else if(op.equals("IL")){
+                    int k=Integer.parseInt(arr[1]);
+                    int x=Integer.parseInt(arr[2]);
+                    add(l[k+1],x);
+                }else{
+                    int k=Integer.parseInt(arr[1]);
+                    int x=Integer.parseInt(arr[2]);
+                    add(k+1,x);
+                }
+            }
+
+            for(int i=r[0];i!=1;i=r[i]) System.out.print(e[i]+" ");
+        }
     }
 }
