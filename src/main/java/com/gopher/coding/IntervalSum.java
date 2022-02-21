@@ -11,7 +11,7 @@ import java.util.List;
  * @Title IntervalSum
  * @Author fyw
  * @Date 2022/2/20 21:01
- * @Description:
+ * @Description: 区间和
  */
 public class IntervalSum {
     public static void main(String[] args) throws IOException {
