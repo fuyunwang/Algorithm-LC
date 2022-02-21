@@ -82,28 +82,28 @@ public class IntervalSum {
         }
         return r + 1;
     }
+    static class PIIs implements Comparable<PIIs>{
+        private int first;
+        private int second;
+
+        public int getFirst() {
+            return first;
+        }
+
+        public int getSecond() {
+            return second;
+        }
+
+        public PIIs(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public int compareTo(PIIs o) {
+            return Integer.compare(first, o.first);
+        }
+    }
 }
 
-class PIIs implements Comparable<PIIs>{
-    private int first;
-    private int second;
-
-    public int getFirst() {
-        return first;
-    }
-
-    public int getSecond() {
-        return second;
-    }
-
-    public PIIs(int first, int second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    @Override
-    public int compareTo(PIIs o) {
-        return Integer.compare(first, o.first);
-    }
-}
 
