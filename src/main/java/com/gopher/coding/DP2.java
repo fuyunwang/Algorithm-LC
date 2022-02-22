@@ -8,6 +8,7 @@ package com.gopher.coding;
  */
 public class DP2 {
     static class Code1{
+        // 数字三角形
 
     }
 }
