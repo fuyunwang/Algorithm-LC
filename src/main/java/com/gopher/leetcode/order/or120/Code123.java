@@ -7,4 +7,5 @@ package com.gopher.leetcode.order.or120;
  * @Description: 买卖股票的最佳时机
  */
 public class Code123 {
+
 }
