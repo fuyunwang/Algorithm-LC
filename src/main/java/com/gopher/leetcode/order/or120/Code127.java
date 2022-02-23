@@ -6,7 +6,7 @@ import java.util.*;
  * @Title Code127
  * @Author fyw
  * @Date 2022/2/18 20:23
- * @Description:
+ * @Description: 单词接龙
  */
 public class Code127 {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
