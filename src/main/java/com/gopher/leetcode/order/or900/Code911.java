@@ -24,7 +24,6 @@ public class Code911 {
                 }
                 win[i]=maxPerson;
             }
-
         }
 
         public int q(int t) {
