@@ -7,6 +7,7 @@ import java.util.HashSet;
  * @Author fyw
  * @Date 2022-02-24 8:16
  * @Description 存在重复元素II
+ * 滑动窗口
  */
 public class Code219 {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
