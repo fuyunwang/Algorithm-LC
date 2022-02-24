@@ -7,7 +7,7 @@ import java.util.Set;
  * @Title Code349
  * @Author fyw
  * @Date 2022/2/3 14:09
- * @Description: 两个数组的交集
+ * @Description: 两个数组的交集II
  */
 public class Code349 {
     public int[] intersection(int[] nums1, int[] nums2) {
