@@ -16,7 +16,7 @@ public class DichotomyArray {
             // 查找左侧边界
             int l=0, r=n-1;
             while (l<r){
-                int mid = l+r>>1;
+                int mid = l+((r-l)>>1);
                 if (q[mid]>=target){
                     r=mid;      // if决定了要查询的值可能等于mid，可能小于mid。所以r=mid
                 }else{
@@ -27,7 +27,7 @@ public class DichotomyArray {
             // 查找右边界
             l=0;r=n-1;
             while (l<r) {
-                int mid = l + r + 1 >> 1;// 只有l=mid时才+1
+                int mid = l+((r-l+1)>>1);// 只有l=mid时才+1
                 if (q[mid] <= mid) {
                     l = mid;
                 } else {

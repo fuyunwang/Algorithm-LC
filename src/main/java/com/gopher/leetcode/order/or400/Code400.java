@@ -6,5 +6,6 @@ package com.gopher.leetcode.order.or400;
  * @Date 2022/2/8 21:55
  * @Description:
  */
-public class Code400 {
+public class Code400   {
+    // n-k / n 上取整等价于 n
 }
