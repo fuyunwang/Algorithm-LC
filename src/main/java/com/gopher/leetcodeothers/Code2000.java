@@ -1,4 +1,4 @@
-package com.gopher.leetcode;
+package com.gopher.leetcodeothers;
 
 /**
  * @Title Code2000
