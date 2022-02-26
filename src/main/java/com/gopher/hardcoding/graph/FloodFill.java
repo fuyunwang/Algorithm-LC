@@ -148,4 +148,7 @@ public class FloodFill {
             }
         }
     }
+
+    // 山峰和山谷，判断连通块的类型
+    
 }
