@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or100;
  * @Title Code96
  * @Author fyw
  * @Date 2022/2/1 16:59
- * @Description:
+ * @Description: 不同的二叉搜索树
  */
 public class Code96 {
     public int numTrees(int n) {

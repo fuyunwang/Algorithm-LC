@@ -6,7 +6,7 @@ import com.gopher.leetcode.linkedlist.ListNode;
  * @Title Code19
  * @Author fyw
  * @Date 2022/1/22 22:14
- * @Description:
+ * @Description: 删除链表的倒数第 N 个结点
  */
 public class Code19 {
     public ListNode removeNthFromEnd(ListNode head, int n) {

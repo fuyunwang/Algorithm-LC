@@ -16,4 +16,27 @@ public class Main {
         System.out.println(split.length);
         System.out.println(Arrays.toString(split));
     }
+
+    public int maximumDifference(int[] nums) {
+//        int res=-1;
+//        for (int i = 0; i < nums.length; i++) {
+//            int j=i+1;
+//            while (j<nums.length){
+//                if (nums[j]>nums[i]){
+//                    res=Math.max(res,nums[j]-nums[i]);
+//                }
+//                j++;
+//            }
+//        }
+//        return res;
+        int prev=nums[0],res=-1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i]>prev){
+                res=Math.max(res,nums[i]-prev);
+            }else{
+                prev=nums[i];// 找到了更小的前一个元素，后续的元素要取得最大差值那么之前的元素就可以不考虑了，所以直接更新
+            }
+        }
+        return res;
+    }
 }

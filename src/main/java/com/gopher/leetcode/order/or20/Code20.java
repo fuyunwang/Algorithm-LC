@@ -6,7 +6,7 @@ import java.util.Stack;
  * @Title Code20
  * @Author fyw
  * @Date 2022/1/22 22:14
- * @Description:
+ * @Description: 有效的括号
  */
 public class Code20 {
     public boolean isValid(String s) {

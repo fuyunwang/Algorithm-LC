@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or60;
  * @Title Code58
  * @Author fyw
  * @Date 2022/2/2 10:44
- * @Description:
+ * @Description: 最后一个单词的长度
  */
 public class Code58 {
     public int lengthOfLastWord(String s) {

@@ -6,7 +6,7 @@ import java.util.Stack;
  * @Title Code32
  * @Author fyw
  * @Date 2022/1/24 13:15
- * @Description:
+ * @Description: 最长有效括号
  */
 public class Code32 {
     public int longestValidParentheses(String s) {

@@ -8,7 +8,7 @@ import java.util.List;
  * @Title Code206
  * @Author fyw
  * @Date 2022/1/25 12:53
- * @Description:
+ * @Description: 反转链表
  */
 public class Code206 {
     public ListNode reverseList(ListNode head) {

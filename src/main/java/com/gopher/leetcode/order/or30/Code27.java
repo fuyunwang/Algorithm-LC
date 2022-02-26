@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or30;
  * @Title Code27
  * @Author fyw
  * @Date 2022/1/23 17:28
- * @Description:
+ * @Description: 移除元素
  */
 public class Code27 {
     public int removeElement(int[] nums, int val) {

@@ -6,7 +6,7 @@ import com.gopher.leetcode.tree.TreeNode;
  * @Title Code98
  * @Author fyw
  * @Date 2022/1/29 22:21
- * @Description:
+ * @Description: 验证二叉搜索树
  */
 public class Code98 {
     TreeNode pre=null;

@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or10;
  * @Title Code6
  * @Author fyw
  * @Date 2022/1/21 14:44
- * @Description:
+ * @Description: Z字形变换
  */
 public class Code6 {
     public String convert(String s, int numRows) {

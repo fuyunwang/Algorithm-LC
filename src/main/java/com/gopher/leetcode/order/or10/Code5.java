@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or10;
  * @Title Code5
  * @Author fyw
  * @Date 2022/1/21 14:16
- * @Description:
+ * @Description: 最长回文子串
  */
 public class Code5 {
     public String longestPalindrome(String s) {

@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or40;
  * @Title Code38
  * @Author fyw
  * @Date 2022/1/27 19:56
- * @Description:
+ * @Description: 外观数列
  */
 public class Code38 {
     public String countAndSay(int n) {

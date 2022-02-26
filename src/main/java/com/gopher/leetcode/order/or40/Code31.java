@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or40;
  * @Title Code31
  * @Author fyw
  * @Date 2022/1/24 12:39
- * @Description:
+ * @Description: 下一个排列
  */
 public class Code31 {
     public void nextPermutation(int[] nums) {

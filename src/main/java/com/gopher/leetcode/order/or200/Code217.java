@@ -7,7 +7,7 @@ import java.util.Set;
  * @Title Code217
  * @Author fyw
  * @Date 2022/2/3 19:27
- * @Description:
+ * @Description: 存在重复元素
  */
 public class Code217 {
     // set在添加时如果存在重复元素直接返回false

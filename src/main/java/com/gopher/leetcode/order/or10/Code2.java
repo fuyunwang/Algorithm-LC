@@ -6,7 +6,7 @@ import com.gopher.leetcode.linkedlist.ListNode;
  * @Title Code2
  * @Author fyw
  * @Date 2022/1/20 19:53
- * @Description:
+ * @Description: 两数相加
  */
 public class Code2 {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

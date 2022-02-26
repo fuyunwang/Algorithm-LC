@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or30;
  * @Title Code26
  * @Author fyw
  * @Date 2022/1/23 17:12
- * @Description:
+ * @Description: 删除有序数组中的重复项
  */
 public class Code26 {
     public int removeDuplicates(int[] nums) {

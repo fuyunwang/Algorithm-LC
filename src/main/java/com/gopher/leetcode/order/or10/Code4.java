@@ -4,7 +4,7 @@ package com.gopher.leetcode.order.or10;
  * @Title Code4
  * @Author fyw
  * @Date 2022/1/20 20:24
- * @Description:
+ * @Description: 寻找两个正序数组中的中位数
  */
 public class Code4 {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {

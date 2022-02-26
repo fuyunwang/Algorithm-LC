@@ -1,4 +1,4 @@
-package com.gopher.lchardhot;
+package com.gopher.leetcode.lchardhot;
 
 /**
  * @Title Code459
