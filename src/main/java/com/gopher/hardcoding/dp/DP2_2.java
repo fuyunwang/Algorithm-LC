@@ -7,4 +7,8 @@ package com.gopher.hardcoding.dp;
  * @Description 最长上升子序列模型2
  */
 public class DP2_2 {
+    // 拦截导弹
+    static class Code5{
+
+    }
 }

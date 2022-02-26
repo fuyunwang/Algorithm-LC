@@ -1,5 +1,6 @@
 package com.gopher.hardcoding.dp;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -94,9 +95,51 @@ public class DP2_1 {
             System.out.println(res);
         }
     }
-
+    // 友好城市，二维偏序。按照一侧的友好城市进行排序然后求LIS
     static class Code3{
-        
+        class PII {
+            int x, y;
+            public PII(int x, int y) {this.x = x; this.y = y;}
+        }
+        public class Main {
+            Scanner in = new Scanner(System.in);
+            int N = 5010;
+            PII q[] = new PII[N];
+            int f[] = new int[N];
+            public void main(String args[]) {
+                int n = in.nextInt(), res = 0;
+                for (int i = 1; i <= n; i++) q[i] = new PII(in.nextInt(), in.nextInt());
+                Arrays.sort(q, 1, n + 1, (o1, o2) -> o1.x - o2.x);
+                for (int i = 1; i <= n; i++)
+                {
+                    f[i] = 1;
+                    for (int j = 1; j < i; j++)
+                        if (q[j].y < q[i].y) f[i] = Math.max(f[i], f[j] + 1);
+                    res = Math.max(res, f[i]);
+                }
+                System.out.println(res);
+            }
+        }
     }
+    // 最大上升子序列和
+    static class Code4{
+        static Scanner in = new Scanner(System.in);
+        static int N = 1010;
+        static int a[] = new int[N], f[] = new int[N];
 
+        public static void main(String args[])
+        {
+            int n = in.nextInt(), res = 0;
+            for (int i = 0; i < n; i++) a[i] = in.nextInt();
+            for (int i = 0; i < n; i++)
+            {
+                f[i] = a[i];
+                for (int j = 0; j < i; j++)
+                    if (a[j] < a[i])
+                        f[i] = Math.max(f[i], f[j] + a[i]);
+                res = Math.max(res, f[i]);
+            }
+            System.out.println(res);
+        }
+    }
 }
