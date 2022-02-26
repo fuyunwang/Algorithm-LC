@@ -1,4 +1,4 @@
-package com.gopher.hardcoding;
+package com.gopher.hardcoding.dp;
 
 /**
  * @Title DP6

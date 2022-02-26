@@ -1,4 +1,4 @@
-package com.gopher.hardcoding;
+package com.gopher.hardcoding.structure;
 
 /**
  * @Title LineSegmentTree
