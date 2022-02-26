@@ -13,6 +13,7 @@ import java.util.LinkedList;
  * @Description: BFS求最短路只适用于边权为1的图
  */
 public class BFS {
+    // 走迷宫
     static class Code844{
         private static final int N = 110;
         private static int[][] g = new int[N][N], d = new int[N][N];
