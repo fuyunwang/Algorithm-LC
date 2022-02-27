@@ -10,6 +10,12 @@ import java.util.*;
  * @Author fyw
  * @Date 2022-02-27 21:51
  * @Description 剪枝
+ * 手段:
+ * 1. 顺序，优先选择决策少的
+ * 2. 排除冗余信息，如果一个分支与另一个分支接下来的搜索是等价，那么可以不必搜索
+ * 3. 可行性剪枝
+ * 4. 最优性剪枝
+ *
  */
 public class DFS2 {
     static class Code1{
@@ -62,5 +68,13 @@ public class DFS2 {
     static class Code2{
         // 数独
 
+    }
+
+    static class Code3{
+         // 木棒
+         // 剪枝：
+            // 1. 木棒的长度必须能够整除木棍长度总和
+            // 2. 优化搜索顺序，从大到小枚举
+            // 3. 排除等效索引，采用组合数的方式来枚举，组合数的关键在于start参数
     }
 }
