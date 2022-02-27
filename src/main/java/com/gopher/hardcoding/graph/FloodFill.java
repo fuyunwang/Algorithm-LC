@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 /**
  * @Title FloodFill
@@ -150,5 +152,72 @@ public class FloodFill {
     }
 
     // 山峰和山谷，判断连通块的类型
-    
+    static class Code3{
+        static int N = 1010;
+        static int [][] w = new int [N][N] ;
+        static int n;
+        static boolean [][] st = new boolean[N][N];
+        public static void main (String [] args){
+            Scanner sc = new Scanner(System.in);
+            n = sc.nextInt();
+            for (int i = 0 ; i < n ; ++i) {
+                for (int j = 0 ; j < n; ++j) {
+                    w[i][j] = sc.nextInt();
+                }
+            }
+
+            int high = 0 , low = 0 ;
+            for (int i = 0 ; i < n ; ++i) {
+                for (int j = 0; j < n ; ++j) {
+                    if (!st[i][j]) {
+                        Status s = bfs (i, j);
+                        //没有比它高的
+                        //没有比他矮的
+                        if (!s.has_higher) high++;
+                        if (!s.has_lower) low++;
+                    }
+                }
+            }
+            System.out.println(high + " " + low) ;
+        }
+
+        static Status bfs (int x ,int y){
+            Queue<Integer> q = new LinkedList<>();
+            q.offer(x * n + y) ;
+            st[x][y] = true ;
+            Status s = new Status();
+            while (!q.isEmpty()) {
+                int t = q.poll();
+                x = t / n ;
+                y = t % n ;
+                for (int i = -1 ; i <= 1 ; ++i) {
+                    for (int j = -1 ; j <= 1 ; ++j) {
+                        int a = x + i;
+                        int b = y + j;
+                        if (a == x && b == y) continue ;
+                        if (a < 0 || a >= n || b < 0 || b >= n) continue ;
+                        if (w[x][y] != w[a][b]) {
+                            if (w[a][b] > w[x][y]) {
+                                s.has_higher = true ;
+                            } else {
+                                s.has_lower = true ;
+                            }
+                            continue ;
+                        }
+                        if (st[a][b]) continue ;
+                        st[a][b] =  true;
+                        q.offer(a * n + b ) ;
+                    }
+                }
+            }
+            return s ;
+        }
+
+        static class Status {
+            //周围比它高的
+            //周围比他矮的
+            boolean has_higher, has_lower ;
+        }
+
+    }
 }
