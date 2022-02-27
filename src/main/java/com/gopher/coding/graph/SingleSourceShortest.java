@@ -1,4 +1,4 @@
-package com.gopher.coding;
+package com.gopher.coding.graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +12,10 @@ import java.util.PriorityQueue;
  * @Date 2022-02-21 15:35
  * @Description 单源最短路径
  * 迪杰斯特拉算法
+ *
+ * 1. 初始化: dist[0]=0， dist[others]=无穷
+ * 2. 遍历所有点，找到距离初始点最近的点并更新距离，然后将当前点纳入已确定集合
+ * 3. 根据已确定集合中的点来更新其他点的距离
  */
 public class SingleSourceShortest {
     // 朴素版边权全为正的，
@@ -37,15 +41,12 @@ public class SingleSourceShortest {
                         t = j;
                     }
                 }
-
-                st[t] = true;
-
+                st[t] = true;       // 此时找到的t就是当前循环找到的距离初始点最近的点
                 //更新其它节点到1号点的距离
                 for(int j=1; j<=n; j++){
                     if(dist[j] > dist[t] + g[t][j]) dist[j] = dist[t]+g[t][j];
                 }
             }
-
             if(dist[n]==max) return -1;
             else return dist[n];
         }
@@ -75,7 +76,6 @@ public class SingleSourceShortest {
     static class Code2{
         static int N = 100010;
         static int n;
-
         static int[] h = new int[N];
         static int[] e = new int[N];
         static int[] ne = new int[N];
@@ -94,16 +94,16 @@ public class SingleSourceShortest {
 
         // 求1号点到n号点的最短路，如果不存在则返回-1
         public static int dijkstra() {
-            //维护当前未在st中标记过且离源点最近的点
-            PriorityQueue<PIIs> queue = new PriorityQueue<PIIs>();
+            //维护当前未在st中标记过且离源点最近的点，//距离值+点编号
+            PriorityQueue<PIIs> queue = new PriorityQueue<>();
             Arrays.fill(dist, INF);
             dist[1] = 0;
             queue.add(new PIIs(0,1));
             while(!queue.isEmpty()) {
                 //1、找到当前未在s中出现过且离源点最近的点
                 PIIs p = queue.poll();
-                int t = p.getSecond();
                 int distance = p.getFirst();
+                int t = p.getSecond();
                 if(st[t]) continue;
                 //2、将该点进行标记
                 st[t] = true;
@@ -140,16 +140,13 @@ public class SingleSourceShortest {
             private int first;//距离值
             private int second;//点编号
 
-            public int getFirst()
-            {
+            public int getFirst() {
                 return this.first;
             }
-            public int getSecond()
-            {
+            public int getSecond() {
                 return this.second;
             }
-            public PIIs(int first,int second)
-            {
+            public PIIs(int first,int second) {
                 this.first = first;
                 this.second = second;
             }

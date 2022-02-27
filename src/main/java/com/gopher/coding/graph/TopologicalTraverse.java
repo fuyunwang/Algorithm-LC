@@ -1,4 +1,4 @@
-package com.gopher.coding;
+package com.gopher.coding.graph;
 
 import java.util.Arrays;
 import java.util.LinkedList;
