@@ -76,24 +76,6 @@ public class SingleSourceShortest {
 
     // 堆优化版本的
     static class Code2{
-        static int N = 100010;
-        static int n;
-        static int[] h = new int[N];
-        static int[] e = new int[N];
-        static int[] ne = new int[N];
-        static int[] w = new int[N];
-        static int idx = 0;
-        static int[] dist = new int[N];// 存储1号点到每个点的最短距离
-        static boolean[] st = new boolean[N];
-        static int INF = 0x3f3f3f3f;//设置无穷大
-
-        public static void add(int a,int b,int c) {
-            e[idx] = b;
-            w[idx] = c;
-            ne[idx] = h[a];
-            h[a] = idx ++;
-        }
-
         // 求1号点到n号点的最短路，如果不存在则返回-1
         public static int dijkstra() {
             //维护当前未在st中标记过且离源点最近的点，//距离值+点编号
@@ -158,28 +140,27 @@ public class SingleSourceShortest {
                 return Integer.compare(first, o.first);
             }
         }
+        static int N = 100010;
+        static int n;
+        static int[] h = new int[N];
+        static int[] e = new int[N];
+        static int[] ne = new int[N];
+        static int[] w = new int[N];
+        static int idx = 0;
+        static int[] dist = new int[N];// 存储1号点到每个点的最短距离
+        static boolean[] st = new boolean[N];
+        static int INF = 0x3f3f3f3f;//设置无穷大
+        public static void add(int a,int b,int c) {
+            e[idx] = b;
+            w[idx] = c;
+            ne[idx] = h[a];
+            h[a] = idx ++;
+        }
     }
 
 
     // SPFA处理负权边
     static class Code3{
-        static int N = 100010;
-        static int[] h = new int[N];
-        static int[] e = new int[N];
-        static int[] ne = new int[N];
-        static int[] w = new int[N];
-        static int[] dist = new int[N];     // 当前1号点到其他点的最短距离
-        static boolean[] st = new boolean[N];
-        static int idx;
-        static int max = (int)1e9;
-        static int n,m;
-
-        static void add(int a, int b, int c){
-            e[idx] = b;
-            w[idx] = c;
-            ne[idx] = h[a];
-            h[a] = idx++;
-        }
         static int spfa(){
             Arrays.fill(dist, max);
             dist[1] = 0;
@@ -224,6 +205,23 @@ public class SingleSourceShortest {
             int t = spfa();
             if(t==-1) System.out.println("impossible");
             else System.out.println(t);
+        }
+        static int N = 100010;
+        static int[] h = new int[N];
+        static int[] e = new int[N];
+        static int[] ne = new int[N];
+        static int[] w = new int[N];
+        static int[] dist = new int[N];     // 当前1号点到其他点的最短距离
+        static boolean[] st = new boolean[N];
+        static int idx;
+        static int max = (int)1e9;
+        static int n,m;
+
+        static void add(int a, int b, int c){
+            e[idx] = b;
+            w[idx] = c;
+            ne[idx] = h[a];
+            h[a] = idx++;
         }
     }
     // SPFA判断是否有负环
