@@ -15,32 +15,34 @@ public class DP2 {
     }
     static class Code2{
         // 最长上升子序列
-        // 状态表示: f[i]表示所有以第i个数结尾的上升子序列的集合，属性是子序列长度最大值
-        // 状态计算：分类讨论：
-        // 1. 考虑倒数第二位数字，如果是aj f[i]=f[j]+1. 注意这里有条件aj<ai
-        static Scanner in = new Scanner(System.in);
-        static int N = 1010;
-        static int a[] = new int[N], f[] = new int[N];
+        static class Code2_1{
+            // 状态表示: f[i]表示所有以第i个数结尾的上升子序列的集合，属性是子序列长度最大值
+            // 状态计算：分类讨论：
+            // 1. 考虑倒数第二位数字，如果是aj f[i]=f[j]+1. 注意这里有条件aj<ai
+            static Scanner in = new Scanner(System.in);
+            static int N = 1010;
+            static int a[] = new int[N], f[] = new int[N];
 
-        public static void main(String args[]) {
-            int n = in.nextInt();
-            for (int i = 1; i <= n; i++) a[i] = in.nextInt();
-            // dp
-            int max = 0;
-            for (int i = 1; i <= n; i++)
-            {
-                f[i] = 1;
-                for (int j = 1; j < i; j++)
-                {
-                    if (a[j] < a[i])
-                        f[i] = Math.max(f[i], f[j] + 1);
+            public static void main(String args[]) {
+                int n = in.nextInt();
+                for (int i = 1; i <= n; i++) a[i] = in.nextInt();
+                // dp
+                int max = 0;
+                for (int i = 1; i <= n; i++) {
+                    f[i] = 1;
+                    for (int j = 1; j < i; j++) {
+                        if (a[j] < a[i])
+                            f[i] = Math.max(f[i], f[j] + 1);
+                    }
+                    max = Math.max(max, f[i]);
                 }
-                max = Math.max(max, f[i]);
+                System.out.println(max);
             }
-            System.out.println(max);
+        }
+        static class Code2_2{
+
         }
     }
-
     static class Code3{
         // 最长公共子序列
         // 状态表示: f[i,j]表示所有a[1~i]和b[1~j]的公共子序列的集合，属性是最长的子序列
