@@ -1,5 +1,7 @@
 package com.gopher.coding;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
@@ -104,11 +106,45 @@ public class DP2 {
             }
         }
     }
-
     static class Code5{
-        // 区间DP 石子合并
+        // 区间DP 石子合并，在哈弗曼树的基础上每次只能合并相邻两堆
+        // 状态表示: f[i,j]表示所有将[i,j]区间内的石子合并成一堆的方案集合，属性代价最小值
+        // 状态计算：分类讨论：
+                // 通式情况是 左边有[i,k]右边有[k+1,j]。注意k的枚举范围
+                // 区间DP首先枚举长度，根据题意最小长度是2
+        static BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        public static void main(String[] args) throws Exception{
+            // 初始化
+            int n = Integer.valueOf(read.readLine());
+            String[] ss = read.readLine().split(" ");
+            int[] a = new int[n];
+            for(int i = 0; i < n; i++){
+                a[i] = Integer.valueOf(ss[i]);
+            }
+            // 计算前缀和
+            int[] sum = new int[n + 1];
+            for(int i = 1; i <= n; i++){
+                sum[i] = sum[i - 1] + a[i - 1];
+            }
+            //dp
+            int[][] dp = new int[n + 1][n + 1];
+            for(int len = 2; len <= n; len++){
+                for(int l = 1; l + len - 1 <= n; l++){
+                    int r = l + len - 1;
+                    dp[l][r] = 0x3f3f3f3f;   //初始化
+                    for(int k = l; k < r; k++){
+                        dp[l][r] = Math.min(dp[l][r],
+                                dp[l][k] + dp[k + 1][r] + sum[r] - sum[l - 1]);
+
+                    }
+                }
+            }
+            System.out.println(dp[1][n]);
+        }
     }
     static class Code6{
         // 计数类DP 整数划分
+        // 给定正整数n划分成多个正整数之和，其中不考虑顺序
+
     }
 }

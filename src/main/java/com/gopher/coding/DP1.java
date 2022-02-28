@@ -64,6 +64,7 @@ public class DP1 {
         static int w[] = new int[N];
         static int v[] = new int[N];
         public static void main(String[] args) {
+            // 初始化
             Scanner scanner = new Scanner(System.in);
             int n = scanner.nextInt();
             int m = scanner.nextInt();
@@ -73,6 +74,7 @@ public class DP1 {
                 v[i] = k;
                 w[i] = a;
             }
+            // dp
             for(int i = 1; i <= n; i++) {
                 for(int j = v[i];j <= m;j ++) {
                     f[j] = Math.max(f[j], f[j-v[i]]+w[i]);
