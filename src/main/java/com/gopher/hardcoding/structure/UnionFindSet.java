@@ -25,7 +25,7 @@ public class UnionFindSet {
             int b = in.nextInt();
             size[find(b)] += size[find(a)];
             p[find(a)] = find(b);       // 合并操作包含了查询操作和路径压缩操作
-            System.out.println(size[find(b)]);
+            System.out.println(size[find(a)]);
         }
         private static int find(int x) {
             if (x != p[x]) { // p不是自己说明还没到根节点

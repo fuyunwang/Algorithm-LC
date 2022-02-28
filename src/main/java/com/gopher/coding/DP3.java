@@ -7,14 +7,10 @@ import java.io.*;
  * @Title DP3
  * @Author fyw
  * @Date 2022-02-21 18:53
- * @Description 计数类DP 数位统计DP 状态压缩DP 树形DP 记忆化搜索
+ * @Description 数位统计DP 状态压缩DP 树形DP 记忆化搜索
  */
 public class DP3 {
     static class Code1{
-        // 整数划分
-    }
-
-    static class Code2{
         // 计数问题，数位统计DP
         /**
          * 给定两个整数 a 和 b，求 a 和 b 之间的所有数字中 0∼9 的出现次数。
@@ -95,5 +91,17 @@ public class DP3 {
             }
         }
 
+    }
+
+    static class Code2{
+        // 状态压缩DP
+    }
+
+    static class Code3{
+        // 树形DP
+    }
+
+    static class Code4{
+        // 记忆化搜索
     }
 }

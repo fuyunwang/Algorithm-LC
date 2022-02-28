@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @Title DP1
  * @Author fyw
  * @Date 2022-02-21 18:53
- * @Description 背包
+ * @Description 背包九讲
  */
 public class DP1 {
     static class Code1{
