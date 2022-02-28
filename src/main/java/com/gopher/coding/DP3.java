@@ -99,9 +99,114 @@ public class DP3 {
 
     static class Code3{
         // 树形DP
+        // 状态表示：
+            //  f[u][0]：所有以u为根的子树中选择，并且不选u这个点的方案
+            //  f[u][1]：所有以u为根的子树中选择，并且选u这个点的方案
+        // 状态计算：
+            // 当前u结点不选，子结点可选可不选
+            // f[u][0]=∑max(f[si,0],f[si,1])
+            // 当前u结点选，子结点一定不能选
+            // f[u][1]=∑(f[si,0])
+        static int N = 6010;
+        static int[] happy = new int[N];    // 存储每个人的高兴度，目的就是求快乐指数的最大总和
+        static int[] h = new int[N];
+        static int[] e = new int[N];
+        static int[] ne = new int[N];
+        static int idx = 0;
+        static int[][] f = new int[N][2];
+        static boolean[] has_fa = new boolean[N];   // 标记哪个节点有父节点，找到根节点
+
+        static void dfs(int u) {
+            f[u][1] = happy[u];
+            for(int i = h[u]; i != -1;i = ne[i])
+            {
+                int j = e[i];
+                dfs(j);     // 注意求和公式，所以这里先处理所有孩子节点
+
+                f[u][1] += f[j][0];
+                f[u][0] += Math.max(f[j][1], f[j][0]);
+            }
+        }
+        public static void main(String[] args) {
+            // 初始化与构图
+            Scanner scan = new Scanner(System.in);
+            int n = scan.nextInt();
+            for(int i = 1;i <= n;i ++) happy[i] = scan.nextInt();
+            Arrays.fill(h, -1);
+            for(int i = 0;i < n - 1;i ++)
+            {
+                int a = scan.nextInt();
+                int b = scan.nextInt();
+                add(b,a);
+                has_fa[a] = true;
+            }
+            int root = 1;
+            while(has_fa[root]) root ++;
+            // 从根节点开始dfs
+            dfs(root);
+            System.out.println(Math.max(f[root][0], f[root][1]));
+        }
+        static void add(int a,int b)
+        {
+            e[idx] = b;
+            ne[idx] = h[a];
+            h[a] = idx ++;
+        }
+
     }
 
     static class Code4{
         // 记忆化搜索
+        // 滑雪，从矩阵中的大值依次遍历直到走过一条最长的递减路
+        // 状态表示：所有从[i,j]开始滑的路径，属性是路径的最大值
+        // 状态计算：
+            //
+        // 使用记忆化数组 记录每个点的最大滑动长度
+        // 遍历每个点作为起点
+        // 然后检测该点四周的点 如果可以滑动到其他的点
+        // 那么该点的最大滑动长度 就是其他可以滑到的点的滑动长度+1
+        // dp[i][j] = max(dp[i][j-1], dp[i][j+1],dp[i-1][j],dp[i+1][j])
+
+        static int N = 310;
+        static int n,m;
+        static int[][] h = new int[N][N];
+        static int[][] f = new int[N][N];
+        static int[] dx = new int[] {0,-1,0,1};
+        static int[] dy = new int[] {-1,0,1,0};
+        static int dfs(int x,int y)
+        {
+            if(f[x][y] != -1) return f[x][y];
+
+            f[x][y] = 1;
+            for(int i = 0;i < 4;i ++)
+            {
+                int a = x + dx[i];
+                int b = y + dy[i];
+                if(a < 0 || a >= n || b < 0 || b >= m) continue;
+                if(h[x][y] > h[a][b]) f[x][y] = Math.max(f[x][y], dfs(a,b) + 1);
+            }
+            return f[x][y];
+        }
+        public static void main(String[] args) {
+            // 初始化
+            Scanner scan = new Scanner(System.in);
+            n = scan.nextInt();
+            m = scan.nextInt();
+            for(int i = 0;i < n;i ++) {
+                for(int j = 0;j < m;j ++)
+                    h[i][j] = scan.nextInt();
+            }
+
+            for(int i = 0;i < n;i ++) Arrays.fill(f[i], -1);
+            // 记忆化搜索
+            int res = 0;
+            for(int i = 0;i < n;i ++) {
+                for(int j = 0;j < m;j ++) {
+                    res = Math.max(res, dfs(i,j));
+                }
+            }
+            System.out.println(res);
+        }
+
     }
 }
