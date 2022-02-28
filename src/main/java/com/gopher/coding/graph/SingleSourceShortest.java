@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * @Title SingleSourceShortest
@@ -159,5 +161,135 @@ public class SingleSourceShortest {
     }
 
 
+    // SPFA处理负权边
+    static class Code3{
+        static int N = 100010;
+        static int[] h = new int[N];
+        static int[] e = new int[N];
+        static int[] ne = new int[N];
+        static int[] w = new int[N];
+        static int[] dist = new int[N];     // 当前1号点到其他点的最短距离
+        static boolean[] st = new boolean[N];
+        static int idx;
+        static int max = (int)1e9;
+        static int n,m;
+
+        static void add(int a, int b, int c){
+            e[idx] = b;
+            w[idx] = c;
+            ne[idx] = h[a];
+            h[a] = idx++;
+        }
+        static int spfa(){
+            Arrays.fill(dist, max);
+            dist[1] = 0;
+            st[1] = true;
+            //声明一个队列保存更新过的节点
+            Queue<Integer> q = new LinkedList<>();
+            q.add(1);
+            while(!q.isEmpty()){
+                int cur = q.poll();
+                st[cur] = false;
+                for(int i=h[cur]; i!=-1; i=ne[i]){
+                    int j = e[i];
+                    //如果当前节点可以被更新，就做更新操作，并将该节点加入到队列中
+                    if(dist[j] > dist[cur]+w[i]){
+                        dist[j] = dist[cur] + w[i];
+                        if(!st[j]){
+                            q.add(j);
+                            st[j] = true;
+                        }
+                    }
+                }
+            }
+            if(dist[n] == max) return -1;
+            else return dist[n];
+        }
+        public static void main(String[]args) throws IOException{
+            Arrays.fill(h, -1);
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            String[] cur = in.readLine().split(" ");
+            n = Integer.parseInt(cur[0]);
+            int m = Integer.parseInt(cur[1]);
+
+            while(m-->0){
+                String[] arr = in.readLine().split(" ");
+                int a = Integer.parseInt(arr[0]);
+                int b = Integer.parseInt(arr[1]);
+                int c = Integer.parseInt(arr[2]);
+
+                add(a, b, c);
+            }
+
+            int t = spfa();
+            if(t==-1) System.out.println("impossible");
+            else System.out.println(t);
+        }
+    }
+    // SPFA判断是否有负环
+    static class Code4{
+        static int n;
+        static int m;
+        static int N = 2010;
+        static int M = 10010;
+        static int[] h = new int[N];
+        static int[] e = new int[M];
+        static int[] ne = new int[M];
+        static int[] w = new int[M];
+        static int idx = 0;
+        static int[] dist = new int[N];//记录虚拟点到x的最短距离
+        static int[] cnt = new int[N];//从虚拟点到x经过的边数
+        static boolean[] st = new boolean[N];
+        public static void add(int a,int b,int c) {
+            e[idx] = b;
+            w[idx] = c;
+            ne[idx] = h[a];
+            h[a] = idx ++;
+
+        }
+        public static boolean spfa() {
+            Queue<Integer> queue = new LinkedList<Integer>();
+            // 将所有点进入队列，
+            // 判断是否存在负环，并非判断是否存在从1开始的负环，因此需要将所有的点都加入队列中，更新周围的点
+            for(int i = 1;i <= n;i++) {
+                queue.add(i);
+                st[i] = true;
+            }
+            while(!queue.isEmpty()) {
+                int t = queue.poll();
+                st[t] = false;
+                for(int i = h[t]; i != -1;i = ne[i]) {
+                    int j = e[i];
+                    if(dist[j] > dist[t] + w[i]) {
+                        dist[j] = dist[t] + w[i];
+                        cnt[j] = cnt[t] + 1;
+                        if(cnt[j] >= n) return true;
+                        if(!st[j]) {
+                            queue.add(j);
+                            st[j] = true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static void main(String[] args) throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String[] str1 = reader.readLine().split(" ");
+            n = Integer.parseInt(str1[0]);
+            m = Integer.parseInt(str1[1]);
+            Arrays.fill(h, -1);
+            while(m -- > 0) {
+                String[] str2 = reader.readLine().split(" ");
+                int a = Integer.parseInt(str2[0]);
+                int b = Integer.parseInt(str2[1]);
+                int c = Integer.parseInt(str2[2]);
+                add(a,b,c);
+            }
+            if(spfa()) System.out.println("Yes");
+            else System.out.println("No");
+        }
+    }
 
 }
