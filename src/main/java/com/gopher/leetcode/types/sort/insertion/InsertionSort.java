@@ -1,6 +1,6 @@
 package com.gopher.leetcode.types.sort.insertion;
 
-import com.gopher.leetcode.types.linkedlist.ListNode;
+import com.gopher.leetcode.types.structure.linkedlist.ListNode;
 
 /**
  * @Title InsertionSort

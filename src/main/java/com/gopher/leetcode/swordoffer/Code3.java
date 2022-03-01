@@ -1,6 +1,6 @@
 package com.gopher.leetcode.swordoffer;
 
-import com.gopher.leetcode.types.linkedlist.ListNode;
+import com.gopher.leetcode.types.structure.linkedlist.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;

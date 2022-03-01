@@ -1,6 +1,6 @@
 package com.gopher.leetcode.order.or900;
 
-import com.gopher.leetcode.types.tree.TreeNode;
+import com.gopher.leetcode.types.structure.tree.TreeNode;
 
 import java.util.*;
 import java.util.stream.Collectors;

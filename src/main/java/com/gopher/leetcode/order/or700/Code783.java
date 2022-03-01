@@ -1,6 +1,6 @@
 package com.gopher.leetcode.order.or700;
 
-import com.gopher.leetcode.types.tree.TreeNode;
+import com.gopher.leetcode.types.structure.tree.TreeNode;
 
 /**
  * @Title Code783

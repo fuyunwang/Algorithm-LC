@@ -1,7 +1,7 @@
 package com.gopher.leetcode.order.or100;
 
-import com.gopher.leetcode.types.linkedlist.ListNode;
-import com.gopher.leetcode.types.tree.TreeNode;
+import com.gopher.leetcode.types.structure.linkedlist.ListNode;
+import com.gopher.leetcode.types.structure.tree.TreeNode;
 
 /**
  * @Title Code109

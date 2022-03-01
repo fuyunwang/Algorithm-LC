@@ -1,6 +1,6 @@
 package com.gopher.leetcode.order.or1000;
 
-import com.gopher.leetcode.types.tree.TreeNode;
+import com.gopher.leetcode.types.structure.tree.TreeNode;
 
 /**
  * @Title Code1080
