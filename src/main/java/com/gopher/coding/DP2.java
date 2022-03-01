@@ -42,7 +42,34 @@ public class DP2 {
             }
         }
         static class Code2_2{
-
+            // 最长上升公共子序列
+            static int N = 3010;
+            static int[] a = new int[N];
+            static int[] b = new int[N];
+            static int[][] f = new int[N][N];
+            public static void main(String[] args) {
+                Scanner scan = new Scanner(System.in);
+                int n = scan.nextInt();
+                for(int i = 1;i <= n;i ++) a[i] = scan.nextInt();
+                for(int i = 1;i <= n;i ++) b[i] = scan.nextInt();
+                for(int i = 1;i <= n;i ++) {
+                    for(int j = 1;j <= n;j ++) {
+                        f[i][j] = f[i - 1][j];
+                        if(a[i] == b[j])
+                        {
+                            f[i][j] = 1;//初始为1
+                            for(int k = 1;k < j;k ++)
+                            {
+                                if(b[k] < b[j]) f[i][j] = Math.max(f[i][j], f[i - 1][k] + 1);
+                            }
+                        }
+                    }
+                }
+                //需要类似最长上升子序列求得最大值,也可以直接加到上面的循环中
+                int res = 0;
+                for(int i = 1;i <= n;i ++) res = Math.max(res,f[n][i]);
+                System.out.println(res);
+            }
         }
     }
     static class Code3{
