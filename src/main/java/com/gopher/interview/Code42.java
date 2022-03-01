@@ -1,7 +1,5 @@
 package com.gopher.interview;
 
-import com.gopher.leetcode.linkedlist.ListNode;
-
 /**
  * @Title Code42
  * @Author fyw

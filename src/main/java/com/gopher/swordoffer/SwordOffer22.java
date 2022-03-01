@@ -1,6 +1,6 @@
 package com.gopher.swordoffer;
 
-import com.gopher.leetcode.linkedlist.ListNode;
+import com.gopher.leetcode.types.linkedlist.ListNode;
 
 /**
  * @Title SwordOffer22

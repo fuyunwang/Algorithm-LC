@@ -1,6 +1,6 @@
 package com.gopher.interview;
 
-import com.gopher.leetcode.tree.TreeNode;
+import com.gopher.leetcode.types.tree.TreeNode;
 
 import java.util.*;
 

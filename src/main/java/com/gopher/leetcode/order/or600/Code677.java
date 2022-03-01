@@ -1,7 +1,5 @@
 package com.gopher.leetcode.order.or600;
 
-import com.gopher.leetcode.tree.TreeNode;
-
 /**
  * @Title Code677
  * @Author fyw

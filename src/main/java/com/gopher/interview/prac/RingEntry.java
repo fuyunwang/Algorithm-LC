@@ -1,6 +1,6 @@
 package com.gopher.interview.prac;
 
-import com.gopher.leetcode.linkedlist.ListNode;
+import com.gopher.leetcode.types.linkedlist.ListNode;
 
 /**
  * @Title RingEntry

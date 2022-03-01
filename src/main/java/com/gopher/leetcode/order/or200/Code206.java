@@ -1,8 +1,6 @@
 package com.gopher.leetcode.order.or200;
 
-import com.gopher.leetcode.linkedlist.ListNode;
-
-import java.util.List;
+import com.gopher.leetcode.types.linkedlist.ListNode;
 
 /**
  * @Title Code206

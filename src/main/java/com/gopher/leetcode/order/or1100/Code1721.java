@@ -1,6 +1,6 @@
 package com.gopher.leetcode.order.or1100;
 
-import com.gopher.leetcode.linkedlist.ListNode;
+import com.gopher.leetcode.types.linkedlist.ListNode;
 
 /**
  * @Title Code1721

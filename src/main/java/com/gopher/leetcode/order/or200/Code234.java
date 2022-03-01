@@ -1,7 +1,5 @@
 package com.gopher.leetcode.order.or200;
 
-import com.gopher.leetcode.linkedlist.ListNode;
-
 /**
  * @Title Code234
  * @Author fyw

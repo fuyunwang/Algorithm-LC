@@ -1,10 +1,7 @@
 package com.gopher.leetcode.order.or100;
 
-import com.gopher.leetcode.linkedlist.ListNode;
-import com.gopher.leetcode.tree.TreeNode;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.gopher.leetcode.types.linkedlist.ListNode;
+import com.gopher.leetcode.types.tree.TreeNode;
 
 /**
  * @Title Code109

@@ -1,6 +1,6 @@
 package com.gopher.leetcode.order.or30;
 
-import com.gopher.leetcode.linkedlist.ListNode;
+import com.gopher.leetcode.types.linkedlist.ListNode;
 
 import java.util.PriorityQueue;
 

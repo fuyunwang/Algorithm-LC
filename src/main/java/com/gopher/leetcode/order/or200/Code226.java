@@ -1,6 +1,6 @@
 package com.gopher.leetcode.order.or200;
 
-import com.gopher.leetcode.tree.TreeNode;
+import com.gopher.leetcode.types.tree.TreeNode;
 
 /**
  * @Title Code226

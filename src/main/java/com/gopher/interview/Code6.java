@@ -1,7 +1,6 @@
 package com.gopher.interview;
 
 import java.util.LinkedList;
-import java.util.Stack;
 
 /**
  * @Title Code6
