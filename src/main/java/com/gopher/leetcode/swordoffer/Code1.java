@@ -1,5 +1,6 @@
 package com.gopher.leetcode.swordoffer;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -10,8 +11,8 @@ import java.util.Stack;
  */
 public class Code1 {
     class CQueue {
-        Stack<Integer> stack1=new Stack<>();
-        Stack<Integer> stack2=new Stack<>();
+        LinkedList<Integer> stack1=new LinkedList<>();
+        LinkedList<Integer> stack2=new LinkedList<>();
         public CQueue() {
             stack1.clear();
             stack2.clear();
@@ -20,12 +21,19 @@ public class Code1 {
         public void appendTail(int value) {
             stack1.push(value);
         }
-        // 在队头删除整数
+        // 在队头删除整数，
+        // 注意有个状态可能stack2中有元素stack1中也有元素，那么此时
+            // stack2不为空，stack2第一个元素直接返回，这可能是多次调用，放心返回就可以。
+            // stack2为空，stack2第一次初始化
         public int deleteHead() {
-            while (!stack1.isEmpty()){
-                stack2.push(stack1.pop());
+            if (stack2.isEmpty()){
+                if(stack1.isEmpty())
+                    return -1;
+                while (!stack1.isEmpty()){
+                    stack2.push(stack1.pop());
+                }
             }
-            return stack2.isEmpty()?-1:stack2.pop();
+            return stack2.pop();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.gopher.leetcodeothers;
+package com.gopher.prac.leetcodeothers;
 
 /**
  * @Title Code917
