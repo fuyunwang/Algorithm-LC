@@ -6,7 +6,7 @@ import java.util.*;
  * @Title Template1
  * @Author fyw
  * @Date 2022-03-01 21:28
- * @Description
+ * @Description 滑动窗口只考虑相关字符或者字符串的添加和删除
  */
 public class Template1 {
     static class Code3{
@@ -38,35 +38,73 @@ public class Template1 {
             // 声明结果数组
             List<Integer> res=new ArrayList<>();
             // 开始枚举，注意n个相同长度的字符串的枚举范围
+            int left=0;
             int n=words.length;
             int len=words[0].length();
-            Map<String,Integer> map=new HashMap<>();// 用于临时比较频次
-            for (int i = 0; i <= s.length()-n*len; i++) {
-                map.clear();
-                int count=0;    // 计数，恰好由所有单词拼凑而成
+            // 用于临时比较频次
+            Map<String,Integer> window=new HashMap<>();
+            while (left<=s.length()-n*len){
+                window.clear();
+                int count=0;    // 连续子串要持续比较，所以固定最左侧索引开始比较
                 while (count<n){
-                    String rString=s.substring(i+count*len,i+(count+1)*len);    // 枚举每个单词
-                    if (freq.containsKey(rString)){
-                        map.put(rString,map.getOrDefault(rString,0)+1);
-                        if (map.get(rString)>freq.get(rString)){
-                            // 说明原始频次不够用
-                            break;
+                    String lWord=s.substring(left+len*count,left+len*(count+1));
+                    if (freq.containsKey(lWord)){
+                        window.put(lWord,window.getOrDefault(lWord,0)+1);
+                        if (window.get(lWord).compareTo(freq.get(lWord))>0){
+                            break;//此时说明freq对于一个单词频次还不够用
                         }
                     }else{
-                        // 说明当前开始的索引拼不出，直接进入下一轮次
                         break;
                     }
                     count++;
                 }
                 if (count==n){
-                    // 说明有结果
-                    res.add(i); // 只记录起始索引
+                    res.add(left);
                 }
+                left++;// 从下一个索引开始
             }
+
             return res;
         }
     }
-    static class Code76{
 
+    static class Code76{
+        // 找到最小覆盖子串
+        public String minWindow(String s, String t) {
+            Map<Character,Integer> freq=new HashMap<>();
+            for (int i = 0; i < t.length(); i++) {
+                freq.put(t.charAt(i), freq.getOrDefault(t.charAt(i),0)+1);
+            }
+            int left=0,right=0;
+            Map<Character,Integer> window=new HashMap<>();
+            int size=0;// 记录不同字符的总个数
+            // 声明结果
+            int len=Integer.MAX_VALUE;
+            int start=0;
+
+            while (right<s.length()){
+                char rc=s.charAt(right++);
+                if (freq.containsKey(rc)){
+                    window.put(rc,window.getOrDefault(rc,0)+1);
+                    if (Objects.equals(window.get(rc),freq.get(rc))){
+                        size++;
+                    }
+                }
+                while (size==freq.size()){
+                    if (right-left<len){
+                        start=left;
+                        len=right-left;
+                    }
+                    char lc=s.charAt(left++);
+                    if (freq.containsKey(lc)){
+                        if (Objects.equals(window.get(lc),freq.get(lc))){
+                            size--;
+                        }
+                        window.put(lc,window.getOrDefault(lc,0)-1);
+                    }
+                }
+            }
+            return len==Integer.MAX_VALUE?"":s.substring(start,start+len);
+        }
     }
 }
