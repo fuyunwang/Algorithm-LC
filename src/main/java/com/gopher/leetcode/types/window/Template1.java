@@ -107,4 +107,9 @@ public class Template1 {
             return len==Integer.MAX_VALUE?"":s.substring(start,start+len);
         }
     }
+
+    static class Code128{
+
+
+    }
 }
