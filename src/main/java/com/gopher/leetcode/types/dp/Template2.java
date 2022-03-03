@@ -105,13 +105,33 @@ public class Template2 {
             }
         }
     }
+    // 顺序不同的序列被视作不同的组合。
     static class Code377{
-        // 顺序不同的序列被视作不同的组合。
-        // 状态表示： f[i][j]:所有从前i个位置中选，且总体积恰好是j的所有方案
-        // 状态计算： f[i][j] = f[i][j] + f[i - 1][j - a(k)]
+        // 状态表示：定义f[i][j]为组合长度为i，凑成总和为j的方案数是多少。由于对组合方案的长度没有限制，因此我们最终答案为所有的f[x][target]的总和。
+        // 状态计算：那么对任意的f[len][target]而言，组合中的最后一个数字可以选择nums中的任意数值。 f[len][target]=f[len-1][target-nums[0]]+f[len-1][target-nums[1]]+...
+        public int combinationSum4(int[] nums, int target) {
+            // 因为 nums[i] 最小值为 1，因此构成答案的最大长度为 target
+            int len=target;
+            int[][] f=new int[len+10][target+10];
+            f[0][0]=1;
+            int res=0;
+            for (int i = 1; i <= len; i++) {
+                for (int j = 0; j <= target; j++) {
+                    for (int k = 0; k < nums.length; k++) {
+                        // 做选择，target的值需要存储下nums[k]才可，完全背包
+                        if (j>=nums[k]){
+                            f[i][j]=f[i][j]+f[i-1][j-nums[k]];
+                        }
+                    }
+                }
+                res+=f[i][target];
+            }
+            return res;
+        }
     }
 
     static class Code1995{
         // 统计特殊四元组
+        // 利用等式关系 nums[a] + nums[b] + nums[c] = nums[d]，具有明确的「数值」和「个数」关系，可将问题抽象为组合优化问题求方案数。
     }
 }

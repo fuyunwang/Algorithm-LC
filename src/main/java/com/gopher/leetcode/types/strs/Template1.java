@@ -36,6 +36,21 @@ public class Template1 {
         }
 
         // 方式2 字符串哈希, p=131或者13331 Q=2^64
-
+    }
+    static class COde1816{
+//        public String truncateSentence(String s, int k) {
+//
+//        }
+    }
+    static class Code2000{
+        public String reversePrefix(String word, char ch) {
+            int index=word.indexOf(ch);
+            if (index<=0)
+                return word;
+            StringBuilder sb=new StringBuilder();
+            sb.append(word.substring(0,index +1)).reverse();
+            sb.append(word.substring(index+1));
+            return sb.toString();
+        }
     }
 }

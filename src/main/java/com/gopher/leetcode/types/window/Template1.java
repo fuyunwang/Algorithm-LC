@@ -133,4 +133,7 @@ public class Template1 {
             return res;
         }
     }
+    static class Code1004{
+
+    }
 }

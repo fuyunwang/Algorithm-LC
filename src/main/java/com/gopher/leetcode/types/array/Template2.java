@@ -54,4 +54,7 @@ public class Template2 {
             return res;
         }
     }
+    static class Code1094{
+
+    }
 }
