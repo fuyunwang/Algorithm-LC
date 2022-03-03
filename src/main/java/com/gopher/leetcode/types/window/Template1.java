@@ -112,4 +112,25 @@ public class Template1 {
 
 
     }
+
+    static class Code1984{
+        // 学生分数的最小差值
+        // 要想使每次计算的差值最小，每次取窗口内的值都应该尽可能接近
+        public int minimumDifference(int[] nums, int k) {
+            Arrays.sort(nums);
+            int res=Integer.MAX_VALUE;
+            // 固定长度的滑动窗口大小为k，确定每次的索引m和i
+            for (int i = nums.length-1;i>=0; i--) {
+                int m=i-k+1;
+                if (m>=0&&m<nums.length){
+                    if (res>nums[i]-nums[m]){
+                        res=nums[i]-nums[m];
+                    }
+                }else if (m<0){
+                    break;
+                }
+            }
+            return res;
+        }
+    }
 }
