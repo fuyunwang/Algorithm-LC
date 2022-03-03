@@ -110,4 +110,8 @@ public class Template2 {
         // 状态表示： f[i][j]:所有从前i个位置中选，且总体积恰好是j的所有方案
         // 状态计算： f[i][j] = f[i][j] + f[i - 1][j - a(k)]
     }
+
+    static class Code1995{
+        // 统计特殊四元组
+    }
 }

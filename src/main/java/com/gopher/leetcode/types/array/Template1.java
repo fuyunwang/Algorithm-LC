@@ -10,4 +10,7 @@ public class Template1 {
     static class Code209{
 
     }
+    static class Code1969{
+        // 数组元素的最小非零乘积
+    }
 }

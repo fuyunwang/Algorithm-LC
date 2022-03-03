@@ -7,4 +7,7 @@ package com.gopher.leetcode.types.simulation;
  * @Description 回文
  */
 public class Plalindrome {
+    static class Code5{
+
+    }
 }
