@@ -1,5 +1,6 @@
 package com.gopher.leetcode.types.backtrack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,34 @@ public class BacktrackTemplate1 {
         }
     }
 
+    class Arrange2{
+        // 含有重复元素的全排列
+        List<List<Integer>> res=new ArrayList<>();
+        boolean[] used;
+        public List<List<Integer>> permuteUnique(int[] nums) {
+            used=new boolean[nums.length];
+            Arrays.sort(nums);  // 始终维持排序之后的顺序
+            backtrack(nums,new LinkedList<>());
+            return res;
+        }
+        void backtrack(int[] nums, LinkedList<Integer> path){
+            if (path.size()==nums.length){
+                res.add(new LinkedList<>(path));
+                return;
+            }
+            for (int i = 0; i < nums.length; i++) {
+                if (!used[i]){
+                    if (i>0&&nums[i]==nums[i-1]&&!used[i-1]) continue;
+                    used[i]=true;
+                    path.add(nums[i]);
+                    backtrack(nums,path);
+                    path.removeLast();
+                    used[i]=false;
+                }
+            }
+        }
+    }
+
     class Subsets{
         LinkedList<List<Integer>> result=new LinkedList<>();
         public List<List<Integer>> subsets(int[] nums) {
@@ -52,6 +81,27 @@ public class BacktrackTemplate1 {
 
     class Subsets2{
        // 重复元素
+       List<List<Integer>> res=new LinkedList<>();
+        boolean[] used;
+        public List<List<Integer>> subsetsWithDup(int[] nums) {
+            used=new boolean[nums.length];
+            Arrays.sort(nums);
+            backtrack(nums,0,new LinkedList<>());
+            return res;
+        }
+        void backtrack(int[] nums,int start,LinkedList<Integer> path){
+            res.add(new LinkedList<>(path));
+            for (int i = start; i < nums.length; i++) {
+                if (!used[i]){
+                    if (i>0&&nums[i]==nums[i-1]&&!used[i-1]) continue;
+                    used[i]=true;
+                    path.add(nums[i]);
+                    backtrack(nums,i+1,path);
+                    path.removeLast();
+                    used[i]=false;
+                }
+            }
+        }
     }
 
     class Combine{
@@ -74,7 +124,7 @@ public class BacktrackTemplate1 {
         }
     }
     class Combine2{
-        // 无重复数字，每个数字只能选一次，顺序的考虑
+        // 无重复数字，每个数字只能选一次，索引顺序的考虑
         List<List<Integer>> res=new LinkedList<>();
         public List<List<Integer>> combinationSum3(int k, int n) {
             backtrack(1,n,k,new LinkedList<>());//从1开始枚举，n为剩余数，k为个数
@@ -120,7 +170,7 @@ public class BacktrackTemplate1 {
         }
     }
     class Combine4{
-        // 有重复数字，但是每个数字只能选一个
+        // 有重复数字，但是每个数字只能选一个，排序的考虑
         List<List<Integer>> res=new LinkedList<>();
         public List<List<Integer>> combinationSum2(int[] candidates, int target) {
             Arrays.sort(candidates);        // 排序方便所有数放在一块

@@ -14,8 +14,7 @@ public class Code36 {
         boolean[] st = new boolean[10];
 
         //判断行
-        for(int i = 0;i < n;i ++)
-        {
+        for(int i = 0;i < n;i ++) {
             Arrays.fill(st,false);
             for(int j = 0;j < n;j ++) {
                 if(board[i][j] != '.') {
