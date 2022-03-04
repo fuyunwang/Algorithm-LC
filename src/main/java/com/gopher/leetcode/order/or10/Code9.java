@@ -14,6 +14,6 @@ public class Code9 {
             result = result * 10 + x%10;
             x/=10;
         }
-        return temp<0?false:result==temp;
+        return temp >= 0 && result == temp;
     }
 }

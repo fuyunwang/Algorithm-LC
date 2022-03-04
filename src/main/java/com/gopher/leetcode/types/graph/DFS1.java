@@ -1,4 +1,4 @@
-package com.gopher.leetcode.types;
+package com.gopher.leetcode.types.graph;
 
 /**
  * @Title DFS1
@@ -50,8 +50,53 @@ public class DFS1 {
         }
     }
 
-    static class Code1034{
+    static class Code130{
 
+    }
+
+    static class Code200{
+
+    }
+
+    static class Code1034{
+        int m,n;
+        int[][] g;
+        boolean[][] visited;
+        int oldColor;
+        int rx,ry;
+        int[] dx=new int[]{-1,0,1,0};
+        int[] dy=new int[]{0,1,0,-1};
+        public int[][] colorBorder(int[][] grid, int row, int col, int color) {
+            m=grid.length;
+            n=grid[0].length;
+            g=grid;
+            rx=row;
+            ry=col;
+            visited=new boolean[m][n];
+            oldColor=grid[row][col];
+            dfs(row,col,color);
+            return g;
+        }
+        void dfs(int x,int y,int color){
+            if(x>=m||x<0||y>=n||y<0||visited[x][y]||g[x][y]!=oldColor){
+                return;
+            }
+            visited[x][y]=true;
+            if(x==0||x==m-1||y==0||y==n-1){
+                g[x][y]=color;
+            }
+            for (int i = 0; i < 4; i++) {
+                int a=x + dx[i];
+                int b=y + dy[i];
+                if (a<m&&a>=0&&b<n&&b>=0&&!visited[a][b] && g[a][b] != oldColor) {
+                    g[x][y]=color;
+                }
+            }
+            dfs(x+1,y,color);
+            dfs(x-1,y,color);
+            dfs(x,y+1,color);
+            dfs(x,y-1,color);
+        }
     }
 
     static class Code695{

@@ -1,9 +1,6 @@
 package com.gopher.leetcode.types.strs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Title Template1
@@ -36,6 +33,24 @@ public class Template1 {
         }
 
         // 方式2 字符串哈希, p=131或者13331 Q=2^64
+    }
+    static class Code187{
+        // 计算重复的长度为10的字符串
+        public List<String> findRepeatedDnaSequences(String s) {
+            List<String> res=new ArrayList<>();
+            Map<String,Integer> map=new HashMap<>();
+            for (int i = 0; i+10 <= s.length(); i++) {
+                String cur=s.substring(i,i+10);
+                map.put(cur,map.getOrDefault(cur,0)+1);
+            }
+            for (Map.Entry<String,Integer> entry:map.entrySet()){
+                int val=entry.getValue();
+                if (val>1){
+                    res.add(entry.getKey());
+                }
+            }
+            return res;
+        }
     }
     static class COde1816{
 //        public String truncateSentence(String s, int k) {

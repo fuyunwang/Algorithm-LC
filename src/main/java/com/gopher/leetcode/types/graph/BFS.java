@@ -1,4 +1,4 @@
-package com.gopher.leetcode.types;
+package com.gopher.leetcode.types.graph;
 
 import java.util.*;
 
