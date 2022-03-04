@@ -1,73 +1,69 @@
 package com.gopher.leetcode.types.backtrack;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Title BacktrackTemplate2
  * @Author fyw
  * @Date 2022/1/29 20:09
- * @Description: 组合总和
+ * @Description: 做选择生成结果
  */
 public class BacktrackTemplate2 {
-    //组合总和1,2,3,4
-    class Code39{
-        List<List<Integer>> res=new LinkedList<>();
-        public List<List<Integer>> combinationSum(int[] candidates, int target) {
-            backtrack(candidates,target,0,new LinkedList<Integer>());
+    static class Code17{
+        // 全排列变形
+        List<String> res=new LinkedList<>();
+        HashMap<String,String> map = new HashMap<String,String>()
+        {
+            {
+                put("2", "abc");
+                put("3", "def");
+                put("4", "ghi");
+                put("5", "jkl");
+                put("6", "mno");
+                put("7", "pqrs");
+                put("8", "tuv");
+                put("9", "wxyz");
+            }
+        };
+        public List<String> letterCombinations(String digits) {
+            if(digits.length()==0){
+                return Collections.emptyList();
+            }
+            backtrack(digits,0,new StringBuilder());
             return res;
         }
-        public void backtrack(int[] candidates, int target, int ceng, LinkedList<Integer> path){
-            if (target==0){
-                res.add(new LinkedList<>(path));
+        void backtrack(String digits,int index,StringBuilder sb){
+            if (index==digits.length()){
+                res.add(new StringBuilder(sb).toString());
                 return;
             }
-            if (ceng==candidates.length)
-                return;
-
-            for (int i = 0; candidates[ceng] * i <= target; i++) {
-                backtrack(candidates,target-candidates[ceng]*i,ceng+1,path);
-                path.add(candidates[ceng]);
-            }
-
-            for (int i = 0; candidates[ceng] * i <= target; i++) {
-                path.pollLast();
+            String substring = digits.substring(index, index + 1);
+            for (int i = 0; i < map.get(substring).length(); i++) { // 对于当前字符可进行的选择进行遍历
+                sb.append(map.get(substring).charAt(i));
+                backtrack(digits,index+1,sb);
+                sb.deleteCharAt(index);
             }
         }
     }
-    class Code40{
-        List<List<Integer>> res=new LinkedList<>();
-        public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-            Arrays.sort(candidates);
-            backtrack(candidates,target,0,new LinkedList<Integer>());
+    static class Code22{
+        List<String> res=new ArrayList<>();
+        public List<String> generateParenthesis(int n) {
+            backtrack(n,0,0,new StringBuilder());
             return res;
         }
-        public void backtrack(int[] candidates, int target, int ceng, LinkedList<Integer> path){
-            if (target==0){
-                res.add(new LinkedList<>(path));
+        void backtrack(int n,int l,int r,StringBuilder sb){
+            if (l==n&&r==n){
+                res.add(new StringBuilder(sb).toString());
                 return;
             }
-            if (ceng==candidates.length)
-                return;
-
-            // 计算当前所选元素的个数，在此之前数组务必排序
-            int k=ceng+1;
-            while (k<candidates.length&&candidates[k]==candidates[ceng]) k++;
-            int cnt=k-ceng;
-
-            for (int i = 0; candidates[ceng] * i <= target&&i<=cnt; i++) {
-                backtrack(candidates,target-candidates[ceng]*i,k,path);
-                path.add(candidates[ceng]);
+            if (l<n){
+                backtrack(n,l+1,r,sb.append("("));
+                sb.deleteCharAt(sb.length()-1);
             }
-
-            for (int i = 0; candidates[ceng] * i <= target&&i<=cnt; i++) {
-                path.pollLast();
+            if (r<n&&r<l){
+                backtrack(n,l,r+1,sb.append(")"));
+                sb.deleteCharAt(sb.length()-1);
             }
         }
-    }
-    class Code216{
-        // 搜索组合问题要避免重复，定义一个顺序
-
     }
 }

@@ -17,10 +17,8 @@ public class Code36 {
         for(int i = 0;i < n;i ++)
         {
             Arrays.fill(st,false);
-            for(int j = 0;j < n;j ++)
-            {
-                if(board[i][j] != '.')
-                {
+            for(int j = 0;j < n;j ++) {
+                if(board[i][j] != '.') {
                     int t = board[i][j] - '0';
                     if(st[t]) return false;
                     st[t] = true;
@@ -31,10 +29,8 @@ public class Code36 {
         for(int i = 0;i < n;i ++)
         {
             Arrays.fill(st,false);
-            for(int j = 0;j < n;j ++)
-            {
-                if(board[j][i] != '.')
-                {
+            for(int j = 0;j < n;j ++) {
+                if(board[j][i] != '.') {
                     int t = board[j][i] - '0';
                     if(st[t]) return false;
                     st[t] = true;
