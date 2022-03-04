@@ -66,4 +66,49 @@ public class BacktrackTemplate2 {
             }
         }
     }
+    static class Code37{
+        // 数独
+        boolean[][] row=new boolean[9][9];
+        boolean[][] col=new boolean[9][9];
+        boolean[][][] cell=new boolean[3][3][9];
+        char[][] board;
+        public void solveSudoku(char[][] board) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (board[i][j]!='.'){
+                        int cur=board[i][j]-'1';
+                        row[i][cur]=col[j][cur]=cell[i/3][j/3][cur]=true;
+                    }
+                }
+            }
+            this.board=board;
+            backtrack(0,0);
+        }
+        boolean backtrack(int x,int y){
+            if (y==9){
+                x++;
+                y=0;
+                if (x==9)
+                    return true;
+            }
+            if (board[x][y]!='.')
+                return backtrack(x,y+1);
+            for (int i = 0; i < 9; i++) {
+                if (!row[x][i]&&!col[y][i]&&!cell[x/3][y/3][i]){
+                    char t= (char) (i+'1');
+                    row[x][i]=col[y][i]=cell[x/3][y/3][i]=true;
+                    board[x][y]=t;
+                    if (backtrack(x,y+1)){
+                        return true;
+                    }
+                    board[x][y]='.';
+                    row[x][i]=col[y][i]=cell[x/3][y/3][i]=false;
+                }
+            }
+            return false;
+        }
+    }
+    static class Code{
+
+    }
 }
