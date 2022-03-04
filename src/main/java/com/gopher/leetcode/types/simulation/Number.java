@@ -7,4 +7,19 @@ package com.gopher.leetcode.types.simulation;
  * @Description
  */
 public class Number {
+    static class Code168{
+
+    }
+
+    static class Code171{
+
+    }
+
+    static class Code202{
+
+    }
+
+    static class Code204{
+
+    }
 }

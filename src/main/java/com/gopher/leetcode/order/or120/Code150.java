@@ -13,18 +13,15 @@ public class Code150 {
 
     public int evalRPN(String[] tokens) {
         Stack<Integer> stk = new Stack<Integer>();
-        for(int i = 0;i < tokens.length;i ++)
-        {
+        for(int i = 0;i < tokens.length;i ++) {
             String s = tokens[i];
-            if(s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/"))
-            {
+            if(s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/")) {
                 int b = stk.pop();
                 int a = stk.pop();
                 if(s.equals("+")) a += b;
                 else if(s.equals("-")) a -= b;
                 else if(s.equals("*")) a *= b;
                 else a /= b;
-
                 stk.add(a);
             }
             else stk.add(Integer.parseInt(s));

@@ -82,7 +82,7 @@ public class BacktrackTemplate2 {
                 }
             }
             this.board=board;
-            backtrack(0,0);
+            backtrack(0,0); // 从第0行第0列开始放
         }
         boolean backtrack(int x,int y){
             if (y==9){
@@ -108,7 +108,45 @@ public class BacktrackTemplate2 {
             return false;
         }
     }
-    static class Code{
-
+    static class Code51{
+        // N皇后
+        int N=10;
+        boolean[] row=new boolean[N];
+        boolean[] dg=new boolean[N];    // x-i+n
+        boolean[] udg=new boolean[N];   // x+i
+        char[][] board=new char[N][N];
+        List<List<String>> res=new LinkedList<>();
+        public List<List<String>> solveNQueens(int n) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    board[i][j]='.';
+                }
+            }
+            backtrack(0,n);
+            return res;
+        }
+        void backtrack(int x,int n){ // 按行放
+            if (x==n){
+                List<String> list=new ArrayList<>();
+                for (int i = 0; i < n; i++) {
+                   StringBuilder sb=new StringBuilder();
+                    for (int j = 0; j < n; j++) {
+                        sb.append(board[i][j]);
+                    }
+                    list.add(sb.toString());
+                }
+                res.add(list);
+                return;
+            }
+            for (int i = 0; i < n; i++) {
+                if (!row[i]&&!dg[x-i+n]&&!udg[x+i]){
+                    row[i]=dg[x-i+n]=udg[x+i]=true;
+                    board[x][i]='Q';
+                    backtrack(x+1,n);   // 下一行开始
+                    board[x][i]='.';
+                    row[i]=dg[x-i+n]=udg[x+i]=false;
+                }
+            }
+        }
     }
 }
