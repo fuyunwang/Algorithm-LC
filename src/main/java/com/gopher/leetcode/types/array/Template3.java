@@ -7,11 +7,7 @@ package com.gopher.leetcode.types.array;
  * @Description 计数排序
  */
 public class Template3 {
-    public int[] buildArray(int[] nums) {
-        int[] res=new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            res[i]=nums[nums[i]];
-        }
-        return res;
+    static class Code1748{
+
     }
 }
