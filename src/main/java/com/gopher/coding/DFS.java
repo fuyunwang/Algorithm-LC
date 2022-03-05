@@ -40,12 +40,12 @@ public class DFS {
                 if(!st[j])
                 {
                     int s = dfs(j);
-                    res = Math.max(res, s);         // 当前节点下子树节点最大值
+                    res = MathTemplate.max(res, s);         // 当前节点下子树节点最大值
                     sum += s;
                 }
             }
-            res = Math.max(res, n - sum);
-            ans = Math.min(ans, res);
+            res = MathTemplate.max(res, n - sum);
+            ans = MathTemplate.min(ans, res);
             return sum ;
         }
         public static void main(String[] args) throws IOException {

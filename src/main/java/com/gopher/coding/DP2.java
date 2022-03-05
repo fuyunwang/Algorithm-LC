@@ -34,9 +34,9 @@ public class DP2 {
                     f[i] = 1;
                     for (int j = 1; j < i; j++) {
                         if (a[j] < a[i])
-                            f[i] = Math.max(f[i], f[j] + 1);
+                            f[i] = MathTemplate.max(f[i], f[j] + 1);
                     }
-                    max = Math.max(max, f[i]);
+                    max = MathTemplate.max(max, f[i]);
                 }
                 System.out.println(max);
             }
@@ -60,14 +60,14 @@ public class DP2 {
                             f[i][j] = 1;//初始为1
                             for(int k = 1;k < j;k ++)
                             {
-                                if(b[k] < b[j]) f[i][j] = Math.max(f[i][j], f[i - 1][k] + 1);
+                                if(b[k] < b[j]) f[i][j] = MathTemplate.max(f[i][j], f[i - 1][k] + 1);
                             }
                         }
                     }
                 }
                 //需要类似最长上升子序列求得最大值,也可以直接加到上面的循环中
                 int res = 0;
-                for(int i = 1;i <= n;i ++) res = Math.max(res,f[n][i]);
+                for(int i = 1;i <= n;i ++) res = MathTemplate.max(res,f[n][i]);
                 System.out.println(res);
             }
         }
@@ -91,10 +91,10 @@ public class DP2 {
             int[][] f = new int[n + 10][m + 10];
             for(int i = 1;i <= n;i++) {
                 for(int j = 1;j <= m;j++) {
-                    f[i][j] = Math.max(f[i-1][j], f[i][j - 1]);
+                    f[i][j] = MathTemplate.max(f[i-1][j], f[i][j - 1]);
                     //包含A[i] = B[j]情况的集合
                     if(A.charAt(i) == B.charAt(j))
-                        f[i][j] = Math.max(f[i][j],f[i - 1][j - 1] + 1);
+                        f[i][j] = MathTemplate.max(f[i][j],f[i - 1][j - 1] + 1);
                 }
             }
             System.out.println(f[n][m]);
@@ -124,10 +124,10 @@ public class DP2 {
                 for(int i = 1;i <= n;i++)
                     for(int j = 1;j <= m;j++)
                     {   //删除和添加
-                        f[i][j] = Math.min(f[i - 1][j] + 1, f[i][j - 1] + 1);
+                        f[i][j] = MathTemplate.min(f[i - 1][j] + 1, f[i][j - 1] + 1);
                         //修改
-                        if(a.charAt(i) == b.charAt(j)) f[i][j] = Math.min(f[i][j], f[i - 1][j - 1]);
-                        else f[i][j] = Math.min(f[i][j], f[i - 1][j - 1] + 1);
+                        if(a.charAt(i) == b.charAt(j)) f[i][j] = MathTemplate.min(f[i][j], f[i - 1][j - 1]);
+                        else f[i][j] = MathTemplate.min(f[i][j], f[i - 1][j - 1] + 1);
                     }
                 System.out.println(f[n][m]);
             }
@@ -160,7 +160,7 @@ public class DP2 {
                     int r = l + len - 1;
                     dp[l][r] = 0x3f3f3f3f;   //初始化
                     for(int k = l; k < r; k++){
-                        dp[l][r] = Math.min(dp[l][r],
+                        dp[l][r] = MathTemplate.min(dp[l][r],
                                 dp[l][k] + dp[k + 1][r] + sum[r] - sum[l - 1]);
 
                     }
