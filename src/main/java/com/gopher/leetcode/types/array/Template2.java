@@ -55,6 +55,23 @@ public class Template2 {
         }
     }
     static class Code1094{
-
+        public boolean carPooling(int[][] trips, int capacity) {
+            int[] res=new int[1001];
+            for (int i = 0; i < trips.length; i++) {
+                res[trips[i][1]]+=trips[i][0];
+                if (trips[i][2]<1000){
+                    res[trips[i][2]]-=trips[i][0];
+                }
+            }
+            for (int i = 1; i < res.length; i++) {
+                res[i]+=res[i-1];
+            }
+            for (int i = 0; i < res.length; i++) {
+                if (res[i]>capacity){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
