@@ -82,24 +82,5 @@ public class BacktrackTemplate4 {
         }
     }
 
-    class Code22{
-        List<String> res=new ArrayList<>();
-        public List<String> generateParenthesis(int n) {
-            dfs(n,0,0,"");
-            return res;
-        }
-        public void dfs(int n,int l,int r,String state){
-            if (l==n&&r==n){
-                res.add(state);
-                return;
-            }
-            if (l<n){
-                dfs(n,l+1,r,state+"(");
-            }
-            if (r<n&&r<l){
-                dfs(n,l,r+1,state+")");
-            }
-        }
-    }
 
 }

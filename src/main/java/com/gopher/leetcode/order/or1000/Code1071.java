@@ -13,7 +13,12 @@ public class Code1071 {
      * @param str2
      * @return
      */
-//    public String gcdOfStrings(String str1, String str2) {
-//
-//    }
+    public String gcdOfStrings(String str1, String str2) {
+        if (!(str1+str2).equals(str2+str1))
+            return "";
+        return str1.substring(0,gcd(str1.length(),str2.length()));
+    }
+    int gcd(int a,int b){           // 求最大公约数
+        return b!=0?gcd(b,a%b):a;
+    }
 }

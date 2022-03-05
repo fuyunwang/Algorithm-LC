@@ -112,7 +112,31 @@ public class Template1 {
 
 
     }
-
+    static class Code1004{
+        /**
+         * 给定一个二进制数组nums和一个整数k，如果可以翻转最多k个0，则返回数组中连续1的最大个数 。
+         * 意思是窗口内最多容许指定数量的0，然后求连续1的最大窗口
+         */
+        public int longestOnes(int[] nums, int k) {
+            int zero=0;
+            int res=0;
+            for (int i = 0, j=0; i < nums.length; i++) {
+                if (nums[i]==0){
+                    zero++;
+                }
+                while (zero>k){
+                    // 收缩左端点
+                    if (nums[j]==0){
+                        zero--;
+                    }
+                    j++;
+                }
+                // 代码进行到这里说明[j,i]是一个合法的区间，求其长度
+                res=Math.max(res,i-j+1);
+            }
+            return res;
+        }
+    }
     static class Code1984{
         // 学生分数的最小差值
         // 要想使每次计算的差值最小，每次取窗口内的值都应该尽可能接近
@@ -133,7 +157,5 @@ public class Template1 {
             return res;
         }
     }
-    static class Code1004{
 
-    }
 }
