@@ -48,6 +48,10 @@ public class Template5 {
         }
     }
 
+    static class Code1052{
+        // 爱生气的书店老板
+    }
+
     static class Code2100{
         //  适合打劫银行的日子
         /**
@@ -82,6 +86,10 @@ public class Template5 {
             }
             return res;
         }
+    }
+
+    static class Code2017{
+
     }
     static class Code845{
 

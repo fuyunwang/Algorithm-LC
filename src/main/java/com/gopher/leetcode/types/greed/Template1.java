@@ -1,8 +1,6 @@
 package com.gopher.leetcode.types.greed;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @Title Template1
@@ -65,6 +63,44 @@ public class Template1 {
                 res=res*31+this.value;
                 return res;
             }
+        }
+    }
+    static class Code1054{
+        // 依次从最多的元素开始取使得所有元素交错
+        public int[] rearrangeBarcodes(int[] barcodes) {
+            Map<Integer,Integer> map=new HashMap<>();
+            for (int i = 0; i < barcodes.length; i++) {
+                map.put(barcodes[i],map.getOrDefault(barcodes[i],0)+1);
+            }
+
+            PriorityQueue<int[]> queue=new PriorityQueue<>((a,b)->b[1]-a[1]);
+            for (Map.Entry<Integer,Integer> entry:map.entrySet()){
+                queue.offer(new int[]{entry.getKey(),entry.getValue()});
+            }
+
+            List<Integer> list=new ArrayList<>();
+            while (!queue.isEmpty()){
+                int[] poll = queue.poll();
+                int[] other = queue.poll();
+                list.add(poll[0]);
+                map.put(poll[0],map.getOrDefault(poll[0],0)-1);
+                if (map.get(poll[0])>0){
+                    queue.offer(new int[]{poll[0],map.get(poll[0])});
+                }
+                if (other!=null){
+                    list.add(other[0]);
+                    map.put(other[0],map.getOrDefault(other[0],0)-1);
+                    if (map.get(other[0])>0){
+                        queue.offer(new int[]{other[0],map.get(other[0])});
+                    }
+                }
+            }
+
+            int[] res=new int[list.size()];
+            for (int i = 0; i < list.size(); i++) {
+                res[i]=list.get(i);
+            }
+            return res;
         }
     }
 }
