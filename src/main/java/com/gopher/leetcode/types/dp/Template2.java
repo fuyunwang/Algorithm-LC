@@ -11,100 +11,6 @@ import java.util.List;
  * @Description
  */
 public class Template2 {
-    static class Code39{
-        // 同一个数字可以无限选取
-        List<List<Integer>> res=new LinkedList<>();
-        public List<List<Integer>> combinationSum(int[] candidates, int target) {
-            backtrack(candidates,0,target,new LinkedList());
-            return res;
-        }
-        void backtrack(int[] candidates, int u, int target, LinkedList path){    // 选择列表，u表示当前枚举的索引，target表示剩余的值
-            if (target==0){
-                res.add(new LinkedList<>(path));
-                return;
-            }
-            if (u==candidates.length) return;
-
-            // 开始枚举，注意从0个到多个的枚举实现是后序遍历，这里的i是数量
-            for (int i = 0; i*candidates[u] <= target; i++) {
-                backtrack(candidates,u+1,target-i*candidates[u],path);
-                path.addLast(candidates[u]);
-            }
-            for (int i = 0; i*candidates[u] <= target; i++) {
-                path.pollLast();//恢复现场
-            }
-        }
-    }
-    static class Code40{
-        // 有重复数字，但是每个数字只能选一个
-        List<List<Integer>> res=new LinkedList<>();
-        public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-            Arrays.sort(candidates);        // 排序方便所有数放在一块
-            backtrack(candidates,0,target,new LinkedList());
-            return res;
-        }
-        void backtrack(int[] candidates, int u, int target, LinkedList path){    // 选择列表，u表示当前枚举的索引，target表示剩余的值
-            if (target==0){
-                res.add(new LinkedList<>(path));
-                return;
-            }
-            if (u==candidates.length) return;
-
-            // 找到当前相同数的个数
-            int k=u+1;
-            while (k<candidates.length&&candidates[k]==candidates[u]) k++;
-            int count=k-u;
-
-            // 开始枚举，注意从0个到多个的枚举实现是后序遍历，这里的i是数量
-            for (int i = 0; i*candidates[u] <= target&&i<=count; i++) {
-                backtrack(candidates,k,target-i*candidates[u],path);
-                path.addLast(candidates[u]);
-            }
-            for (int i = 0; i*candidates[u] <= target&&i<=count; i++) {
-                path.pollLast();//恢复现场
-            }
-        }
-    }
-    static class Code77{
-        List<List<Integer>> res=new LinkedList<>();
-        public List<List<Integer>> combine(int n, int k) {
-            backtrack(1,n,k,new LinkedList<>());
-            return res;
-        }
-        void backtrack(int start,int n,int k,LinkedList<Integer> path){
-            if (k==0){
-                res.add(new LinkedList<>(path));
-                return;
-            }
-            for (int i = start; i <= n; i++) {
-                path.addLast(i);
-                backtrack(i+1,n,k-1,path);
-                path.pollLast();
-            }
-        }
-    }
-    static class Code216{
-        // 无重复数字，每个数字只能选一次，顺序的考虑
-        List<List<Integer>> res=new LinkedList<>();
-        public List<List<Integer>> combinationSum3(int k, int n) {
-            backtrack(1,n,k,new LinkedList<>());//从1开始枚举，n为剩余数，k为个数
-            return res;
-        }
-        void backtrack(int start,int target,int count,LinkedList<Integer> path){
-            if (target==0){
-                if (count==0){
-                    res.add(new LinkedList<>(path));
-                    return;
-                }
-            }else if (count>0){
-                for (int i = start; i <= 9; i++) {
-                    path.addLast(i);
-                    backtrack(i+1,target-i,count-1,path);
-                    path.pollLast();
-                }
-            }
-        }
-    }
     // 顺序不同的序列被视作不同的组合。
     static class Code377{
         // 状态表示：定义f[i][j]为组合长度为i，凑成总和为j的方案数是多少。由于对组合方案的长度没有限制，因此我们最终答案为所有的f[x][target]的总和。
@@ -129,9 +35,59 @@ public class Template2 {
             return res;
         }
     }
+    static class Code1014{
 
-    static class Code1995{
-        // 统计特殊四元组
-        // 利用等式关系 nums[a] + nums[b] + nums[c] = nums[d]，具有明确的「数值」和「个数」关系，可将问题抽象为组合优化问题求方案数。
+    }
+    static class Code1092{
+        public String shortestCommonSupersequence(String str1, String str2) {
+            /**
+             * f[i][j]表示字符串1的前i位进行扩充直到包含字符串2的前j位的最小方案数
+             *
+             * 集合划分依据就是当前最后一个字符是否相等
+             */
+            int n=str1.length();
+            int m=str2.length();
+            // 我这里没有将str1和str2前面加“ ”补齐，所以后续索引对应应该注意
+            int[][] f=new int[n+1][m+1];
+            for (int i = 0; i <= n; i++) {
+                f[i][0]=0;
+            }
+            for (int i = 1; i <= m; i++) {
+                f[0][i]=i;
+            }
+
+            // dp 的核心思想就是前面的都已经匹配好了，只需要考虑当前这位。
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    if (str1.charAt(i-1)==str2.charAt(j-1)){    // 如果当前字符相等那么说明不需要扩充，结果仍然是去掉当前这位的结果
+                        f[i][j]=f[i-1][j-1];
+                    }else{
+                        // 考虑既要包含a又要包含b的情况。可以保证a已经包含b是f[i-1][j]，可以保证a还差一个字符才包含b的情况f[i][j-1]+1。以上两种情况都一定保证是满足要求所以取最小的可能方案
+                        f[i][j]=Math.min(f[i][j-1]+1,f[i-1][j]);
+                    }
+                }
+            }
+
+            StringBuilder sb=new StringBuilder();
+            for (int i = n,j=m; i>0||j>0;) {
+                if (i==0){
+                    sb.append(str2.charAt(--j));
+                }else if (j==0){
+                    sb.append(str1.charAt(--i));
+                }else{
+                    if (str1.charAt(i-1)==str2.charAt(j-1)){
+                        sb.append(str1.charAt(--i));
+                        --j;
+                    }else{
+                        if (f[i][j]==f[i][j-1]+1){
+                            sb.append(str2.charAt(--j));
+                        }else{
+                            sb.append(str1.charAt(--i));
+                        }
+                    }
+                }
+            }
+            return sb.reverse().toString();
+        }
     }
 }
