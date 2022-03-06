@@ -45,6 +45,35 @@ public class BacktrackTemplate2 {
             }
         }
     }
+    static class Code1079{
+        // 全排列变形
+        // 活字印刷，去重，排序
+        boolean[] used;
+        public int numTilePossibilities(String tiles) {
+            char[] chars = tiles.toCharArray();
+            Arrays.sort(chars);
+            used=new boolean[chars.length];
+            return backtrack(chars,0)-1;
+        }
+        int backtrack(char[] s,int index){
+            int res=1;
+            if (index==s.length) {
+                return res;
+            }
+            for (int i = 0; i < s.length; i++) {
+                if (!used[i]){
+                    if (i>0&&s[i]==s[i-1]&&!used[i-1]) continue;
+                    char t=s[i];
+                    used[i]=true;
+                    s[i]=' ';
+                    res+=backtrack(s,index+1);
+                    s[i]=t;
+                    used[i]=false;
+                }
+            }
+            return res;
+        }
+    }
     static class Code22{
         List<String> res=new ArrayList<>();
         public List<String> generateParenthesis(int n) {
