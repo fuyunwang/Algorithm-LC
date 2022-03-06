@@ -13,6 +13,10 @@ public class Template1 {
     static class Code84{
 
     }
+    static class Code1081{
+
+    }
+
     static class Code2104{
         // 子数组中最大元素和最小元素的差值求和，每个nums[i]成为最大值的次数和成为最小值的次数抵消求和
         // 统计每个nums[i]成为区间最值的次数，最大值：
