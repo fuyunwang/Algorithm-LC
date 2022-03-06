@@ -124,7 +124,7 @@ public class DP3 {
                 dfs(j);     // 注意求和公式，所以这里先处理所有孩子节点
 
                 f[u][1] += f[j][0];
-                f[u][0] += MathTemplate.max(f[j][1], f[j][0]);
+                f[u][0] += Math.max(f[j][1], f[j][0]);
             }
         }
         public static void main(String[] args) {
@@ -144,7 +144,7 @@ public class DP3 {
             while(has_fa[root]) root ++;
             // 从根节点开始dfs
             dfs(root);
-            System.out.println(MathTemplate.max(f[root][0], f[root][1]));
+            System.out.println(Math.max(f[root][0], f[root][1]));
         }
         static void add(int a,int b)
         {
@@ -183,7 +183,7 @@ public class DP3 {
                 int a = x + dx[i];
                 int b = y + dy[i];
                 if(a < 0 || a >= n || b < 0 || b >= m) continue;
-                if(h[x][y] > h[a][b]) f[x][y] = MathTemplate.max(f[x][y], dfs(a,b) + 1);
+                if(h[x][y] > h[a][b]) f[x][y] = Math.max(f[x][y], dfs(a,b) + 1);
             }
             return f[x][y];
         }
@@ -202,7 +202,7 @@ public class DP3 {
             int res = 0;
             for(int i = 0;i < n;i ++) {
                 for(int j = 0;j < m;j ++) {
-                    res = MathTemplate.max(res, dfs(i,j));
+                    res = Math.max(res, dfs(i,j));
                 }
             }
             System.out.println(res);

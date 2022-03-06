@@ -37,7 +37,7 @@ public class DP1 {
                 for(int j = 0;j <= m ; j ++) {
                     f[i][j] = f[i-1][j];
                     if(j>=v[i]){
-                        f[i][j] = MathTemplate.max(f[i][j], f[i-1][j-v[i]]+w[i]);
+                        f[i][j] = Math.max(f[i][j], f[i-1][j-v[i]]+w[i]);
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class DP1 {
             // dp
             for(int i = 1; i <= n; i++) {
                 for(int j = v[i];j <= m;j ++) {
-                    f[j] = MathTemplate.max(f[j], f[j-v[i]]+w[i]);
+                    f[j] = Math.max(f[j], f[j-v[i]]+w[i]);
                 }
             }
             System.out.println(f[m]);
