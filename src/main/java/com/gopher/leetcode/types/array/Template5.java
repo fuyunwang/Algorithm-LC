@@ -1,6 +1,8 @@
 package com.gopher.leetcode.types.array;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,10 +53,35 @@ public class Template5 {
         /**
          * 根据其中的两个要求：
          *  第 i 天前连续 time 天警卫数目都是非递增的、第 i 天后连续 time 天警卫数目都是非递减的。
-         *  说明合理的结果范围区间的起始索引是time，终止索引n-time
+         * 1. 说明合理的结果范围区间的起始索引是time，终止索引n-time。其中time可以取到,n-time取不到
+         * 2. 枚举以上区间，然后对于区间的每一个值枚举其左侧time范围和右侧time范围，保证左侧time不严格升序，右侧time不严格降序
          *
+         * 本题是山脉数组的逆向，山谷数组
          */
-
+        public List<Integer> goodDaysToRobBank(int[] security, int time) {
+            int n=security.length;
+            int[] right=new int[n+1];   // 始终记录数组中当前索引下左侧小于等于当前数的个数
+            int[] left=new int[n+1];    // 始终记录数组中当前索引下右侧大于等于当前数的个数
+            for (int i = 1,j=0,k=0; i < security.length; i++) {
+                if (security[i]<security[i-1]){
+                    j++;
+                }else if (security[i]>security[i-1]){
+                    k++;
+                }else{
+                    j++;
+                    k++;
+                }
+                right[i]=k;
+                left[i]=j;
+            }
+            List<Integer> res=new ArrayList<>();
+            for (int i = time; i < n-time; i++) {
+                if (left[i]-left[i-time]==time&&right[i+time]-right[i]==time){
+                    res.add(i);
+                }
+            }
+            return res;
+        }
     }
     static class Code845{
 
