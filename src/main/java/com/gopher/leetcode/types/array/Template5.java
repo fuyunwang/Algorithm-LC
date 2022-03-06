@@ -45,4 +45,18 @@ public class Template5 {
             return res;
         }
     }
+
+    static class Code2100{
+        //  适合打劫银行的日子
+        /**
+         * 根据其中的两个要求：
+         *  第 i 天前连续 time 天警卫数目都是非递增的、第 i 天后连续 time 天警卫数目都是非递减的。
+         *  说明合理的结果范围区间的起始索引是time，终止索引n-time
+         *
+         */
+
+    }
+    static class Code845{
+
+    }
 }

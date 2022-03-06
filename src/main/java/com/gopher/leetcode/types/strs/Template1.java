@@ -51,8 +51,73 @@ public class Template1 {
             }
             return res;
         }
+
+        static class Code187_1{
+            int N = (int)1e5, P = 131313;
+            int[] h = new int[N+10], p = new int[N+10];
+            public List<String> findRepeatedDnaSequences(String s) {
+                int n=s.length();
+                p[0] = 1;
+                for (int i = 1; i <= n; i++) {
+                    h[i] = h[i - 1] * P + s.charAt(i - 1);
+                    p[i] = p[i - 1] * P;
+                }
+                List<String> res=new ArrayList<>();
+                Map<Integer,Integer> map=new HashMap<>();
+                // 枚举长度为10的串
+                for (int i = 1; i + 10 - 1<= s.length(); i++) {
+                    // 计算长度为10的串的哈希值
+                    int j=i+10-1;
+                    int hash=h[j]-h[i-1]*p[j-i+1];
+
+                    int count=map.getOrDefault(hash,0);
+                    if (count==1) {
+                        res.add(s.substring(i - 1, i + 10 - 1));
+                    }
+                    map.put(hash,count+1);
+
+                }
+                return res;
+            }
+        }
     }
-    static class COde1816{
+    static class Code1044{
+        long[] h, p;
+        public String longestDupSubstring(String s) {
+            int P = 1313131, n = s.length();
+            h = new long[n + 10];
+            p = new long[n + 10];
+            p[0] = 1;
+            for (int i = 1; i <= n; i++) {
+                h[i] = h[i-1] * P + s.charAt(i-1);
+                p[i] = p[i-1] * P;
+            }
+            String ans = "";
+            // 二分枚举，此题的二段性在于最大长度实在左边还是在右边
+            int l = 0, r = n;
+            while (l < r) {
+                int mid = l + r + 1 >> 1;
+                String t = check(s, mid);
+                if (t.length() != 0) l = mid;
+                else r = mid - 1;
+                ans = t.length() > ans.length() ? t : ans;
+            }
+            return ans;
+        }
+        String check(String s, int len) {       // check函数使用字符串hash来判断给定长度下是否存在合法方案
+            int n = s.length();
+            Set<Long> set = new HashSet<>();
+            for (int i = 1; i + len - 1 <= n; i++) {
+                int j = i + len - 1;
+                long cur = h[j] - h[i - 1] * p[j - i + 1];
+                if (set.contains(cur)) return s.substring(i - 1, j);
+                set.add(cur);
+            }
+            return "";
+        }
+
+    }
+    static class Code1816{
 //        public String truncateSentence(String s, int k) {
 //
 //        }
