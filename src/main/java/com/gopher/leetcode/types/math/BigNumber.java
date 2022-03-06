@@ -1,4 +1,4 @@
-package com.gopher.leetcode.types.simulation;
+package com.gopher.leetcode.types.math;
 
 import java.util.*;
 import java.util.stream.Collectors;
