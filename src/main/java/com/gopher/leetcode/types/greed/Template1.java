@@ -103,4 +103,26 @@ public class Template1 {
             return res;
         }
     }
+
+    static class Code1053{
+        // 保证字典序小于当前排列的最大的排列，贪心从数组尾部开始考虑找到非升序的开始位置
+        public int[] prevPermOpt1(int[] arr) {
+            for (int i = arr.length-2; i>=0; i--) {
+                if (arr[i]>arr[i+1]){
+                    int j=i+1;
+                    while (j<arr.length-1&&arr[i]>arr[j+1]) j++;
+                    while (arr[j-1]==arr[j])    // 如果有重复元素那么需要考虑第一个重复元素的交换
+                        j--;
+                    swap(arr,i,j);
+                    return arr;
+                }
+            }
+            return arr;
+        }
+        void swap(int[] arr,int i,int j){
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
 }
