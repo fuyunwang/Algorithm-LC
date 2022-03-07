@@ -7,7 +7,7 @@ import java.util.Map;
  * @Title Template3
  * @Author fyw
  * @Date 2022/2/1 20:17
- * @Description: 前序中序构造二叉树，中序后序构造二叉树
+ * @Description: 构造二叉树
  */
 public class TreeTemplate3 {
     // 前序和中序构造二叉树
@@ -28,6 +28,7 @@ public class TreeTemplate3 {
         root.right=buildTreePreIn(preorder,p_start+leftNum+1,p_end,inorder,inIndex+1,i_end,map);
         return root;
     }
+
     public TreeNode constructFromPrePost(int[] pre, int[] post) {
         return helper(pre,post,0,pre.length-1,0,post.length-1);
     }

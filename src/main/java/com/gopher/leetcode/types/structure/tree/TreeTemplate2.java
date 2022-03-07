@@ -9,6 +9,8 @@ package com.gopher.leetcode.types.structure.tree;
 public class TreeTemplate2 {
     static class Code1080{
 
+    }
+    static class Code538{
 
     }
 }
