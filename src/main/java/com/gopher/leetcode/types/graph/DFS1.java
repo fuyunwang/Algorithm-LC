@@ -57,24 +57,43 @@ public class DFS1 {
     static class Code200{
 
     }
+    static class Code695{
+
+    }
 
     static class Code1034{
         int m,n;
         int[][] g;
         boolean[][] visited;
         int oldColor;
-        int rx,ry;
         int[] dx=new int[]{-1,0,1,0};
         int[] dy=new int[]{0,1,0,-1};
         public int[][] colorBorder(int[][] grid, int row, int col, int color) {
             m=grid.length;
             n=grid[0].length;
             g=grid;
-            rx=row;
-            ry=col;
             visited=new boolean[m][n];
             oldColor=grid[row][col];
-            dfs(row,col,color);
+            dfs(row,col,color);// 经过flood fill，联通分量都已经被visited标记
+            // 开始枚举边界，边界情况分两种，一种是当前联通分量的格子本身就是边界，一种是当前联通分量的格子挨着非联通分量的格子（枚举方向并看是否标记过）
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    if(visited[i][j]){
+                        if(i==0||i==m-1||j==0||j==n-1){
+                            g[i][j]=color;
+                        }else{
+                            for (int d = 0; d < 4; d++) {
+                                int a=i + dx[d];
+                                int b=j + dy[d];
+                                if(a<m&&a>=0&&b<n&&b>=0&&!visited[a][b]){
+                                    g[i][j]=color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             return g;
         }
         void dfs(int x,int y,int color){
@@ -82,24 +101,15 @@ public class DFS1 {
                 return;
             }
             visited[x][y]=true;
-            if(x==0||x==m-1||y==0||y==n-1){
-                g[x][y]=color;
-            }
+            // 枚举
             for (int i = 0; i < 4; i++) {
                 int a=x + dx[i];
                 int b=y + dy[i];
-                if (a<m&&a>=0&&b<n&&b>=0&&!visited[a][b] && g[a][b] != oldColor) {
-                    g[x][y]=color;
-                }
+                dfs(a,b,color);
+
             }
-            dfs(x+1,y,color);
-            dfs(x-1,y,color);
-            dfs(x,y+1,color);
-            dfs(x,y-1,color);
         }
     }
 
-    static class Code695{
 
-    }
 }

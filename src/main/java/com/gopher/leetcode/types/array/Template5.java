@@ -50,6 +50,28 @@ public class Template5 {
 
     static class Code1052{
         // 爱生气的书店老板
+        // 满意人数=原本满意人数+新增满意人数
+        // 滑动窗口连续分钟内生气时间的最大值
+        public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
+            // 原本满意的顾客+新增满意顾客
+            // 注意题目的特殊点，如果新增满意顾客，那么在原本的窗口内直接累加前缀和并维护最大值即可，因为生气时间正好是1，不生气时间不新增顾客正好是0；
+            int max=0;
+            int additional=0;
+            for (int i = 0; i < customers.length; i++) {
+                additional+=customers[i]*grumpy[i];
+                if (i>=minutes) additional-=customers[i-minutes]*grumpy[i-minutes];
+                max=Math.max(max,additional);
+            }
+            // 累加原来的满意数量
+            int res=0;
+            for (int i = 0; i < customers.length; i++) {
+                if (grumpy[i]==0){
+                    res+=customers[i];
+                }
+            }
+            res+=max;
+            return res;
+        }
     }
 
     static class Code2100{
