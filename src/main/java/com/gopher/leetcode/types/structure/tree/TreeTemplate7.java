@@ -8,6 +8,6 @@ package com.gopher.leetcode.types.structure.tree;
  */
 public class TreeTemplate7 {
     static class Code2096{
-        
+
     }
 }

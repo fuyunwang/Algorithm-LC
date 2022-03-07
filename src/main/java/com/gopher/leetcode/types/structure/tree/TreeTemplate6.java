@@ -39,4 +39,25 @@ public class TreeTemplate6 {
         }
         return left==null?right:left;
     }
+
+    static class Code865{
+        // 最深叶子节点的最近公共祖先
+        public TreeNode lcaDeepestLeaves(TreeNode root) {
+            if (root==null)
+                return null;
+            int left=getDepth(root.left);
+            int right=getDepth(root.right);
+            if (left==right)
+                return root;
+            if (left>right){
+                return lcaDeepestLeaves(root.left);
+            }
+            return lcaDeepestLeaves(root.right);
+        }
+        int getDepth(TreeNode root){
+            if (root==null)
+                return 0;
+            return Math.max(getDepth(root.left),getDepth(root.right))+1;
+        }
+    }
 }
