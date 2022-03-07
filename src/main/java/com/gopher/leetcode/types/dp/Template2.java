@@ -38,6 +38,24 @@ public class Template2 {
     static class Code1014{
 
     }
+    static class Code1035{
+        // 不相交的线，最长公共子序列
+        public int maxUncrossedLines(int[] nums1, int[] nums2) {
+            int m=nums1.length;
+            int n=nums2.length;
+            int[][] f=new int[m+1][n+1];
+
+            for (int i = 1; i <= m; i++) {
+                for (int j = 1; j <= n; j++) {
+                    f[i][j]=Math.max(f[i][j-1],f[i-1][j]);
+                    if (nums1[i-1]==nums2[j-1]){
+                        f[i][j]=Math.max(f[i][j],f[i-1][j-1]+1);
+                    }
+                }
+            }
+            return f[m][n];
+        }
+    }
     static class Code1092{
         public String shortestCommonSupersequence(String str1, String str2) {
             /**
