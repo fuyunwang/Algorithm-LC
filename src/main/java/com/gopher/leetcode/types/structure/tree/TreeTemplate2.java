@@ -23,4 +23,24 @@ public class TreeTemplate2 {
             return root;
         }
     }
+    static class Code1022{
+        public int sumRootToLeaf(TreeNode root) {
+            return cal(root,0);
+        }
+        int cal(TreeNode root, int x){
+            if (root==null){
+                return 0;
+            }
+            x=x*2+root.val;
+            if (root.left==null&&root.right==null){
+                return x;
+            }
+            int res=0;      // 累加求和
+            if (root.left!=null)
+                res+=cal(root.left,x);
+            if (root.right!=null)
+                res+=cal(root.right,x);
+            return res;
+        }
+    }
 }

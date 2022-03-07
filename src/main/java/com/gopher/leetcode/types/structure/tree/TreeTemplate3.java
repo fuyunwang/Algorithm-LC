@@ -1,6 +1,8 @@
 package com.gopher.leetcode.types.structure.tree;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,6 +91,37 @@ public class TreeTemplate3 {
             }else{
                 root.left=buildBST(root.left,num);
             }
+            return root;
+        }
+    }
+    static class Code1382{
+        // 重构平衡的二叉搜索树
+        List<Integer> list=new ArrayList<>();
+        int temp[];
+        public TreeNode balanceBST(TreeNode root) {
+            if (root==null)
+                return null;
+            dfs(root);
+            temp=new int[list.size()];
+            for (int i = 0; i < list.size(); i++) {
+                temp[i]=list.get(i);
+            }
+            return buildTree(0,list.size()-1);
+        }
+        void dfs(TreeNode root){
+            if (root==null)
+                return;
+            dfs(root.left);
+            list.add(root.val);
+            dfs(root.right);
+        }
+        TreeNode buildTree(int start, int end){
+            if (start>end)
+                return null;
+            int mid=start+((end-start)>>1);
+            TreeNode root=new TreeNode(temp[mid]);
+            root.left=buildTree(start,mid-1);
+            root.right=buildTree(mid+1,end);
             return root;
         }
     }

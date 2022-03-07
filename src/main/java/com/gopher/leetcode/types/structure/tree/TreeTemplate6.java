@@ -30,9 +30,6 @@ public class TreeTemplate6 {
             return root;
         final TreeNode left = lowestCommonAncestor(root.left, p, q);
         final TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if (left==null&&right==null){
-            return null;// 说明都没找到
-        }
         if (left!=null&&right!=null){
             // 说明在左右子树中，左右子树都存在
             return root;
