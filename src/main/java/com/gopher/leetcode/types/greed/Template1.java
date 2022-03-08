@@ -67,7 +67,7 @@ public class Template1 {
         }
     }
     static class Code1054{
-        // 依次从最多的元素开始取使得所有元素交错
+        // 依次从最多的元素开始取使得所有元素交错，类似767题目
         public int[] rearrangeBarcodes(int[] barcodes) {
             Map<Integer,Integer> map=new HashMap<>();
             for (int i = 0; i < barcodes.length; i++) {

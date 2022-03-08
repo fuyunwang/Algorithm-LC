@@ -10,4 +10,7 @@ public class Template1 {
     static class Code924{
         // 维护连通块的大小用并查集
     }
+    static class Code765{
+
+    }
 }

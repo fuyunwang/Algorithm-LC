@@ -8,6 +8,6 @@ package com.gopher.leetcode.types.graph;
  */
 public class AnnularGraph {
     static class Code765{
-        
+
     }
 }
