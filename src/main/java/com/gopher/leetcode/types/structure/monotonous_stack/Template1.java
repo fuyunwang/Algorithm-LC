@@ -17,6 +17,28 @@ public class Template1 {
 
     }
 
+    static class Code735{
+        // 行星碰撞
+        public int[] asteroidCollision(int[] as) {
+            Deque<Integer> stk = new ArrayDeque<>();
+            for(int x: as){
+                if(x > 0){
+                    stk.push(x);                                                                // 全为正向
+                }else{
+                    while(stk.size() > 0 && stk.peek() > 0 && stk.peek() < -x) stk.pop();       // 一个正向一个逆向
+                    if(stk.size() == 0 || stk.size() > 0 && stk.peek() < 0) stk.push(x);        // 全为逆向
+                    else if(stk.size() > 0 && stk.peek() == -x) stk.pop();
+                }
+            }
+            int[] res = new int[stk.size()];
+            int k = stk.size() - 1;
+            while(stk.size() > 0){
+                res[k--] = stk.pop();
+            }
+            return res;
+        }
+    }
+
     static class Code2104{
         // 子数组中最大元素和最小元素的差值求和，每个nums[i]成为最大值的次数和成为最小值的次数抵消求和
         // 统计每个nums[i]成为区间最值的次数，最大值：

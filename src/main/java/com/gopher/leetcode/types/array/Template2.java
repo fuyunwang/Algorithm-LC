@@ -1,5 +1,7 @@
 package com.gopher.leetcode.types.array;
 
+import java.util.TreeMap;
+
 /**
  * @Title Template2
  * @Author fyw
@@ -72,6 +74,29 @@ public class Template2 {
                 }
             }
             return true;
+        }
+    }
+    static class Code731{
+        class MyCalendarTwo {
+            TreeMap<Integer, Integer> map = new TreeMap<>(); // 按照key从小到大排序
+            public MyCalendarTwo() {
+
+            }
+
+            public boolean book(int start, int end) {
+                map.put(start, map.getOrDefault(start, 0) + 1);
+                map.put(end, map.getOrDefault(end, 0) - 1);
+                int sum = 0;
+                for (int n : map.values()) {        // 类似差分，但并不是区间内每一个值都加数而是在最后结果中维护状态
+                    sum += n;
+                    if (sum >= 3) {
+                        map.put(start, map.get(start) - 1);
+                        map.put(end, map.get(end) + 1);
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
     }
 }

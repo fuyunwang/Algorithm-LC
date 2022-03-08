@@ -7,5 +7,6 @@ package com.gopher.leetcode.types.graph;
  * @Description Floyd
  */
 public class Template2 {
-    static class Code
+    static class Code{
+    }
 }

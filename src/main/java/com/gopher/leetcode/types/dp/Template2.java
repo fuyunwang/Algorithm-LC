@@ -1,6 +1,7 @@
 package com.gopher.leetcode.types.dp;
 
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -106,6 +107,55 @@ public class Template2 {
                 }
             }
             return sb.reverse().toString();
+        }
+    }
+
+    static class Code730{
+        // 统计不同的回文子序列
+        /**
+         * f[i,j]表示 【i，j】中的不同回文子序列的数量(包含空序列)
+         *
+         * 单独一个字母也是一种子序列
+         * dp问题我们直接考虑能生成正确答案的分类情况，这里4种字符所以划分为4类
+         */
+        public int countPalindromicSubsequences(String s) {
+            int mod = (int)1e9 + 7;
+            int n = s.length();
+            int[][] f = new int[n][n];
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    f[i][j] = 1;
+                }
+                f[i][i] = 2;
+            }
+            for (int len = 2; len <= n; ++len) {
+                Deque<Integer>[] q = new Deque[4];
+                for (int i = 0; i < 4; ++i) {
+                    q[i] = new LinkedList<>();
+                }
+                for (int i = 0; i < len - 1; i++) {
+                    q[s.charAt(i) - 'a'].add(i);
+                }
+                for (int i = 0; i + len <= n; ++i) {
+                    int j = i + len - 1;
+                    int p = s.charAt(j) - 'a';
+                    q[p].offerLast(j);
+
+                    for (int k = 0; k < 4; ++k) {
+
+                        if (q[k].size() > 0) {
+                            f[i][j]++;
+                            if (q[k].size() > 1) {
+                                int l = q[k].peekFirst(), r = q[k].peekLast();
+                                f[i][j] += f[l + 1][r - 1];
+                                f[i][j] %= mod;
+                            }
+                        }
+                    }
+                    q[s.charAt(i) - 'a'].pollFirst();
+                }
+            }
+            return (f[0][n - 1] + mod - 1) % mod;
         }
     }
 
