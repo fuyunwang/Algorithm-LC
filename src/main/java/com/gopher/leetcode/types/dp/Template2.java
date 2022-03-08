@@ -160,6 +160,10 @@ public class Template2 {
     }
 
     static class Code740{
+
+    }
+
+    static class Code741{
         // 类似题目，方格取数、传纸条
 
     }
