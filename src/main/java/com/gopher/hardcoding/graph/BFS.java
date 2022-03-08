@@ -50,9 +50,9 @@ public class BFS {
     }
 
     static class Code2{
+        // 抓住那头牛
         static int n,m;// 分别表示人的位置和牛的位置
         public static void main(String[] args) throws IOException {
-
             bfs(n, m);
         }
 

@@ -9,6 +9,7 @@ import java.util.*;
  * @Description 
  */
 public class Template1 {
+
     static class Code1090{
         /**
          *  有一些物品，每个物品都有一个价值value以及该物品的对应编号label。

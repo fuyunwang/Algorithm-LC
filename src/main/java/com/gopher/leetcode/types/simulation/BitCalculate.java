@@ -4,6 +4,7 @@ import com.gopher.leetcode.types.structure.linkedlist.ListNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -38,6 +39,34 @@ public class BitCalculate {
                 head=head.next;
             }
             return res;
+        }
+    }
+    static class Code762{
+        class Solution {
+            public int countPrimeSetBits(int left, int right) {
+                // 最大范围是2^19
+                HashSet<Integer> primes=new HashSet<>();
+                primes.add(2);
+                primes.add(3);
+                primes.add(5);
+                primes.add(7);
+                primes.add(11);
+                primes.add(13);
+                primes.add(17);
+                primes.add(19);
+                int res=0;
+                while (left<=right){
+                    int cur=0;
+                    for (int i = left; i > 0; i>>=1) {
+                        cur+=(i&1);
+                    }
+                    if (primes.contains(cur)){
+                        res++;
+                    }
+                    left++;
+                }
+                return res;
+            }
         }
     }
     static class Code504{

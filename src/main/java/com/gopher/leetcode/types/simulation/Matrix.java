@@ -15,6 +15,62 @@ public class Matrix {
     static class Code48{
 
     }
+    static class Code764{
+        public int orderOfLargestPlusSign(int N, int[][] mines) {
+            boolean[][] g = new boolean[N][N];
+            for (int[] m : mines) {
+                g[m[0]][m[1]] = true;
+            }
+            int[][] f = new int[N][N];
+            for (int i = 0; i < N; i++) {
+                for (int j = 0, s = 0; j < N; j++) {
+                    if (!g[i][j]) {
+                        s++;
+                    } else {
+                        s = 0;
+                    }
+                    f[i][j] = s;
+                }
+            }
+            for (int i = 0; i < N; i++) {
+                for (int j = N - 1, s = 0; j >= 0; j--) {
+                    if (!g[i][j]) {
+                        s++;
+                    } else {
+                        s = 0;
+                    }
+                    f[i][j] = Math.min(f[i][j], s);
+                }
+            }
+            for (int i = 0; i < N; i++) {
+                for (int j = 0, s = 0; j < N; j++) {
+                    if (!g[j][i]) {
+                        s++;
+                    } else {
+                        s = 0;
+                    }
+                    f[j][i] = Math.min(f[j][i], s);
+                }
+            }
+            for (int i = 0; i < N; i++) {
+                for (int j = N - 1, s = 0; j >= 0; j--) {
+                    if (!g[j][i]) {
+                        s++;
+                    } else {
+                        s = 0;
+                    }
+                    f[j][i] = Math.min(f[j][i], s);
+                }
+            }
+            int res = 0;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    res = Math.max(res, f[i][j]);
+                }
+            }
+            return res;
+        }
+    }
     static class Code1886{
 
     }
