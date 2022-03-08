@@ -57,4 +57,21 @@ public class Template4 {
             return -1;
         }
     }
+
+    static class Code747{
+        // 找数组中的最大值和次大值
+        public int dominantIndex(int[] nums) {
+            int max = Integer.MIN_VALUE, less = 0, idx = -1;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] > max) {
+                    less = max;
+                    max = nums[i];
+                    idx = i;
+                } else if (nums[i] > less) {
+                    less = nums[i];
+                }
+            }
+            return max >= 2 * less ? idx : -1;
+        }
+    }
 }
