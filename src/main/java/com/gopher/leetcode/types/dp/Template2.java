@@ -108,4 +108,9 @@ public class Template2 {
             return sb.reverse().toString();
         }
     }
+
+    static class Code740{
+        // 类似题目，方格取数、传纸条
+
+    }
 }

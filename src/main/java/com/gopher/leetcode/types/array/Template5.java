@@ -1,9 +1,6 @@
 package com.gopher.leetcode.types.array;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Title Template5
@@ -115,5 +112,43 @@ public class Template5 {
     }
     static class Code845{
 
+    }
+
+    static class Code2055{
+        public int[] platesBetweenCandles(String s, int[][] queries) {
+            int[] sum=new int[s.length()+1];
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '|') list.add(i);
+                sum[i + 1] = sum[i] + (s.charAt(i) == '*' ? 1 : 0);
+            }
+            int[] res=new int[queries.length];
+            if (list.size() == 0) return res;
+            for (int i = 0; i < queries.length; i++) {
+                int a = queries[i][0], b = queries[i][1];
+                int c = -1, d = -1;
+                // 找到 a 右边最近的蜡烛
+                int l = 0, r = list.size() - 1;
+                while (l < r) {
+                    int mid = l + r >> 1;
+                    if (list.get(mid) >= a) r = mid;
+                    else l = mid + 1;
+                }
+                if (list.get(r) >= a) c = list.get(r);
+                else continue;
+                // 找到 b 左边最近的蜡烛
+                l = 0; r = list.size() - 1;
+                while (l < r) {
+                    int mid = l + r + 1 >> 1;
+                    if (list.get(mid) <= b) l = mid;
+                    else r = mid - 1;
+                }
+                if (list.get(r) <= b) d = list.get(r);
+                else continue;
+                if (c <= d) res[i] = sum[d + 1] - sum[c];
+            }
+
+            return res;
+        }
     }
 }
