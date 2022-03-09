@@ -44,7 +44,26 @@ public class Template5 {
             return res;
         }
     }
+    static class Code1031{
+        public int maxSumTwoNoOverlap(int[] nums, int firstLen, int secondLen) {
+            return Math.max(maxWork(nums, firstLen, secondLen), maxWork(nums, secondLen, firstLen));
+        }
 
+        private int maxWork(int[] nums, int a, int b) {
+            int n=nums.length;
+            int[] sums = new int[n + 1];
+            for (int i = 1; i <= n; i++) {
+                sums[i] = sums[i - 1] + nums[i - 1];
+            }
+
+            int res=0;
+            for (int i = a + b, maxa = 0; i <= n; i++) {
+                maxa = Math.max(maxa, sums[i - b] - sums[i - b - a]);
+                res = Math.max(res, sums[i] - sums[i - b] + maxa);
+            }
+            return res;
+        }
+    }
     static class Code1052{
         // 爱生气的书店老板
         // 满意人数=原本满意人数+新增满意人数
