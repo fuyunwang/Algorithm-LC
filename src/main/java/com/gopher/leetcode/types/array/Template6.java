@@ -12,7 +12,10 @@ public class Template6 {
     static class Code56 {
         // 区间合并
     }
+    static class Code1010{
+        // 类似K倍区间
 
+    }
     static class Code729 {
         class MyCalendar {
             TreeMap<Integer/*开始数字*/, Integer/*结束数字*/> treeMap = new TreeMap();
