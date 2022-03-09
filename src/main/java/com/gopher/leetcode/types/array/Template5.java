@@ -151,4 +151,23 @@ public class Template5 {
             return res;
         }
     }
+    static class Code1012{
+        public boolean canThreePartsEqualSum(int[] arr) {
+            int n = arr.length ;
+            int [] sum = new int [n + 1] ;
+            for (int i = 1; i <= n ; ++i) {
+                sum[i] = sum[i - 1] + arr[i - 1] ;
+            }
+            if (sum[n] % 3 != 0) return false ;
+            int avg = sum[n] / 3 ;
+            int i = 1 ;
+            while (i <= n && sum[i] != avg) i++ ;
+            int j = n - 1 ;
+            while (i + 1 < j && sum[n] - sum[j] != avg) j-- ;
+            if (j > i && sum[j] - sum[i] == avg) return true ;
+            return false ;
+
+
+        }
+    }
 }

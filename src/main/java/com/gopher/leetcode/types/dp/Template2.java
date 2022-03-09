@@ -167,4 +167,30 @@ public class Template2 {
         // 类似题目，方格取数、传纸条
 
     }
+
+    static class Code1027{
+        // 最长等差数列
+        // f[i,j]表示所有以i结尾且公差为j的子序列的集合，属性最大值 | 枚举第二个数
+        public int longestArithSeqLength(int[] nums) {
+            int n = nums.length;
+            int maxLen = 1; // at least has 1 element
+            // dp[i][diff] means the length of Arithmetic Subsequence which difference is diff and last element is nums[i]
+            int offSet = 500;
+            int[][] dp = new int[n][offSet * 2 + 10];
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < i; j++) {
+                    int diff = nums[i] - nums[j] + offSet;
+                    if (dp[j][diff] == 0) {
+                        dp[i][diff] = 2;
+                    } else {
+                        dp[i][diff] = 1 + dp[j][diff];
+                    }
+                    maxLen = Math.max(maxLen, dp[i][diff]);
+                }
+            }
+
+            return maxLen;
+        }
+    }
 }

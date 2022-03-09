@@ -15,6 +15,29 @@ public class Matrix {
     static class Code48{
 
     }
+    static class Code1030{
+        public int[][] allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
+            int[][] res = new int[rows*cols][2];
+            int[] dx = new int[]{1, 1, -1, -1}, dy = new int[]{1, -1, -1, 1};
+            res[0] = new int[]{rCenter, cCenter};
+            int index = 1;
+            for (int d = 1; ;d++){//枚举距离
+                int x = rCenter - d, y = cCenter, cnt = 0;//cnt 这一层有多少数
+                for (int i = 0; i < 4; i ++){
+                    for (int j = 0; j < d; j++){
+                        if (x >= 0 && x < rows && y >=0 && y < cols){
+                            res[index++] = new int[]{x, y};
+                            cnt++;
+                        }
+                        x+= dx[i];
+                        y+= dy[i];
+                    }
+                }
+                if (cnt == 0) break;
+            }
+            return res;
+        }
+    }
     static class Code764{
         public int orderOfLargestPlusSign(int N, int[][] mines) {
             boolean[][] g = new boolean[N][N];

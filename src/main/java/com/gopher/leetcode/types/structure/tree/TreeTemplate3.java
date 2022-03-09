@@ -125,4 +125,34 @@ public class TreeTemplate3 {
             return root;
         }
     }
+
+    static class Code1028{
+        // 先序遍历还原二叉树
+        int idx = 0;
+        public TreeNode recoverFromPreorder(String str) {
+            return dfs(str, 0);
+        }
+
+        TreeNode dfs(String str, int depth)
+        {
+            if (idx >= str.length())
+                return null;
+            int k = idx, d = 0;
+            while (str.charAt(k) == '-')
+            {
+                k ++ ;
+                d ++ ;
+            }
+            if (d != depth)
+                return null;
+            idx = k;
+            while (idx < str.length() && Character.isDigit(str.charAt(idx)))
+                idx ++ ;
+            int v = Integer.parseInt(str.substring(k, idx));
+            TreeNode root = new TreeNode(v);
+            root.left = dfs(str, depth + 1);
+            root.right = dfs(str, depth + 1);
+            return root;
+        }
+    }
 }

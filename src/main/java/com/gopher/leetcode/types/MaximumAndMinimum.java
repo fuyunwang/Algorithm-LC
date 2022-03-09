@@ -21,15 +21,12 @@ public class MaximumAndMinimum {
             return r;
         }
 
-        boolean check(int[] w, int d, int x)
-        {
+        boolean check(int[] w, int d, int x) {
             int cnt = 1;
-            for (int i = 0, s = 0; i < w.length; i ++ )
-            {
+            for (int i = 0, s = 0; i < w.length; i ++ ) {
                 if (w[i] > x)
                     return false;
-                if (s + w[i] > x)
-                {
+                if (s + w[i] > x) {
                     cnt ++ ;
                     s = 0;
                 }

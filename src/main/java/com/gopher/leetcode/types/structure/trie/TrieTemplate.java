@@ -1,5 +1,7 @@
 package com.gopher.leetcode.types.structure.trie;
 
+import java.util.*;
+
 /**
  * @Title TrieTemplate
  * @Author fyw
@@ -65,6 +67,48 @@ public class TrieTemplate {
 
             public int f(String prefix, String suffix) {
                 return query(suffix + "#" + prefix);
+            }
+        }
+
+    }
+    static class Code1032{
+        class StreamChecker {
+            class Trie {
+                class Node {
+                    Node[] children = new Node[26];
+                    boolean isEnd;
+                }
+                Node root = new Node();
+                void add(String word) {
+                    Node node = root;
+                    for (int i = word.length() - 1; i >= 0; i--) {
+                        int c = word.charAt(i) - 'a';
+                        if (node.children[c] == null) node.children[c] = new Node();
+                        node = node.children[c];
+                    }
+                    node.isEnd = true;
+                }
+                boolean search(StringBuilder word) {
+                    Node node = root;
+                    for (int i = word.length() - 1; i >= 0; i--) {
+                        int c = word.charAt(i) - 'a';
+                        if (node.children[c] == null) return false;
+                        node = node.children[c];
+                        if (node.isEnd) return true;
+                    }
+                    return false;
+                }
+            }
+            Trie trie;
+            StringBuilder query;
+            public StreamChecker(String[] words) {
+                trie = new Trie();
+                query = new StringBuilder();
+                Arrays.stream(words).forEach(trie::add);;
+            }
+
+            public boolean query(char letter) {
+                return trie.search(query.append(letter));
             }
         }
 
