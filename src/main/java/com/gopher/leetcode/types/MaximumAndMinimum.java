@@ -8,6 +8,35 @@ package com.gopher.leetcode.types;
  */
 public class MaximumAndMinimum {
     static class Code1011{
+        public int shipWithinDays(int[] weights, int days) {
+            int l = 1, r = 500 * (int)5e4;
+            while (l < r)
+            {
+                int mid = l + r >> 1;
+                if (check(weights, days, mid))
+                    r = mid;
+                else
+                    l = mid + 1;
+            }
+            return r;
+        }
+
+        boolean check(int[] w, int d, int x)
+        {
+            int cnt = 1;
+            for (int i = 0, s = 0; i < w.length; i ++ )
+            {
+                if (w[i] > x)
+                    return false;
+                if (s + w[i] > x)
+                {
+                    cnt ++ ;
+                    s = 0;
+                }
+                s += w[i];
+            }
+            return cnt <= d;
+        }
 
     }
     static class Code738{
