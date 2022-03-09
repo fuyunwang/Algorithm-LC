@@ -117,4 +117,17 @@ public class Template2 {
             return sum;
         }
     }
+
+    static class Code991{
+        public int brokenCalc(int x, int y) {
+            int res =  0;
+            while(y>x){
+                if(y%2>0)y++;
+                else y/=2;
+                res++;
+
+            }
+            return res+x-y;
+        }
+    }
 }
