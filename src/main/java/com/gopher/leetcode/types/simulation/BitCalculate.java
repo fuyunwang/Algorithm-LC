@@ -14,6 +14,18 @@ import java.util.List;
  * @Description 位运算
  */
 public class BitCalculate {
+    static class Code1009{
+        // 求n的第k位 ： n>>k&1
+        // 1<<i 表示2的i次方
+        public int bitwiseComplement(int n) {
+            if (n == 0) return 1;
+            int res = 0;
+            for (int i = 0; 1 << i <= n; i ++){
+                res ^= ((n >> i & 1) == 1 ? 0 : 1) << i;
+            }
+            return res;
+        }
+    }
     public List<Integer> pathInZigZagTree(int label) {
         List<Integer> res=new ArrayList<>();
         while (label>0){

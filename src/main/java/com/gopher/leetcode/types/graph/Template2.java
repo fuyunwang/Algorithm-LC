@@ -3,7 +3,7 @@ package com.gopher.leetcode.types.graph;
 import com.gopher.hardcoding.graph.BFS;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * @Title Template2
@@ -90,5 +90,31 @@ public class Template2 {
              }
              return (tx == sx && ty == sy);
          }
+    }
+
+    static class Code1005{
+        public int largestSumAfterKNegations(int[] nums, int k) {
+            int n = nums.length;
+            // 记录最小的一个负数,在k的范围内 从小到大记录负数, 把对应的负数转成正数
+            // 如果负数cnt的个数<k, 再根据k-cnt的奇偶性, 如果是奇数, 结果减去2*|最小绝对值数|, 如果是偶数, 则不需要更改正数
+
+
+            Arrays.sort(nums);
+            int sum = 0, cnt = 0, minv = 0x3f3f3f3f;
+            // 记录最小的绝对值数
+            for (int i = 0; i < nums.length; i ++){
+                sum += nums[i];
+                minv = Math.min(minv, Math.abs(nums[i]));
+            }
+            // System.out.println(minv);
+            // 负数->正数
+            for (int i = 0; i < nums.length && nums[i] < 0 && k > 0;i ++){
+                sum += 2 * Math.abs(nums[i]);
+                k --;
+            }
+            // System.out.println(sum);
+            if (k % 2 == 1) sum -= 2 * minv;
+            return sum;
+        }
     }
 }

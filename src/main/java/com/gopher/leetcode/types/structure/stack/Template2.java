@@ -25,4 +25,23 @@ public class Template2 {
         }
         return sb.reverse().toString();
     }
+
+    static class Code1003{
+        public boolean isValid(String s) {
+            /**
+             如果是添加两个字符, 就相当于添加(),判断是否是有效的字符串 -> 栈
+             对于三个字符abc, 遇到abc就删掉, 这样不会出现栈中交叉的情况
+             如果合法, 栈一定为空
+             */
+            int n = s.length();
+            char[] stk = new char[n]; int idx = -1;
+            for (int i = 0; i < n; i ++){
+                stk[++idx] = s.charAt(i);
+                if (idx >= 2 && stk[idx] == 'c' && stk[idx-1] == 'b' && stk[idx-2] == 'a'){
+                    idx -= 3;
+                }
+            }
+            return idx == -1;
+        }
+    }
 }
