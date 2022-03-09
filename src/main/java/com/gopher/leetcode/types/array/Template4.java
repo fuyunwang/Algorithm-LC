@@ -1,10 +1,12 @@
 package com.gopher.leetcode.types.array;
 
+import java.util.*;
+
 /**
  * @Title Template4
  * @Author fyw
  * @Date 2022-03-05 18:25
- * @Description 二分
+ * @Description 二分、山脉数组
  */
 public class Template4 {
 
@@ -72,6 +74,38 @@ public class Template4 {
                 }
             }
             return max >= 2 * less ? idx : -1;
+        }
+    }
+
+    static class Code845{
+        // 数组中的最长山脉、类似合唱队形
+        public int longestMountain(int[] arr) {
+            /**
+             * 递推
+             */
+            // 1 暴力解法是枚举所有的山脉顶点1-n-1，然后在左，右两侧找满足条件的小于cur的数的数量，且要连续。  on2会超时。
+            // 2 根据题意，对每个点i 只需要找到左，右两侧第一个比其大的位置l, r，单调栈可以在on时间内找到左，右第一个比当前位置大或小的位置。(但是不能保证数是单调的)
+            // 3 ldp[i]表示以i为山顶的左侧的长度，若ai > ai-1则dp[i]=dp[i-1] + 1否则dp[i]=1;
+            Stack<Integer> lst = new Stack<>();
+            Stack<Integer> rst = new Stack<>();
+            int[] ldp = new int[arr.length];
+            Arrays.fill(ldp, 1);
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] > arr[i - 1]) ldp[i] = ldp[i - 1] + 1;
+            }
+
+            int[] rdp = new int[arr.length];
+            Arrays.fill(rdp, 1);
+            for (int i = arr.length - 2; i >= 0; i--) {
+                if (arr[i] > arr[i + 1]) rdp[i] = rdp[i + 1] + 1;
+            }
+            int res = 0;
+            for (int i = 0; i < arr.length; i++) {
+                // 左右都>1才能形成山脉，则累加计算，否则为0
+                if (ldp[i] > 1 && rdp[i] > 1) res = Math.max(res, rdp[i] + ldp[i] - 1);
+            }
+            return res;
+
         }
     }
 }

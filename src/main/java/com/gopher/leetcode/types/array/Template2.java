@@ -99,4 +99,7 @@ public class Template2 {
             }
         }
     }
+    static class Code798{
+        // 得分最高的最小轮调
+    }
 }
