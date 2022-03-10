@@ -178,4 +178,43 @@ public class BacktrackTemplate2 {
             }
         }
     }
+    static class Code980{
+        int m, n, k;
+        int[] dirs = {0, 1, 0, -1, 0};
+        public int uniquePathsIII(int[][] grid) {
+            m = grid.length;
+            n = grid[0].length;
+            int sx = -1, sy = -1;
+            for (int i = 0; i < m; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    if (grid[i][j] == 1) {
+                        sx = i;
+                        sy = j;
+                        k++;
+                    }else if (grid[i][j] == 0) k++;
+                }
+            }
+
+            return dfs(sx, sy, grid);
+        }
+
+        private int dfs(int x, int y, int[][] grid) {
+            if (grid[x][y] == 2) {
+                return k == 0 ? 1 : 0;
+            }
+
+            k--;
+            grid[x][y] = -1;
+            int res = 0;
+            for (int i = 0; i < 4; ++i) {
+                int nx = x + dirs[i], ny = y + dirs[i + 1];
+                if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] != -1) {
+                    res += dfs(nx, ny, grid);
+                }
+            }
+            k++;
+            grid[x][y] = 0;
+            return res;
+        }
+    }
 }

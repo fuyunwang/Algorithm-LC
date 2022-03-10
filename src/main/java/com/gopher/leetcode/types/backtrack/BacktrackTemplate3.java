@@ -1,5 +1,7 @@
 package com.gopher.leetcode.types.backtrack;
 
+import com.gopher.leetcode.types.structure.tree.TreeNode;
+
 import java.util.Stack;
 
 /**
@@ -89,6 +91,28 @@ public class BacktrackTemplate3 {
             int sum = 0;
             while (!nums.isEmpty()) sum += nums.pop();
             return sum;
+        }
+    }
+    static class Code988{
+        String ans;
+        // 字符串拼接
+        public String smallestFromLeaf(TreeNode root) {
+            dfs(root,new StringBuilder());
+            return ans;
+        }
+        void dfs(TreeNode root,StringBuilder sb){
+            if (root==null)
+                return;
+            sb.append((char)(root.val+'a'));
+            if (root.left==null&&root.right==null){
+                sb.reverse();
+                if (ans==null||sb.toString().compareTo(ans)<0) ans=sb.toString();
+                sb.reverse();
+            }else{
+                dfs(root.left,new StringBuilder(sb));
+                dfs(root.right,new StringBuilder(sb));
+            }
+            sb.deleteCharAt(sb.length()-1);
         }
     }
 }

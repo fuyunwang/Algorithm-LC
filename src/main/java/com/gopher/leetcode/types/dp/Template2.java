@@ -36,9 +36,11 @@ public class Template2 {
             return res;
         }
     }
+
     static class Code1014{
 
     }
+
     static class Code1035{
         // 不相交的线，最长公共子序列
         public int maxUncrossedLines(int[] nums1, int[] nums2) {
@@ -57,6 +59,7 @@ public class Template2 {
             return f[m][n];
         }
     }
+
     static class Code1092{
         public String shortestCommonSupersequence(String str1, String str2) {
             /**
@@ -191,6 +194,43 @@ public class Template2 {
             }
 
             return maxLen;
+        }
+    }
+
+    static class Code983{
+        // 递推
+        public int mincostTickets(int[] days, int[] costs) {
+            // f[i] 表示玩完前i天，并且最后一张票以i结尾的最小花费
+            int n = days.length;
+            int[] f = new int[n + 1];
+            for (int i= 1, a = 0, b= 0, c = 0; i <= n; i++){
+                while (days[i - 1] - days[a] >= 1) a++;
+                while (days[i - 1] - days[b] >= 7) b++;
+                while (days[i - 1] - days[c] >= 30) c++;
+                f[i] = Math.min(f[a] + costs[0], Math.min(f[b] + costs[1], f[c] + costs[2]));
+            }
+            return f[n];
+        }
+    }
+    
+    static class Code978{
+        // 递推
+        public int maxTurbulenceSize(int[] arr) {
+            int res = 1;
+            for (int i = 1, up = 1, down = 1; i < arr.length; i++){
+                if (arr[i] > arr[i - 1]){
+                    up = down + 1;
+                    down = 1;
+                } else if(arr[i] < arr[i - 1]){
+                    down = up + 1;
+                    up = 1;
+                } else {
+                    down = 1;
+                    up = 1;
+                }
+                res = Math.max(res, Math.max(up, down));
+            }
+            return res;
         }
     }
 }

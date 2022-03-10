@@ -158,4 +158,30 @@ public class Template1 {
         }
     }
 
+    static class Code992{
+        public int subarraysWithKDistinct(int[] nums, int k) {
+            Map<Integer, Integer> s1 = new HashMap<>(), s2 = new HashMap<>();
+            int res = 0;
+            for (int i = 0, j1 = 0, j2 = 0, cnt1 = 0, cnt2 = 0; i < nums.length; i++){
+                if (s1.getOrDefault(nums[i], 0) == 0) cnt1++;   // 记录不同字符的种类数
+                s1.put(nums[i], s1.getOrDefault(nums[i], 0) + 1);
+                while (cnt1 > k){
+                    s1.put(nums[j1], s1.get(nums[j1]) - 1);
+                    if (s1.get(nums[j1]) == 0) cnt1 --;
+                    j1++;
+                }
+
+                if (s2.getOrDefault(nums[i], 0) == 0) cnt2++;
+                s2.put(nums[i], s2.getOrDefault(nums[i], 0) + 1);
+                while (cnt2 > k-1){
+                    s2.put(nums[j2], s2.get(nums[j2]) - 1);
+                    if (s2.get(nums[j2]) == 0) cnt2 --;
+                    j2++;
+                }
+                res += j2 - j1;
+            }
+            return res;
+        }
+    }
+
 }

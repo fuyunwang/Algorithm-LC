@@ -1,5 +1,7 @@
 package com.gopher.leetcode.types.structure.tree;
 
+import java.util.Map;
+
 /**
  * @Title TreeModel2
  * @Author fyw
@@ -41,6 +43,20 @@ public class TreeTemplate2 {
             if (root.right!=null)
                 res+=cal(root.right,x);
             return res;
+        }
+    }
+
+    static class Code979{
+        int[] dfs(TreeNode root){
+            if (root==null)
+                return new int[]{0,0,0};// 节点数、金币数、当前子树的操作数
+            int[] l=dfs(root.left);
+            int[] r=dfs(root.right);
+            int x = l[0] + r[0] + 1, y = l[1] + r[1] + root.val;
+            return new int[]{x, y, Math.abs(x - y) + l[2] + r[2]};
+        }
+        public int distributeCoins(TreeNode root) {
+            return dfs(root)[2];
         }
     }
 }

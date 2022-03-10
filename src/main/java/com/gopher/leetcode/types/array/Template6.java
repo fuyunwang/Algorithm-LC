@@ -1,7 +1,7 @@
 package com.gopher.leetcode.types.array;
 
 import java.util.TreeMap;
-
+import java.util.*;
 /**
  * @Title Template6
  * @Author fyw
@@ -14,6 +14,32 @@ public class Template6 {
     }
     static class Code1010{
         // 类似K倍区间
+
+    }
+    static class Code986{
+        // 区间列表的交集
+        public int[][] intervalIntersection(int[][] A, int[][] B) {
+            List<int[]> res = new ArrayList();
+            for (int i = 0, j = 0; i < A.length && j < B.length; ){
+                int a = A[i][0], b = A[i][1], x = B[j][0], y = B[j][1];
+                if (Math.max(a, x) <= Math.min(b, y)){//有交点
+                    res.add(new int[]{Math.max(a, x), Math.min(b, y)});
+                }
+                if (b > y){
+                    j++;
+                } else if (b < y) {
+                    i++;
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+            int[][] t = new int[res.size()][2];
+            for (int i = 0; i < res.size(); i++){
+                t[i] = res.get(i);
+            }
+            return t;
+        }
 
     }
     static class Code729 {

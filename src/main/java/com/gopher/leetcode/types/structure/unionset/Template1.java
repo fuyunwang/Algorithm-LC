@@ -1,6 +1,8 @@
 package com.gopher.leetcode.types.structure.unionset;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @Title Template1
@@ -15,6 +17,42 @@ public class Template1 {
 
     static class Code765 {
 
+    }
+    static class Code990{
+        int[] parent;
+        int find(int x){
+            if (parent[x]!=x){
+                parent[x]=find(parent[x]);
+            }
+            return parent[x];
+        }
+        public boolean equationsPossible(String[] equations) {
+            parent=new int[26];
+            for (int i = 0; i < 26; i++) {
+                parent[i]=i;
+            }
+            for (String eq:equations){
+                int a=eq.charAt(0)-'a';
+                int b=eq.charAt(3)-'a';
+                char c=eq.charAt(1);
+                if (c=='='){
+                    if (find(a)!=find(b)){
+                        parent[find(a)]=find(b);
+                    }
+                }
+            }
+            for (String eq:equations){
+                int a=eq.charAt(0)-'a';
+                int b=eq.charAt(3)-'a';
+                char c=eq.charAt(1);
+                if (c=='!'){
+                    if (find(a)==find(b)){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 
     static class Code924_928 {
