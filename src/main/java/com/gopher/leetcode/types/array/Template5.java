@@ -29,6 +29,10 @@ public class Template5 {
         }
     }
 
+    static class Code995{
+
+    }
+
     static class Code1074{
         // 二维数组前缀和
         /**

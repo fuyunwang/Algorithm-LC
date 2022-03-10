@@ -246,6 +246,25 @@ public class TreeTemplate4 {
             children = _children;
         }
     }
+
+    static class Code993{
+        int[] dfs(TreeNode root,int x,int fa,int depth){
+            if (root==null){
+                return new int[]{0,0};  // 返回{父节点的值，深度}
+            }
+            if (root.val==x){
+                return new int[]{fa,depth};
+            }
+            int[] l=dfs(root.left,x,root.val,depth+1);
+            int[] r=dfs(root.right,x, root.val,depth+1);
+            return new int[]{l[0]+r[0],l[1]+r[1]};  // 由于只能在一侧找到，所以直接求和
+        }
+        public boolean isCousins(TreeNode root, int x, int y) {
+            int[] a=dfs(root,x,-1,0);
+            int[] b=dfs(root,y,-1,0);
+            return a[0]!=b[0]&&a[1]==b[1];
+        }
+    }
 }
 
 
