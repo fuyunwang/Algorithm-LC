@@ -212,7 +212,7 @@ public class Template2 {
             return f[n];
         }
     }
-    
+
     static class Code978{
         // 递推
         public int maxTurbulenceSize(int[] arr) {

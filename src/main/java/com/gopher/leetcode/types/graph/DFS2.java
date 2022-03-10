@@ -73,4 +73,29 @@ public class DFS2 {
         }
     }
 
+    static class Code967{
+        List<Integer> res = new ArrayList<>();
+        public int[] numsSameConsecDiff(int n, int k) {
+            for (int i = 1; i <= 9; i++) {
+                dfs(n, 1, k, i);
+            }
+            return res.stream().mapToInt(i -> i).toArray();
+        }
+
+        private void dfs(int n, int d, int k, int num) {
+            if (d == n) {
+                res.add(num);
+                return;
+            }
+
+            int tail = num % 10;
+            if (tail + k <= 9) {
+                dfs(n, d + 1, k, num * 10 + tail + k);
+            }
+            if (tail - k >= 0 && k != 0) {
+                dfs(n, d + 1, k, num * 10 + tail - k);
+            }
+        }
+    }
+
 }
