@@ -17,6 +17,52 @@ public class Template1 {
 
     }
 
+    static class Code924_928 {
+        //  尽量减少恶意软件的传播
+        int[] p, s, c;
+
+        int find(int x) {
+            if (p[x] != x) {
+                p[x] = find(p[x]);
+            }
+            return p[x];
+        }
+
+        public int minMalwareSpread(int[][] graph, int[] initial) {
+            int n = graph.length;
+            p = new int[n];
+            s = new int[n];
+            c = new int[n];
+            for (int i = 0; i < n; i++) {
+                p[i] = i;
+                s[i] = 1;
+                c[i] = 0;
+            }
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (graph[i][j] > 0 && find(i) != find(j)) {
+                        s[find(i)] += s[find(j)];
+                        p[find(j)] = find(i);
+                    }
+                }
+            }
+            for (int i : initial) c[find(i)]++;
+            int rs = -1, rp = Integer.MAX_VALUE;
+            for (int x : initial) {
+                if (rs == -1) rp = Math.min(rp, x);
+                if (c[find(x)] == 1) {
+                    if (rs < s[find(x)]) {
+                        rs = s[find(x)];
+                        rp = x;
+                    } else if (rs == s[find(x)]) {
+                        rp = Math.min(rp, x);
+                    }
+                }
+            }
+            return rp;
+        }
+    }
+
     static class Code827 {
         int[] dx = {0, -1, 0, 1};
         int[] dy = {-1, 0, 1, 0};

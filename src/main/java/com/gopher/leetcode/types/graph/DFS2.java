@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class DFS2 {
     static class Code756{
-
         Map<String,List<Character>> map=new HashMap<>();
         public boolean pyramidTransition(String bottom, List<String> allowed) {
             for (String allow:allowed){
@@ -31,6 +30,46 @@ public class DFS2 {
             }
             return false;
         }
+    }
 
+    static class Code679{
+        public boolean judgePoint24(int[] cards) {
+            Arrays.sort(cards);
+            List<Double> list=new ArrayList<>();
+            for (int i = 0; i < cards.length; i++) {
+                list.add(Double.parseDouble(String.valueOf(cards[i])));
+            }
+            return dfs(list);
+        }
+        List<Double> erease(List<Double> nums,int i,int j,double x){
+            List<Double> res=new ArrayList<>();
+            for (int k = 0; k < nums.size(); k++) {
+                if (!Objects.equals(i,k)&&!Objects.equals(j,k)){
+                    res.add(nums.get(k));
+                }
+            }
+            res.add(x);
+            return res;
+        }
+        boolean dfs(List<Double> nums){
+            if (nums.size()==1){
+                if (Math.abs(nums.get(0)-24)<1e-8){
+                    return true;
+                }
+            }
+            for (int i = 0; i < nums.size(); i++) {
+                for (int j = 0; j < nums.size(); j++) {
+                    if (!Objects.equals(i,j)){
+                        double a=nums.get(i);
+                        double b=nums.get(j);
+                        if (dfs(erease(nums,i,j,a+b))) return true;
+                        if (dfs(erease(nums,i,j,a-b))) return true;
+                        if (dfs(erease(nums,i,j,a*b))) return true;
+                        if (!Objects.equals(b,0.0)&&dfs(erease(nums,i,j,a/b))) return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

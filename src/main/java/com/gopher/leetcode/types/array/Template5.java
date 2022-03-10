@@ -9,6 +9,26 @@ import java.util.*;
  * @Description 前缀和
  */
 public class Template5 {
+
+    static class Code930{
+        // 和相同的二元子数组
+        public int numSubarraysWithSum(int[] nums, int goal) {
+            int[] sum=new int[nums.length+1];
+            for (int i = 1; i <= nums.length; i++) {
+                sum[i]=sum[i-1]+nums[i-1];
+            }
+            Map<Integer,Integer> map=new HashMap<>();
+            map.put(0,1);
+            int res=0;
+            for (int i = 1,s=0; i <= nums.length; i++) {
+                s+=nums[i-1];
+                res+=map.getOrDefault(s-goal,0);
+                map.put(s,map.getOrDefault(s,0)+1);
+            }
+            return res;
+        }
+    }
+
     static class Code1074{
         // 二维数组前缀和
         /**

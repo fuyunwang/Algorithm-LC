@@ -4,7 +4,7 @@ package com.gopher.leetcode.types.graph;
  * @Title DFS1
  * @Author fyw
  * @Date 2022-03-03 20:46
- * @Description floodfill
+ * @Description flodfill
  */
 public class DFS1 {
     static class Code1905{
