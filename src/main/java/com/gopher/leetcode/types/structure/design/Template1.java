@@ -33,4 +33,50 @@ public class Template1 {
             }
         }
     }
+    static class Code622{
+        // 数组模拟循环队列
+        class MyCircularQueue {
+
+            int[] q;
+            int front = 0, rear = 0;
+            int n;
+
+            public MyCircularQueue(int k) {
+                q = new int[k+1];
+                n = k + 1;
+            }
+
+
+            public boolean enQueue(int value) {
+                if((rear+1) % n == front) return false;
+                q[rear] = value;
+                rear = (rear + 1) % n;
+                return true;
+            }
+
+            public boolean deQueue() {
+                if(front == rear) return false;
+                front = (front+1)%n;
+                return true;
+            }
+
+            public int Front() {
+                if(front == rear) return -1;
+                return q[front];
+            }
+
+            public int Rear() {
+                if(front == rear) return -1;
+                return q[(rear-1+n) % n];
+            }
+
+            public boolean isEmpty() {
+                return front == rear;
+            }
+
+            public boolean isFull() {
+                return (rear+1) % n == front;
+            }
+        }
+    }
 }

@@ -11,7 +11,26 @@ import java.util.List;
  * @Description N数之和
  */
 public class NnumberSum {
-
+    static class Code611{
+        // 有效三角形的个数
+        public int triangleNumber(int[] nums) {
+            int n = nums.length;
+            Arrays.sort(nums);
+            int res = 0;
+            for(int i = n - 1; i >= 2; i--){
+                int l = 0, r = i - 1;
+                while(l < r){
+                    if(nums[l] + nums[r] > nums[i]){
+                        res += r - l;
+                        r--;
+                    }else {
+                        l++;
+                    }
+                }
+            }
+            return res;
+        }
+    }
     static class Code15{
         // 三数之和
         public List<List<Integer>> threeSum(int[] nums) {

@@ -1,5 +1,6 @@
 package com.gopher.leetcode.types.structure.tree;
 
+import java.util.*;
 /**
  * @Title TreeTemplate8
  * @Author fyw
@@ -11,6 +12,35 @@ public class TreeTemplate8 {
 
     }
     static class Code1932{
+
+    }
+    static class Code623{
+        // 好题
+        public TreeNode addOneRow(TreeNode root, int v, int d) {
+            if (d == 1) {
+                TreeNode cur = new TreeNode(v);
+                cur.left = root;
+                return cur;
+            }
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
+            for (int i = 0; i < d - 2; i++) {
+                for (int j = q.size(); j > 0; j--) {
+                    TreeNode t = q.poll();
+                    if (t.left != null) q.offer(t.left);
+                    if (t.right != null) q.offer(t.right);
+                }
+            }
+
+            while (!q.isEmpty()) {
+                TreeNode t = q.poll();
+                TreeNode l = new TreeNode(v), r = new TreeNode(v);
+                l.left = t.left; r.right = t.right;
+                t.left = l; t.right = r;
+            }
+
+            return root;
+        }
 
     }
     static class Code998{
