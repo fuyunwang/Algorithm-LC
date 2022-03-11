@@ -26,4 +26,25 @@ public class Code142 {
         }
         return null;
     }
+
+    // 类似题目，原地寻找数组中的重复数
+    static class Code287{
+        public int findDuplicate(int[] nums) {
+            int slow=0;
+            int fast=0;
+            while (true){
+                slow=nums[slow];
+                fast=nums[nums[fast]];
+                if (slow==fast){
+                    slow=0;
+                    while (slow!=fast){
+                        slow=nums[slow];
+                        fast=nums[fast];
+                    }
+                    return slow;
+                }
+            }
+        }
+    }
+
 }

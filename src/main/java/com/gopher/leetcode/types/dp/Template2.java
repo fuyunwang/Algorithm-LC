@@ -12,6 +12,30 @@ import java.util.List;
  * @Description 序列
  */
 public class Template2 {
+    static class Code931{
+        // 下降路径最小和，类似数字三角形
+        public int minFallingPathSum(int[][] matrix) {
+            // 典型dp求路径类问题，类似于数字三角形。f(i,j)表示到a(i,j)点的最小路径和
+            // f(i,j) = min(f(i-1,j -1), f(i-1,j),f(i -1,j+1)) + a[i,j]
+            // 要注意在边界情况，初始值第0行原样赋值, 这里有个技巧，通过k来枚举三种情况，避免了多次判断
+            int n = matrix.length;
+            int m = matrix[0].length;
+            int[][] dp = new int[n][m];
+            for (int i = 0; i < n; i++) Arrays.fill(dp[i], Integer.MAX_VALUE);
+            for (int i = 0; i < m; i++) dp[0][i] = matrix[0][i];
+
+            for (int i = 1; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    for (int k = Math.max(0, j - 1); k <= Math.min(m - 1, j + 1); k++) {
+                        dp[i][j] = Math.min(dp[i][j], dp[i - 1][k] + matrix[i][j]);
+                    }
+                }
+            }
+            int res = Integer.MAX_VALUE;
+            for (int i = 0; i < m; i++) res = Math.min(res, dp[n - 1][i]);
+            return res;
+        }
+    }
     // 顺序不同的序列被视作不同的组合。
     static class Code377{
         // 状态表示：定义f[i][j]为组合长度为i，凑成总和为j的方案数是多少。由于对组合方案的长度没有限制，因此我们最终答案为所有的f[x][target]的总和。

@@ -145,4 +145,61 @@ public class BFS {
             shortestPathBinaryMatrix(g);
         }
     }
+
+    static class Code934{
+        // 多源BFS
+        int n;
+        int m;
+        int[][] a;
+        int[] dx = {0, 1, 0, -1};
+        int[] dy = {1, 0, -1, 0};
+        LinkedList<List<Integer>> q = new LinkedList<>();
+        Map<List<Integer>, Integer> dist = new HashMap<>();
+
+        public int shortestBridge(int[][] grid) {
+            // 1、多源bfs求最短路问题，a岛可以看作源，b岛看作目的，从a岛中可以有多个点到达b岛，这类问题可以将a中所有点(x,y)先加到队列中（dfs）。
+            // 2、然后出队，并更新dist值(取最小的)，直到到达b岛中任一一个节点，返回最短的路径即可（变换的0的数目为dist - 1）。
+            // 3 dist使用map, key:坐标list, value到该坐标的距离。
+            n = grid.length;
+            m = grid[0].length;
+            a = grid;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if (grid[i][j] == 1) {
+                        dfs(i, j);
+                        return bfs();
+                    }
+                }
+            }
+            return -1;
+        }
+        void dfs(int x, int y) {
+            a[x][y] = 0;
+            q.offer(Arrays.asList(x, y));
+            dist.put(Arrays.asList(x, y), 0);
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if (nx >= 0 && nx < n && ny >= 0 && ny < m && a[nx][ny] == 1) dfs(nx, ny);
+            }
+        }
+        int bfs() {
+            while (q.size() > 0) {
+                List<Integer> list = q.poll();
+                int x = list.get(0);
+                int y = list.get(1);
+                for (int i = 0; i < 4; i++) {
+                    int nx = x + dx[i];
+                    int ny = y + dy[i];
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < m && !dist.containsKey(Arrays.asList(nx, ny))) {
+                        dist.put(Arrays.asList(nx, ny), dist.get(list) + 1);
+                        q.offer(Arrays.asList(nx, ny));
+                        if (a[nx][ny] == 1) return dist.get(Arrays.asList(nx, ny)) - 1;
+                    }
+                }
+            }
+            return -1;
+        }
+
+    }
 }

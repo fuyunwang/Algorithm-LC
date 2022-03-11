@@ -73,6 +73,10 @@ public class DFS2 {
         }
     }
 
+    static class Code913{
+
+    }
+
     static class Code967{
         List<Integer> res = new ArrayList<>();
         public int[] numsSameConsecDiff(int n, int k) {

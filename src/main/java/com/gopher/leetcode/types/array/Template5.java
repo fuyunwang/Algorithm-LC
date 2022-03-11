@@ -29,6 +29,22 @@ public class Template5 {
         }
     }
 
+    static class Code926{
+        public int minFlipsMonoIncr(String str) {
+            int n = str.length();
+            int [] s = new int[n + 1];
+            for (int i = 1; i <= n; i++){
+                s[i] = s[i - 1] + str.charAt(i - 1) - '0';
+            }
+            int res = n - s[n];
+            for (int i = 1; i <= n; i++){
+                //前面1的个数+后面0的个数  即需要修改的次数 遍历取个最小值
+                res = Math.min(res, s[i] + n - i - (s[n] - s[i]));
+            }
+            return res;
+        }
+    }
+
     static class Code995{
 
     }
