@@ -36,6 +36,11 @@ public class Template2 {
             return res;
         }
     }
+
+    static class Code960{
+        // f[i]表示只看前i列（包含第i列）所有合法方案的集合，属性是最少删除列
+    }
+
     // 顺序不同的序列被视作不同的组合。
     static class Code377{
         // 状态表示：定义f[i][j]为组合长度为i，凑成总和为j的方案数是多少。由于对组合方案的长度没有限制，因此我们最终答案为所有的f[x][target]的总和。
