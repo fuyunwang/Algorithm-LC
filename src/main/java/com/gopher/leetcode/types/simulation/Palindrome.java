@@ -11,7 +11,7 @@ public class Palindrome {
 
     }
     static class Code906{
-
+        // 超级回文数
     }
     static class Code336{
         // 回文对

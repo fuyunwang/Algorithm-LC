@@ -17,7 +17,7 @@ public class Template1 {
             // 1 关键在于转换：不要正向思考求每个子数组再求最小值累加。可以对每个元素i，求以其作为最小值时的会出现在多少个区间中。
             // 2 一个区间中可能会有多个值最小。为了避免重复可以约定前面的数最小。 枚举每个i，找到左边第一个比其小的数，右边第一个比其小的数。
             // 3 左边区间长度 llen 右边区间长度rlen, 则以i为最小值的 子数组数量是ilen * rlen 再乘以a[i]值，即为对答案的贡献。
-            // 4 找左右 第一个比自己小的数可以 用单调站。
+            // 4 找左右 第一个比自己小的数可以 用单调栈。
             // 5 和84题思路基本上一样。只是最后计算方式不一样。
             Stack<Integer> st = new Stack<>();
             int n = arr.length;
@@ -40,8 +40,6 @@ public class Template1 {
                 else right[i] = st.peek();
                 st.push(i);
             }
-            // System.out.println(Arrays.toString(left));
-            // System.out.println(Arrays.toString(right));
             long res = 0;
             for (int i = 0; i < n; i++) {
                 res = (res + (long)arr[i] * (i - left[i]) * (right[i] - i)) % 1000000007;
