@@ -79,4 +79,37 @@ public class Template1 {
             }
         }
     }
+    static class Code284{
+        class PeekingIterator implements Iterator<Integer> {
+            boolean hasNext;
+            int cur;
+            Iterator<Integer> iterator;
+            public PeekingIterator(Iterator<Integer> iterator) {
+                // initialize any member here.
+                this.iterator=iterator;
+                hasNext=this.iterator.hasNext();
+                if (hasNext){
+                    cur=this.iterator.next();
+                }
+            }
+
+            public Integer peek() {
+                return cur;
+            }
+
+            @Override
+            public Integer next() {
+                int t=cur;
+                hasNext=iterator.hasNext();
+                if (hasNext){
+                    cur=iterator.next();
+                }
+                return t;
+            }
+            @Override
+            public boolean hasNext() {
+                return hasNext;
+            }
+        }
+    }
 }

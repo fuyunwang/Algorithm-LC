@@ -265,6 +265,30 @@ public class TreeTemplate4 {
             return a[0]!=b[0]&&a[1]==b[1];
         }
     }
+
+    static class Code971{
+        int k = 0;
+        int[] voyage;
+        List<Integer> res = new ArrayList();
+
+        public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
+            this.voyage = voyage;
+            if (dfs(root)) return res;
+            return new ArrayList(){{add(-1);}};
+        }
+
+        boolean dfs(TreeNode root){
+            if (root == null) return true;
+            if (root.val != voyage[k]) return false;
+            k++;
+            if (root.left != null && root.left.val != voyage[k]){
+                res.add(root.val);
+                return dfs(root.right) && dfs(root.left);
+            } else {
+                return dfs(root.left) && dfs(root.right);
+            }
+        }
+    }
 }
 
 

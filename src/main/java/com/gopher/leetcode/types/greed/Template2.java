@@ -49,4 +49,8 @@ public class Template2 {
             return res;
         }
     }
+
+    static class Code134{
+        // 单调队列的通用解法，提高课 旅行问题
+    }
 }
