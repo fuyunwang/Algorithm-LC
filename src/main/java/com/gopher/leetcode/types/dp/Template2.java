@@ -9,7 +9,7 @@ import java.util.List;
  * @Title Template2
  * @Author fyw
  * @Date 2022-03-03 16:45
- * @Description
+ * @Description 序列
  */
 public class Template2 {
     // 顺序不同的序列被视作不同的组合。

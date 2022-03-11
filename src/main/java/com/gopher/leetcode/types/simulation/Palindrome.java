@@ -13,4 +13,7 @@ public class Palindrome {
     static class Code906{
 
     }
+    static class Code336{
+        // 回文对
+    }
 }
