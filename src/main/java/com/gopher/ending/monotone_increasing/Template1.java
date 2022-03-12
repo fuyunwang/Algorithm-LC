@@ -1,5 +1,7 @@
 package com.gopher.ending.monotone_increasing;
 
+import java.util.Arrays;
+
 /**
  * @Title Template1
  * @Author fyw
@@ -7,8 +9,4 @@ package com.gopher.ending.monotone_increasing;
  * @Description 增量
  */
 public class Template1 {
-    static class Code945{
-        // 增量
-        
-    }
 }
