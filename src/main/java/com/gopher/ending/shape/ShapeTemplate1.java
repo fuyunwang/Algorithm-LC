@@ -7,6 +7,10 @@ package com.gopher.ending.shape;
  * @Description 摆动类型
  */
 public class ShapeTemplate1 {
+    static class Code324{
+        // 摆动排序
+
+    }
     static class Code376{
         // 摆动序列，贪心
         public int wiggleMaxLength(int[] nums) {
