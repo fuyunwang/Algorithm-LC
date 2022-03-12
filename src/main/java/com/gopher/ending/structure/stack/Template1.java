@@ -1,4 +1,4 @@
-package com.gopher.ending.strcuture.stack;
+package com.gopher.ending.structure.stack;
 
 import java.util.*;
 
