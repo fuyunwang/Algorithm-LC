@@ -9,4 +9,7 @@ import java.util.Arrays;
  * @Description 增量
  */
 public class Template1 {
+    static class Code665{
+        
+    }
 }
