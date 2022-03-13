@@ -1,6 +1,8 @@
 package com.gopher;
 
-import java.util.Arrays;
+import com.gopher.leetcode.types.structure.tree.TreeNode;
+
+import java.util.*;
 
 /**
  * @Title Main
@@ -38,5 +40,8 @@ public class Main {
             }
         }
         return res;
+    }
+
+    static class Prac{
     }
 }
