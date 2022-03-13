@@ -1,5 +1,7 @@
 package com.gopher.ending.dp;
 
+import java.util.*;
+
 /**
  * @Title SequenceDp
  * @Author fyw
@@ -7,6 +9,27 @@ package com.gopher.ending.dp;
  * @Description
  */
 public class SequenceDp {
+    static class Code813{
+        // 最大平均值和分组
+        public double largestSumOfAverages(int[] nums, int m) {
+            // 1 线性dp经典题，f(i,j)表示将前i个元素分为j段的最大分数。考虑最后一段的长度可以是1..i - 1，即对应下标k
+            // 2 k的范围是[0, i - 1] ,则f(i,j) = max(f(k, j - 1) + (si - sk) / (i - k))
+            // 3 后面一段可以用前缀和快速求出
+            double[][] dp = new double[nums.length + 1][m + 1];
+            for (int i = 0; i <= nums.length; i++) Arrays.fill(dp[i], -1e8); // 注意初始化为负数
+            dp[0][0] = 0; // 初始值为0
+            int[] sum = new int[nums.length + 1];
+            for (int i = 1; i <= nums.length; i++) sum[i] = sum[i - 1] + nums[i - 1];
+            for (int i = 1; i <= nums.length; i++) {
+                for (int j = 1; j <= m; j++) {
+                    for (int k = 0; k < i; k++) {
+                        dp[i][j] = Math.max(dp[i][j], dp[k][j - 1] + (sum[i] - sum[k]) / (double)(i - k));
+                    }
+                }
+            }
+            return dp[nums.length][m];
+        }
+    }
     static class Code712{
         // 两个字符串的最小ASCII删除和、最长公共子序列、最长公共超序列都是一类题目
         public int minimumDeleteSum(String s1, String s2) {

@@ -19,7 +19,21 @@ public class TreeTemplate8 {
         }
     }
     static class Code814{
-
+        // 判断二叉树的子树中是否含1，如果含1那么删除否则不删除
+        public TreeNode pruneTree(TreeNode root) {
+            if (!dfs(root))
+                root=null;
+            return root;
+        }
+        boolean dfs(TreeNode root){
+            if (root==null)
+                return false;
+            if (!dfs(root.left))
+                root.left=null;
+            if (!dfs(root.right))
+                root.right=null;
+            return root.val==1||root.right!=null||root.left!=null;
+        }
     }
     static class Code1932{
 

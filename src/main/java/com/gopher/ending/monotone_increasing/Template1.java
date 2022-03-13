@@ -10,6 +10,9 @@ import java.util.Arrays;
  */
 public class Template1 {
     static class Code665{
-        
+
+    }
+    static class Code801{
+
     }
 }
