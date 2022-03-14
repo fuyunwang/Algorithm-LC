@@ -14,6 +14,25 @@ import java.util.Scanner;
 public class PathDp {
     static class CodeWing1 {
         // 数字三角形
+        static int N=505;
+        static int[][] a=new int[N][N];
+
+        public static void main(String[] args) {
+            Scanner scanner=new Scanner(System.in);
+            int n=scanner.nextInt();
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= i; j++) {
+                    a[i][j]=scanner.nextInt();
+                }
+            }
+            // 进行状态计算
+            for (int i = n-1; i >=1 ; i--) {
+                for (int j = 1; j <= i; j++) {
+                    a[i][j]+=Math.max(a[i+1][j],a[i+1][j+1]);
+                }
+            }
+            System.out.println(a[1][1]);
+        }
     }
 
     static class CodeWing2 {

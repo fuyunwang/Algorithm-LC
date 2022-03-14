@@ -9,6 +9,40 @@ import java.util.*;
  * @Description
  */
 public class SequenceDp {
+    static class CodeWing1{
+        // 最长上升子序列
+        /**
+         * f[i]表示所有以第i个数结尾的上升子序列长度的最大值
+         * 状态计算分别以没有倒数第二个数、倒数第二个数的位置是1、是2、。。。 分类计算
+         */
+        static class Code1{
+            static int N=1010;
+            static int[] a=new int[N];
+            static int[] f=new int[N];
+            public static void main(String[] args) {
+                Scanner scanner=new Scanner(System.in);
+                int n=scanner.nextInt();
+                for (int i = 1; i <= n; i++) {
+                    a[i]=scanner.nextInt(); // 初始化原始序列
+                }
+                // 进行状态转移计算的同时更新答案
+                int res=0;
+                for (int i = 1; i <= n; i++) {
+                    f[i]=1;                         // 只有一个数的时候是1
+                    for (int j = 1; j < i; j++) {   // 枚举倒数第二个元素的可能情况
+                        if (a[j]<a[i]){
+                            f[i]=Math.max(f[i],f[j]+1);
+                        }
+                    }
+                    res=Math.max(res,f[i]);
+                }
+                System.out.println(res);
+            }
+        }
+        static class Code2{
+            // 数据范围大了之后
+        }
+    }
     static class Code629{
         // f[i,j] 表示所有前1~i个字符中包含j个逆序对的排列数的最大值
 
