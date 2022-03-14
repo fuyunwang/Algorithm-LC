@@ -18,7 +18,6 @@ public class Template1 {
             }
             return l;
         }
-
         int get(int[] piles, int mid){
             int res = 0;
             for (int x:piles){

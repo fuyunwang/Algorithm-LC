@@ -45,7 +45,7 @@ public class TreeTemplate1 {
         }
     }
     static class SwordOffer26{
-        // 树的子结构，特别是一类从树中的一个节点开始比较的题型
+        // 树的子结构，特别是一类从树中的一个节点开始比较的题型。类似572题
         public boolean isSubStructure(TreeNode A, TreeNode B) {
             if (B==null){
                 return false;
@@ -60,6 +60,31 @@ public class TreeTemplate1 {
             if (A==null)
                 return false;
             return A.val==B.val&&dfs(A.left,B.left)&&dfs(A.right,B.right);
+        }
+    }
+    static class Code652{
+        // 子树结构，
+    }
+
+    static class Code671{
+        long min=Long.MAX_VALUE, less=min;
+        public int findSecondMinimumValue(TreeNode root) {
+            dfs(root);
+            if (less==Long.MAX_VALUE)
+                less=-1;
+            return (int)less;
+        }
+        void dfs(TreeNode root){
+            if (root==null)
+                return;
+            if (root.val<min){
+                less=min;
+                min=root.val;
+            }else if (root.val>min&&root.val<less){
+                less=root.val;
+            }
+            dfs(root.left);
+            dfs(root.right);
         }
     }
 }
