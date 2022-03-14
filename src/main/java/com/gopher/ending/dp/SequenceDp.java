@@ -40,7 +40,37 @@ public class SequenceDp {
             }
         }
         static class Code2{
-            // 数据范围大了之后
+            // 数据范围大了之后,类似贪心
+            /**
+             * 使用q[]存储所有不同长度的上升子序列结尾的最小值
+             * 进来一个数a[i]时，通过二分在q[]中找到最大的小于ai的数，就能够将ai接到该数的后面，即更新q[r + 1] = a[i]
+             */
+            static int N=100010;
+            static int[] a=new int[N];
+            static int[] q=new int[N];
+            public static void main(String[] args) {
+                Scanner scanner=new Scanner(System.in);
+                int n=scanner.nextInt();
+                for (int i = 0; i < n; i++) {
+                    a[i]=scanner.nextInt();
+                }
+                int len=0;// 记录最大长度
+                for (int i = 0; i < n; i++) {
+                    int l=0, r=len;
+                    while (l<r){
+                        int mid=l+r+1>>1;
+                        if (q[mid]<a[i]){
+                            // 找到第一个小于a[i]且最大的数
+                            l=mid;
+                        }else{
+                            r=mid-1;
+                        }
+                    }
+                    len=Math.max(len,r+1);  // r是索引，所以长度加1
+                    q[r+1]=a[i];
+                }
+                System.out.println(len);
+            }
         }
     }
     static class Code629{
