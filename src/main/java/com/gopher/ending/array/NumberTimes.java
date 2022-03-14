@@ -34,7 +34,6 @@ public class NumberTimes {
                 return res;
             }
         }
-
         static class Code389{
             public char findTheDifference(String s, String t) {
                 char[] s1=s.toCharArray();
@@ -48,6 +47,9 @@ public class NumberTimes {
                 }
                 return res;
             }
+        }
+        static class Code645{
+            // 错误的集合
         }
     }
 

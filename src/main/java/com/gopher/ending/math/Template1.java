@@ -8,7 +8,7 @@ package com.gopher.ending.math;
  */
 public class Template1 {
     static class Code875{
-        //二分
+        // 二分
         public int minEatingSpeed(int[] piles, int h) {
             int l = 1, r = (int)1e9;
             while (l < r){

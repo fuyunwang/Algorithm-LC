@@ -11,7 +11,6 @@ public class Template1 {
         //  至少有K个重复字符的最长子串
         public int longestSubstring(String s, int k) {
             int res=0;
-
             for (int i = 1; i <= 26; i++) {     // 枚举最终结果中出现字符类型数的可能性
                 int[] arr=new int[26];
                 int l=0,r=0,kinds=0,ansKinds=0;

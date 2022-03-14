@@ -13,6 +13,9 @@ public class SequenceDp {
         // f[i,j] 表示所有前1~i个字符中包含j个逆序对的排列数的最大值
 
     }
+    static class Code689{
+
+    }
     static class Code813{
         // 最大平均值和分组
         public double largestSumOfAverages(int[] nums, int m) {

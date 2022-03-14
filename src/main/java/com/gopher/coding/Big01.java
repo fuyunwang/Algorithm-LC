@@ -66,7 +66,7 @@ public class Big01 {
             }
 
             private List<Integer> add(List<Integer> A, List<Integer> B) {
-                List<Integer>C=new ArrayList<>(MathTemplate.max(A.size(),B.size())+2);
+                List<Integer>C=new ArrayList<>(Math.max(A.size(),B.size())+2);
                 int t=0;
                 for(int i=0;i<A.size() || i<B.size();i++){
                     if(i<A.size())t+=A.get(i);

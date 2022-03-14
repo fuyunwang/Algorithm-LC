@@ -7,4 +7,8 @@ package com.gopher.ending.array;
  * @Description
  */
 public class MergeQuestion {
+    // 多路归并
+    static class Code632{
+
+    }
 }

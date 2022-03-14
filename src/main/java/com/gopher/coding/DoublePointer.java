@@ -23,7 +23,7 @@ public class DoublePointer {
                     map.put(s.charAt(j), map.get(s.charAt(j)) - 1);
                     j++;
                 }
-                res = MathTemplate.max(res, i-j+1);
+                res = Math.max(res, i-j+1);
             }
             return res;
         }
