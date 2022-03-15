@@ -274,12 +274,87 @@ public class SequenceDp {
             System.out.println(n-res); // 注意题目要求是出列最少
         }
     }
-
     static class CodeWing7{
         // 友好城市
+        static int N = 5010;
+        static PIIs[] city = new PIIs[N];
+        static int[] f = new int[N];
+        public static void main(String[] args) throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            int n = Integer.parseInt(reader.readLine().trim());
+            for(int i = 1;i <= n;i++)
+            {
+                String[] s1 = reader.readLine().split(" ");
+                int first = Integer.parseInt(s1[0]);
+                int second = Integer.parseInt(s1[1]);
+                city[i] = new PIIs(first,second);
+            }
+            // 先按照第二维度排序 然后求第一维度的最长上升子序列
+            Arrays.sort(city,1,n + 1);
+            int res = 0;
+            for(int i = 1;i <= n;i++)
+            {
+                f[i] = 1;
+                for(int j = 1;j < i;j++)
+                {
+                    if(city[j].getFirst() < city[i].getFirst())
+                        f[i] = Math.max(f[i],f[j] + 1);
+                }
+                res = Math.max(res, f[i]);
+            }
+            System.out.println(res);
+        }
+        static class PIIs implements Comparable<PIIs>{
+
+            private int first;
+            private int second;
+            public int getFirst(){
+                return this.first;
+            }
+            public int getSecond() {
+                return this.second;
+            }
+            public PIIs (int first,int second) {
+                this.first = first;
+                this.second = second;
+            }
+            @Override
+            public int compareTo(PIIs o) {
+                // TODO 自动生成的方法存根
+                return Integer.compare(this.second, o.second);  // 实现Comparable接口之后，从小到大排序
+            }
+
+        }
     }
     static class CodeWing8{
         // 最大上升子序列和
+        /**
+         * f[i]表示所有以a[i]结尾的上升子序列中和的最大值
+         * 倒数第二个数可能是不存在，是第一个数、第二个数、。。。第i-1个数 共i类
+         */
+        static int N=1010;
+        static int[] f=new int[N];
+        static int[] arr=new int[N];
+        public static void main(String[] args) throws IOException{
+            BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+            int n=Integer.parseInt(reader.readLine().trim());
+            String[] str=reader.readLine().trim().split(" ");
+            for (int i = 1; i <= n; i++) {
+                arr[i]=Integer.parseInt(str[i-1]);
+            }
+            int res=0;
+            for (int i = 1; i <= n; i++) {
+                f[i]=arr[i];
+                for (int j = 1; j < i; j++) {
+                    if (arr[i]>arr[j]){
+                        // 此时说明是递增的
+                        f[i]=Math.max(f[i],f[j]+arr[i]);
+                    }
+                }
+                res=Math.max(res,f[i]);
+            }
+            System.out.println(res);
+        }
     }
     static class CodeWing9{
         // 拦截导弹
@@ -289,7 +364,71 @@ public class SequenceDp {
     }
     static class CodeWing11{
         // 最长公共上升子序列
+        /**
+         * f[i,j]表示以a的前i个字符和b的前j个字符且以b[j]结尾组成的公共递增子序列长度的最大值
+         * 1. a[i]不包含在结果中 即f[i-1,j]
+         * 2. a[i]包含在结果中
+         *      考虑递增的限制，考虑倒数第二个数：
+         *      倒数第二个数可能是不存在，是第一个数b[1]、第二个数b[2]、。。。第i-1个数 共i类
+         * 宏观考虑a[i]和b[j]的公共关系，微观考虑b的递增关系
+         */
+        // 优化之前：
+        static class Code1{
+            static int N = 3010;
+            static int[] a = new int[N];
+            static int[] b = new int[N];
+            static int[][] f = new int[N][N];
+            public static void main(String[] args) {
+                Scanner scan = new Scanner(System.in);
+                int n = scan.nextInt();
+                for(int i = 1;i <= n;i ++) a[i] = scan.nextInt();
+                for(int i = 1;i <= n;i ++) b[i] = scan.nextInt();
+                for(int i = 1;i <= n;i ++) {
+                    for(int j = 1;j <= n;j ++) {
+                        f[i][j] = f[i - 1][j];
+                        if(a[i] == b[j]) {
+                            f[i][j] = 1;//初始为1
+                            for(int k = 1;k < j;k ++) {
+                                if(b[k] < b[j]) f[i][j] = Math.max(f[i][j], f[i - 1][k] + 1);
+                            }
+                        }
+                    }
+                }
+                //需要类似最长上升子序列求得最大值,也可以直接加到上面的循环中
+                int res = 0;
+                for(int i = 1;i <= n;i ++) res = Math.max(res,f[n][i]);
+                System.out.println(res);
+            }
+        }
+        // 优化之后
+        static class Code2{
+            static int N = 3010;
+            static int[] a = new int[N];
+            static int[] b = new int[N];
+            static int[][] f = new int[N][N];
+            public static void main(String[] args) {
+                Scanner scan = new Scanner(System.in);
+                int n = scan.nextInt();
+                for(int i = 1;i <= n;i ++) a[i] = scan.nextInt();
+                for(int i = 1;i <= n;i ++) b[i] = scan.nextInt();
+                // 进行状态转移计算
+                for(int i = 1;i <= n;i ++) {
+                    int maxv = 1;//记录当前a[i] > 所有b[k]时，f[k] + 1的最大值，其中k < j
+                    for(int j = 1;j <= n;j ++)
+                    {
+                        f[i][j] = f[i - 1][j];
+                        if(a[i] == b[j]) f[i][j] = maxv;
+                        if(b[j] < a[i]) maxv = Math.max(maxv, f[i][j] + 1);
+                    }
+                }
+                //需要类似最长上升子序列求得最大值,也可以直接加到上面的循环中
+                int res = 0;
+                for(int i = 1;i <= n;i ++) res = Math.max(res,f[n][i]);
+                System.out.println(res);
+            }
+        }
     }
+
     static class Code629{
         // f[i,j] 表示所有前1~i个字符中包含j个逆序对的排列数的最大值
 
