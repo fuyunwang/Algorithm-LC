@@ -1,5 +1,8 @@
 package com.gopher.ending.dp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -190,7 +193,103 @@ public class SequenceDp {
 
         }
     }
+    static class CodeWing4{
+        // 怪盗基德的滑翔翼，本质上是两侧最长上升子序列之和
+        static int N=110;
+        static int[] f=new int[N];
+        static int[] arr=new int[N];
+        public static void main(String[] args) {
+            Scanner scanner=new Scanner(System.in);
+            int T = scanner.nextInt();
+            while (T--!=0){
+                int n=scanner.nextInt();
+                for (int i = 1; i <= n; i++) {
+                    arr[i]=scanner.nextInt();
+                }
 
+                // 进行状态转移计算
+                int res=1;
+                for (int i = 1; i <= n; i++) {
+                    f[i]=1;
+                    for (int j = 1; j < i; j++) {
+                        if (arr[i]>arr[j]){
+                            f[i]=Math.max(f[i],f[j]+1);
+                        }
+                    }
+                    res=Math.max(res,f[i]);
+                }
+
+                for (int i = n; i >=1 ; i--) {
+                    f[i]=1;
+                    for (int j = n; j >i ; j--) {
+                        if (arr[j]<arr[i]){
+                            f[i]=Math.max(f[i],f[j]+1);
+                        }
+                    }
+                    res=Math.max(res,f[i]);
+                }
+                System.out.println(res);
+            }
+        }
+    }
+    static class CodeWing5{
+        // 登山，类似CodeWing4，只是两侧求和，上题是两侧取最大值
+
+    }
+    static class CodeWing6{
+        // 合唱队形，和登山一个题
+        static int N=1010;
+        static int[] arr=new int[N];
+        static int[] f=new int[N];  // 记录峰值左侧上升子序列
+        static int[] g=new int[N];  // 记录峰值右侧下降子序列
+
+        public static void main(String[] args) throws IOException {
+            BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+            int n=Integer.parseInt(reader.readLine().trim());
+            String[] str=reader.readLine().trim().split(" ");
+            for (int i = 1; i <= n; i++) {
+                arr[i]=Integer.parseInt(str[i-1]);
+            }
+            // 求解状态转移方程
+            for (int i = 1; i <= n; i++) {
+                f[i]=1;
+                for (int j = 1; j < i; j++) {
+                    if (arr[i]>arr[j]){
+                        f[i]=Math.max(f[i],f[j] + 1);
+                    }
+                }
+            }
+            for (int i = n; i >=1 ; i--) {
+                g[i]=1;
+                for (int j = n; j > i; j--) {
+                    if (arr[i]>arr[j]){
+                        g[i]=Math.max(g[i],g[j]+1);
+                    }
+                }
+            }
+            int res=1;
+            for (int i = 1; i <= n; i++) {
+                res=Math.max(res,f[i]+g[i]-1);
+            }
+            System.out.println(n-res); // 注意题目要求是出列最少
+        }
+    }
+
+    static class CodeWing7{
+        // 友好城市
+    }
+    static class CodeWing8{
+        // 最大上升子序列和
+    }
+    static class CodeWing9{
+        // 拦截导弹
+    }
+    static class CodeWing10{
+        // 导弹防御系统
+    }
+    static class CodeWing11{
+        // 最长公共上升子序列
+    }
     static class Code629{
         // f[i,j] 表示所有前1~i个字符中包含j个逆序对的排列数的最大值
 
@@ -253,7 +352,6 @@ public class SequenceDp {
             int n = strs.length, m = strs[0].length();
             int[] f = new int[m];
             int res = m;
-
             for (int i = 0; i < m; ++i) {
                 f[i] = i;
                 for (int j = 0; j < i; ++j) {
@@ -265,7 +363,6 @@ public class SequenceDp {
             }
             return res;
         }
-
         private boolean check(String[] strs, int j, int i) {
             int n = strs.length;
             for (int k = 0; k < n; ++k) {
