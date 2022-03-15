@@ -72,6 +72,57 @@ public class SequenceDp {
                 System.out.println(len);
             }
         }
+
+        static class Code3{ // 最长上升子序列、字典序、牛客NC91
+            /**
+             * f[i] 记录每一个位置上对应的最长上升子序列的最大长度
+             * 使用q[]存储所有不同长度的上升子序列结尾的最小值
+             * 本题目的核心在于结果的逆向存储（字典序最小），这里可以证明：
+             * 假设 f[x]==f[y]且(x<y)
+             * 如果 arr[x]<arr[y]那么y可以接在x之后，就保证f[y]>f[x]与假设矛盾
+             * 如果 arr[x]==arr[y]那么取前者和后者都是一样的
+             * 如果 arr[x]>arr[y]那么正好满足题意
+             * @param arr
+             * @return
+             */
+            public int[] LIS (int[] arr) {
+                int n=arr.length;
+                int[] f=new int[n+10];
+                int[] q=new int[n+10];
+                List<Integer> list=new ArrayList<>();
+
+                // 默写求上升子序列模型的代码
+                int len=0;
+                for (int i = 0; i < n; i++) {
+                    int l=0,r=len;
+                    while (l<r){
+                        int mid=l+r+1>>1;
+                        if (q[mid]<arr[i]){
+                            l=mid;// 必须找到小于arr[i]的最大的位置之后插入
+                        }else{
+                            r=mid-1;
+                        }
+                    }
+                    // 状态保持
+                    len=Math.max(len,r+1);// 计算当前位置的最长上升子序列长度
+                    f[i]=r+1;             // 保存当前位置的最长上升子序列长度
+                    q[r+1]=arr[i];        // 当前位置之后插入满足上升条件的最小值
+                }
+
+                for (int i = n,t=len; i >=0 ; i--) {
+                    if (f[i]==t){
+                        list.add(arr[i]);
+                        t--;
+                    }
+                }
+                Collections.reverse(list);
+                int[] res=new int[list.size()];
+                for (int i = 0; i < list.size(); i++) {
+                    res[i]=list.get(i);
+                }
+                return res;
+            }
+        }
     }
     static class Code629{
         // f[i,j] 表示所有前1~i个字符中包含j个逆序对的排列数的最大值
