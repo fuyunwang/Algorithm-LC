@@ -124,6 +124,73 @@ public class SequenceDp {
             }
         }
     }
+    static class CodeWing2{
+        // 最长公共子序列
+        /**
+         * f[i,j]表示所有以s的前i个字符和以t的前j个字符组成的公共子序列的长度的最大值
+         * 考虑最后一个字符，s[i]和t[j]是否同时包含组成了四种情况
+         */
+        public static void main(String[] args) {
+            Scanner scanner=new Scanner(System.in);
+            int n = scanner.nextInt();
+            int m = scanner.nextInt();
+            String s = "　"+scanner.next();
+            String t = "　"+scanner.next();
+            // 进行状态转移计算
+            int[][] f=new int[n+1][m+1];
+            for (int i = 1; i <= n; i++) {
+                for (int j = 1; j <= m; j++) {
+                    f[i][j]=Math.max(f[i-1][j],f[i][j-1]);
+                    if (s.charAt(i)==t.charAt(j)){
+                        f[i][j]=Math.max(f[i][j],f[i-1][j-1]+1);
+                    }
+                }
+            }
+            System.out.println(f[n][m]);
+        }
+    }
+    static class CodeWing3{
+        // 编辑距离
+        static class Code1{
+            /**
+             * f[i,j]表示将s的前i段变成t的前j段的操作方案的操作次数最小值
+             * 考虑s[i]和t[j]
+             */
+            static int N=1010;
+            static int[][] f=new int[N][N];
+            public static void main(String[] args) {
+                Scanner scanner=new Scanner(System.in);
+                int n=scanner.nextInt();
+                String a=" "+scanner.next();
+                int m=scanner.nextInt();
+                String b=" "+scanner.next();
+
+                // 初始化
+                for (int i = 1; i <= n; i++) {
+                    f[i][0]=i;// 需要全部删除
+                }
+                for (int i = 1; i <= m; i++) {
+                    f[0][i]=i;// 需要依次添加
+                }
+
+                for (int i = 1; i <= n; i++) {
+                    for (int j = 1; j <= m; j++) {
+                        f[i][j]=Math.min(f[i-1][j]+1,f[i][j-1]+1);//分别表示删除和增加
+                        if (a.charAt(i)!=b.charAt(j)){
+                            f[i][j]=Math.min(f[i][j],f[i-1][j-1]+1);
+                        }else{
+                            f[i][j]=Math.min(f[i][j],f[i-1][j-1]);
+                        }
+                    }
+                }
+                System.out.println(f[n][m]);
+            }
+        }
+        static class Code2{
+
+        }
+    }
+
     static class Code629{
         // f[i,j] 表示所有前1~i个字符中包含j个逆序对的排列数的最大值
 
