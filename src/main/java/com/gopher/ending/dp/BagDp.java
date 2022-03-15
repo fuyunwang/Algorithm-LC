@@ -34,7 +34,6 @@ public class BagDp {
     }
     static class CodeWing2{
         // 完全背包
-
         /**
          * f[i,j]表示从前i个物品中选，总体积不超过j的选择方案的价值最大值
          * 考虑第i个物品选0个、1个、2个、。。。的情况
