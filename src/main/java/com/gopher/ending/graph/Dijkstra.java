@@ -3,9 +3,7 @@ package com.gopher.ending.graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @Title Dijkstra
@@ -148,5 +146,74 @@ public class Dijkstra {
             }
         }
     }
+    static class CodeWing2{
+        // SPFA
+        static int N = 100010;
+        static int n;
+        static int m;
+        static int[] h = new int[N];
+        static int[] e = new int[N];
+        static int[] ne = new int[N];
+        static int[] w = new int[N];
+        static int idx = 0;
+        static int[] dist = new int[N];
+        static boolean[] st = new boolean[N]; //标记是否在队列中
+        static int INF = 0x3f3f3f3f;
+        public static void add(int a,int b,int c)
+        {
+            e[idx] = b;
+            w[idx] = c;
+            ne[idx] = h[a];
+            h[a] = idx ++;
+        }
+        public static int spfa()
+        {
+            Arrays.fill(dist, INF);
+            Queue<Integer> queue = new LinkedList<Integer>();
+            dist[1] = 0;
+            queue.add(1);
+            st[1] = true;//标记1号点在队列中
+            while(!queue.isEmpty())
+            {
+                int t = queue.poll();
+                st[t] = false;
+                for(int i = h[t];i != -1;i = ne[i])
+                {
+                    int j = e[i];//获取点编号
+                    //若该点被更新过，则加入队列中
+                    if(dist[j] > dist[t] + w[i])
+                    {
+                        dist[j] = dist[t] + w[i];
+                        //判断该点是否已经在队列中
+                        if(!st[j])
+                        {
+                            queue.add(j);
+                            st[j] = true;//标记已加入队列
+                        }
+                    }
 
+                }
+            }
+            return dist[n];
+        }
+        public static void main(String[] args) throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String[] str1 = reader.readLine().split(" ");
+            n = Integer.parseInt(str1[0]);
+            m = Integer.parseInt(str1[1]);
+            Arrays.fill(h, -1);
+            while(m -- > 0)
+            {
+                String[] str2 = reader.readLine().split(" ");
+                int a = Integer.parseInt(str2[0]);
+                int b = Integer.parseInt(str2[1]);
+                int c = Integer.parseInt(str2[2]);
+                add(a,b,c);
+            }
+            int t = spfa();
+            if(t == 0x3f3f3f3f) System.out.println("impossible");
+            else System.out.println(t);
+
+        }
+    }
 }
