@@ -57,7 +57,47 @@ public class BFS {
         }
         // 八数码
         static class Code2{
-            
+            static Map<String,Integer> dist=new HashMap<>();
+            static int[] dx=new int[]{1,0,-1,0};
+            static int[] dy=new int[]{0,1,0,-1};
+            public static void main(String[] args) {
+                Scanner scanner=new Scanner(System.in);
+                StringBuilder sb=new StringBuilder();
+                for (int i = 0; i < 9; i++) {
+                    sb.append(scanner.next());
+                }
+                System.out.println(bfs(sb.toString()));
+            }
+            static int bfs(String src){
+                dist.put(src,0);
+                Queue<String> queue=new LinkedList<>();
+                queue.offer(src);
+                while (!queue.isEmpty()){
+                    String top=queue.poll();
+                    if (top.equals("12345678x"))
+                        return dist.get(top);
+                    int pos=top.indexOf('x');
+                    int x=pos/3;
+                    int y=pos%3;
+                    for (int i = 0; i < 4; i++) {
+                        int a=x+dx[i];
+                        int b=y+dy[i];
+                        if (a<0||a>=3||b<0||b>=3) continue;
+                        String newStr=makeStr(top,pos,a*3+b);
+                        if (dist.containsKey(newStr))   // 避免重复搜索
+                            continue;
+                        dist.put(newStr,dist.get(top)+1);
+                        queue.offer(newStr);
+                    }
+                }
+                return -1;
+            }
+            static String makeStr(String t,int src,int dest){
+                StringBuilder stringBuilder=new StringBuilder(t);
+                stringBuilder.setCharAt(src,t.charAt(dest));
+                stringBuilder.setCharAt(dest,'x');  // 目标位置和原始位置的字符互换
+                return stringBuilder.toString();
+            }
         }
     }
 
