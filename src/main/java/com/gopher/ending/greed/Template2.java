@@ -12,6 +12,7 @@ public class Template2 {
     static class CodeWing1{
         // 区间选点
         // 多个闭区间选择最少数量点使得每个区间都至少包含一个点
+        // 最大不相交区间数量，尽可能选择最多的区间使其不相交
         /**
          * 区间按照右端点从小到大排序
          * 从前往后依次枚举每个区间，如果满足条件则跳过，否则选择当前区间右端点
@@ -19,34 +20,22 @@ public class Template2 {
         public static void main(String[] args) {
             Scanner scanner=new Scanner(System.in);
             int n=scanner.nextInt();    // n个区间
-            List<PII> list=new ArrayList<>();
+            List<int[]> list=new ArrayList<>();
             while (n-->0){
                 int l=scanner.nextInt();
                 int r=scanner.nextInt();
-                list.add(new PII(l,r));
+                list.add(new int[]{l,r});
             }
             // 右端点从小到大排序
-            Collections.sort(list);
+            Collections.sort(list,(l1,l2)->l1[1]-l2[1]);
             int count=0,end=Integer.MIN_VALUE;
-            for(PII pii: list){
-                if (pii.first>end){
+            for(int[] pii: list){
+                if (pii[0]>end){
                     count++;
-                    end=pii.second;
+                    end=pii[1];
                 }
             }
             System.out.println(count);
-        }
-        static class PII implements Comparable<PII>{
-            public int first;
-            public int second;
-            public PII(int first, int second) {
-                this.first = first;
-                this.second = second;
-            }
-            @Override
-            public int compareTo(PII o) {
-                return Integer.compare(this.second,o.second);   // 从小到大排序
-            }
         }
     }
     static class CodeWing2{
@@ -54,7 +43,7 @@ public class Template2 {
         // 将所有区间按照左端点排序，每次选择能够能够覆盖左端点的区间中右端点最大的区间
         public static void main(String[] args) {
             Scanner scan = new Scanner(System.in);
-            List<PIIs> list = new ArrayList<PIIs>();
+            List<int[]> list = new ArrayList<int[]>();
             int start = scan.nextInt();
             int end = scan.nextInt();
             int n = scan.nextInt();
@@ -62,17 +51,17 @@ public class Template2 {
             {
                 int L = scan.nextInt();
                 int R = scan.nextInt();
-                list.add(new PIIs(L,R));
+                list.add(new int[]{L,R});
             }
             //按左端点排序
-            Collections.sort(list);
+            Collections.sort(list,(l1,l2)->l1[0]-l2[0]);
             boolean flag=false;
             int res=0;
             for (int i = 0; i < n; i++) {
                 int j=i;
                 int r=Integer.MIN_VALUE;    // 记录满足左边界的条件下最大右边界
-                while (j<n&&list.get(j).first<=start){
-                    r=Math.max(r,list.get(j).second);
+                while (j<n&&list.get(j)[0]<=start){
+                    r=Math.max(r,list.get(j)[1]);
                     j++;
                 }
                 if (r<start){
@@ -92,22 +81,32 @@ public class Template2 {
             else
                 System.out.println(res);
         }
-
-        static class PIIs implements Comparable<PIIs>{
-            public int first;
-            public int second;
-            public PIIs(int first, int second) {
-                this.first = first;
-                this.second = second;
-            }
-            @Override
-            public int compareTo(PIIs o) {
-                return Integer.compare(this.first,o.first);
-            }
-        }
     }
     static class CodeWing3{
-
+        // 区间分组，分成尽可能少的组使得组内区间都不相交
+        public static void main(String[] args) {
+            Scanner scanner=new Scanner(System.in);
+            int n=scanner.nextInt();
+            List<int[]> list=new ArrayList<>();
+            while (n-->0){
+                int l=scanner.nextInt();
+                int r=scanner.nextInt();
+                list.add(new int[]{l,r});
+            }
+            // 首先按照左端点排序
+            Collections.sort(list,(l1,l2)->l1[0]-l2[0]);
+            PriorityQueue<Integer> queue=new PriorityQueue<>();// 小根堆，每次扩展较小的分组
+            for (int[] cur:list) {
+                if (queue.isEmpty()||queue.peek()>=cur[0]){
+                    // 如果队列为空或者队列的右端点最大值小于当前左端点的最小值
+                    queue.offer(cur[1]);
+                }else{
+                    queue.poll();
+                    queue.offer(cur[1]);
+                }
+            }
+            System.out.println(queue.size());
+        }
     }
 
     static class Code406{
