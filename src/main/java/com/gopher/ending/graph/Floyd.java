@@ -16,8 +16,7 @@ public class Floyd {
         static int N = 210;
         static int INF = 0x3f3f3f3f;
         static int[][] d = new int[N][N];
-        public static void floyd()
-        {
+        public static void floyd() {
             for(int k = 1;k <= n;k++)
                 for(int i = 1;i <= n;i++)
                     for(int j = 1;j <= n;j++)
@@ -29,16 +28,13 @@ public class Floyd {
             n = Integer.parseInt(str1[0]);
             m = Integer.parseInt(str1[1]);
             q = Integer.parseInt(str1[2]);
-            for(int i = 1;i <= n;i++)
-            {
-                for(int j = 1;j <= n;j++)
-                {
+            for(int i = 1;i <= n;i++) {
+                for(int j = 1;j <= n;j++) {
                     if(i == j) d[i][j] = 0;
                     else d[i][j] = INF;
                 }
             }
-            while(m -- > 0)
-            {
+            while(m -- > 0) {
                 String[] str2 = reader.readLine().split(" ");
                 int a = Integer.parseInt(str2[0]);
                 int b = Integer.parseInt(str2[1]);
