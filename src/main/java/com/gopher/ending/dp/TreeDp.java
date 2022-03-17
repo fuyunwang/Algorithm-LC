@@ -15,6 +15,56 @@ import java.util.Scanner;
 public class TreeDp{
     static class CodeWing0{
         // 树的重心
+        // 删除某个点之后其他的连通块中最多节点的数量最少
+        static int N=100010,M=2*N;
+        static int n;
+        static int[] h=new int[N];
+        static int[] e=new int[M];
+        static int[] ne=new int[M];
+        static int idx=0;
+        static boolean[] visited=new boolean[N];
+
+        static int ans=N;
+
+        public static void main(String[] args) throws IOException{
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            n = Integer.parseInt(reader.readLine());
+            Arrays.fill(h, -1);
+            for(int i = 0;i < n - 1;i++)
+            {
+                String[] str = reader.readLine().split(" ");
+                int a = Integer.parseInt(str[0]);
+                int b = Integer.parseInt(str[1]);
+                add(a,b);
+                add(b,a);
+            }
+            dfs(1);
+            System.out.println(ans);
+        }
+
+        static int dfs(int u){      // 返回以u为根节点的子树的大小
+            visited[u]=true;
+            int sum=1;// 记录以u为根节点的子树的大小
+            int res=0;// 记录最大值
+            for (int i = h[u]; i != -1; i=ne[i]) {
+                int j=e[i];
+                if (!visited[j]){
+                    int s=dfs(j);
+                    res=Math.max(res,s);
+                    sum+=s;
+                }
+            }
+            // 更新最大值
+            res=Math.max(res,n-sum);
+            ans=Math.min(ans,res);
+            return sum;
+        }
+
+        static void add(int a,int b){
+            e[idx]=b;
+            ne[idx]=h[a];
+            h[a]=idx++;
+        }
     }
     static class CodeWing1{
         // 没有上司的舞会
