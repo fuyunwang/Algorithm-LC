@@ -63,6 +63,52 @@ public class Template1 {
                 System.out.println(res);
         }
     }
+    static class CodeWing2{
+        // 搭配购买
+
+        static int N = 10010;
+        static int n,m,vol;
+        static int[] v = new int[N];
+        static int[] w = new int[N];
+        static int[] p = new int[N];
+        static int[] f = new int[N];
+        static int find(int x)
+        {
+            if(p[x] != x) p[x] = find(p[x]);
+            return p[x];
+        }
+        public static void main(String[] args) throws IOException{
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String[] s1 = br.readLine().split(" ");
+            n = Integer.parseInt(s1[0]);
+            m = Integer.parseInt(s1[1]);
+            vol = Integer.parseInt(s1[2]);
+            for(int i = 1;i <= n;i ++) p[i] = i;
+            for(int i = 1;i <= n;i ++) {
+                String[] s2 = br.readLine().split(" ");
+                v[i] = Integer.parseInt(s2[0]);
+                w[i] = Integer.parseInt(s2[1]);
+            }
+            while(m -- > 0) {
+                String[] s3 = br.readLine().split(" ");
+                int a = Integer.parseInt(s3[0]);
+                int b = Integer.parseInt(s3[1]);
+                int pa = find(a);
+                int pb = find(b);
+                if(pa != pb) {
+                    v[pb] += v[pa];
+                    w[pb] += w[pa];
+                    p[pa] = pb;
+                }
+            }
+            //01 背包
+            for(int i = 1;i <= n;i ++)
+                if(p[i] == i)
+                    for(int j = vol;j >= v[i];j --)
+                        f[j] = Math.max(f[j], f[j - v[i]] + w[i]);
+            System.out.println(f[vol]);
+        }
+    }
 
     static class Code765{
         int[] p;
