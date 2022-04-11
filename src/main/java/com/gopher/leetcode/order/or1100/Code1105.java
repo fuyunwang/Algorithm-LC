@@ -11,25 +11,21 @@ import java.util.Arrays;
  */
 public class Code1105 {
     public int minHeightShelves(int[][] books, int shelfWidth) {
-        /**
-         * f[i]表示考虑前i本书时高度的最小值
-         */
-        int[] f=new int[books.length+1];
+        int n=books.length;
+        int[] f=new int[n+1]; // 考虑前i本书摆放方案的高度最小值
         Arrays.fill(f,Integer.MAX_VALUE);
         f[0]=0;
-        for (int i = 1; i <= books.length; i++) {
-            int curWidth=0;
-            int curHeight=0;
-            for (int j = i-1; j >=0; j--) {   // 对前i-1本书的摆放情况进行考虑。当仅第i本书放最后一层时的高度、第i-1和第i本书都放最后一层的高度、...、第1到第i本书都放最后一层的高度
-                curWidth+=books[j][0];
-                curHeight=Math.max(books[j][1],curHeight);
-                if (curWidth>shelfWidth)
+        for (int i = 1; i <= n; i++) {  // 递推计算要枚举每一本书作为最后一本书的情况
+            int height=0;
+            int width=0;
+            for (int j = i-1; j >= 0; j--) {    // 最后一层摆放第i本（索引是i-1）、第i和i-1本、。。。。
+                width+=books[j][0];
+                height=Math.max(height,books[j][1]);
+                if (width>shelfWidth)
                     break;
-                f[i]=Math.min(f[i],f[j]+curHeight);
+                f[i]=Math.min(f[i],f[j]+height);    // 注意这里的索引又是另外一码事
             }
         }
-
-        return f[books.length];
-
+        return f[n];
     }
 }

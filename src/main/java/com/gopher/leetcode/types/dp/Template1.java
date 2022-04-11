@@ -24,15 +24,23 @@ public class Template1 {
          * 以最后一段的长度不同分为k类
          */
         public int maxSumAfterPartitioning(int[] arr, int k) {
-            int[] f=new int[arr.length+1];
-            for (int i = 1; i <= arr.length; i++) {
-                int curMax=0;
-                for (int j = 1; j <= k&&j<=i; j++) {        // j表示枚举每种划分方案，最后一个区间可能有1个数、两个数、....、k个数
-                    curMax=Math.max(curMax,arr[i-j]);       // 枚举到当前索引,curMax
-                    f[i]=Math.max(f[i],f[i-j]+curMax*j);    // f[i-j]表示去掉最后一个区间之后的最大值，加上当前枚举的结果
+            int n=arr.length;
+            int[] f=new int[n+1];   // 考虑前i个数所有方案的可能情况最大值
+
+            for (int i = 1; i <= n; i++) {
+                int height=0;
+                int width=0;
+                for (int j = i-1; j >=0 ; j--) {
+                    width+=1;
+                    height=Math.max(height,arr[j]);
+                    if (width>k){
+                        break;
+                    }
+                    f[i]=Math.max(f[i],f[j]+height*width);
                 }
             }
-            return f[arr.length];
+            return f[n];
+
         }
 
     }
