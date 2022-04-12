@@ -149,9 +149,7 @@ public class Dijkstra {
         static boolean[] visited=new boolean[N];
         static int[] dist=new int[N];
         static int idx=0;
-
         static int n,m;
-
         public static void main(String[] args) throws IOException{
             BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
             String[] str1=reader.readLine().trim().split(" ");
@@ -165,7 +163,6 @@ public class Dijkstra {
                 int c=Integer.parseInt(str2[2]);
                 add(a,b,c);
             }
-
             int t=spfa();
             if(t==INF){
                 System.out.println("impossible");
