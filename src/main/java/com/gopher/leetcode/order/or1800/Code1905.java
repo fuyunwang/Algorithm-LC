@@ -8,18 +8,24 @@ package com.gopher.leetcode.order.or1800;
  */
 public class Code1905 {
     int m,n;
-    boolean flag=false;
+    boolean[][] visited;
+    int[][] g1,g2;
+    int[] dx=new int[]{-1,0,1,0};
+    int[] dy=new int[]{0,-1,0,1};
+    boolean flag;
     public int countSubIslands(int[][] grid1, int[][] grid2) {
         m=grid1.length;
         n=grid1[0].length;
+        g1=grid1;
+        g2=grid2;
+        visited=new boolean[m][n];
         int res=0;
-
-        // 针对岛屿2进行陆地遍历
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (grid2[i][j]==1){
+                // 对g2所有的连通块遍历
+                if (g2[i][j]==1&&!visited[i][j]){
                     flag=true;
-                    dfs(grid1,grid2,i,j);
+                    dfs(i,j);
                     if (flag){
                         res++;
                     }
@@ -28,20 +34,19 @@ public class Code1905 {
         }
         return res;
     }
-    void dfs(int[][] grid1,int[][] grid2,int x,int y){
-        if (x>=m||x<0||y>=n||y<0||grid2[x][y]!=1){
+    void dfs(int row,int col){
+        if (row<0||row>=m||col<0||col>=n||g2[row][col]!=1||visited[row][col]){
             return;
         }
-        // 能进入这里的都是岛屿2的陆地
-        if (grid1[x][y]!=1){
-            // 一旦岛屿1不是陆地，那本次整个dfs都已经得到结果
+        if (g1[row][col]!=1){
             flag=false;
             return;
         }
-        grid2[x][y]=2;
-        dfs(grid1,grid2,x+1,y);
-        dfs(grid1,grid2,x-1,y);
-        dfs(grid1,grid2,x,y+1);
-        dfs(grid1,grid2,x,y-1);
+        visited[row][col]=true;
+        for (int d = 0; d < 4; d++) {
+            int a=row+dx[d];
+            int b=col+dy[d];
+            dfs(a,b);
+        }
     }
 }
