@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Template2 {
     static class Code931{
-        // 下降路径最小和，类似数字三角形
+        // 下降路径最小和，类似数字三角形，路径类DP坐标不错位、一一对应
         public int minFallingPathSum(int[][] matrix) {
             // 典型dp求路径类问题，类似于数字三角形。f(i,j)表示到a(i,j)点的最小路径和
             // f(i,j) = min(f(i-1,j -1), f(i-1,j),f(i -1,j+1)) + a[i,j]
