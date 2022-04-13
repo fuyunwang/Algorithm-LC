@@ -7,6 +7,9 @@
 
 2. Code1092 Code1035
 
+路径DP：
+1. Code931
+
 模拟数学运算
 1. Code1073
 
@@ -18,10 +21,11 @@
 1. Code1044
 
 前缀和
-1. Code1074
+1. Code1074（二维），Code930（一维）
 
 2. Code1052
 
+3. Code926
 单调栈
 1. Code1081(和字典序相关，类似还有Code1053，都是贪心，不过后者借助双指针解决)
 
@@ -34,3 +38,12 @@
 FloodFill: visited未标记的点（即完全遍历之后visited[i][j]=false的点属于非连通分量的点）
 1. Code1905 Code1034
 
+并查集
+
+
+双指针
+1. Code922,Code925
+2. Code923
+
+等分
+1. Code927，Code1013

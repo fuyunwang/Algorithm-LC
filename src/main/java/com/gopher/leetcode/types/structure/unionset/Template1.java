@@ -13,6 +13,53 @@ import java.util.List;
 public class Template1 {
     static class Code924 {
         // 维护连通块的大小用并查集
+        int[] p,s,c;// p表示并查集数组，s表示并查集大小，c表示并查集中感染的点数
+        public int minMalwareSpread(int[][] graph, int[] initial) {
+            // 并查集使用一个点代表一个集合，所以这里s代表每一个集合的大小，c表示集合的感染点数
+            int n=graph.length;
+            p=new int[n];
+            s=new int[n];
+            c=new int[n];
+            for (int i = 0; i < n; i++) {
+                p[i]=i;
+                s[i]=1;
+                c[i]=0;
+            }
+            // 本题的graph中的矩阵值只衡量了点之间的连通关系
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (graph[i][j]==1&&find(i)!=find(j)){
+                        s[find(i)]+=s[find(j)];
+                        p[find(j)]=p[find(i)];
+                    }
+                }
+            }
+            // 当前集合感染的点数
+            for (int x:initial)
+                c[find(x)]++;
+            int rs=-1;// 表示可以拯救的点数，尽量拯救更多的点
+            int rp=Integer.MAX_VALUE;// 点的编号，最多可以拯救点的集合的编号
+            for (int x:initial){
+                if (rs==-1)
+                    rp=Math.min(rp,x);
+                if (c[find(x)]==1){
+                    // 此时可以拯救
+                    if (rs<s[find(x)]){
+                        rs=s[find(x)];
+                        rp=x;
+                    }else if (rs==s[find(x)]){
+                        rp=Math.min(rp,x);
+                    }
+                }
+            }
+            return rp;
+        }
+        int find(int x){
+            if (p[x]!=x){
+                p[x]=find(p[x]);
+            }
+            return p[x];
+        }
     }
 
     static class Code765 {

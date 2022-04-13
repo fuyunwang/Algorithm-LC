@@ -38,7 +38,7 @@ public class Template5 {
             }
             int res = n - s[n];
             for (int i = 1; i <= n; i++){
-                //前面1的个数+后面0的个数  即需要修改的次数 遍历取个最小值
+                //前面1的个数(s[i])+后面0的个数(n-i-(s[n]-s[i]))  即需要修改的次数 遍历取个最小值
                 res = Math.min(res, s[i] + n - i - (s[n] - s[i]));
             }
             return res;
