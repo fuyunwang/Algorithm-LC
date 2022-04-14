@@ -53,3 +53,6 @@ FloodFill: visited未标记的点（即完全遍历之后visited[i][j]=false的�
 
 摩尔投票
 1. Code961
+
+贪心
+1. Code1024（区间覆盖）

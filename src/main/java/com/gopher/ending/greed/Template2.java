@@ -63,11 +63,11 @@ public class Template2 {
                     r=Math.max(r,list.get(j)[1]);
                     j++;
                 }
-                if (r<start){
+                if (r<start){       // 说明中间有空隙不能覆盖直接结束返回-1
                     res=-1;
                     break;
                 }
-                res++;
+                res++;              // 连续片段多了一种
                 if (r>=end){
                     flag=true;
                     break;
@@ -105,6 +105,44 @@ public class Template2 {
                 }
             }
             System.out.println(queue.size());
+        }
+    }
+
+    static class Code1024{
+        // 视频拼接，区间覆盖 [0,time]
+        public int videoStitching(int[][] clips, int time) {
+            int start=0;
+            int end=time;
+            Arrays.sort(clips, new Comparator<int[]>() {
+                @Override
+                public int compare(int[] o1, int[] o2) {
+                    return Integer.compare(o1[0],o2[0]);
+                }
+            });
+            boolean flag = false;
+            int res=0;
+            for (int i = 0; i < clips.length; i++) {
+                int j=i;
+                int r=Integer.MIN_VALUE;    // 当前可扩展的最大右边界
+                while (j<clips.length&&clips[j][0]<=start){
+                    r=Math.max(r,clips[j][1]);
+                    j++;
+                }
+                if (r<start){
+                    res=-1;
+                    break;
+                }
+                res++;  //当前连续可扩展的第一个区间结束了，累加
+                if (r>=end){
+                    flag=true;
+                    break;
+                }
+                start=r;
+                i=j-1;
+            }
+            if (!flag)
+                return -1;
+            return res;
         }
     }
 
