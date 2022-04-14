@@ -9,22 +9,39 @@ import java.util.Arrays;
  * @Description: 快排的代码模板
  */
 public class QuickSort1 {
-    public static void quickSort(int[] q, int l, int r){
-        if(l >= r) return;
-        int x = q[l], i = l - 1, j = r + 1;
-        while(i < j){
-            while( q[++i] < x );
-            while( q[--j] > x) ;
-            if(i < j){
-                int t = q[i];
-                q[i] = q[j];
-                q[j] = t;
+//    public static void quickSort(int[] q, int l, int r){
+//        if(l >= r) return;
+//        int x = q[l], i = l - 1, j = r + 1;
+//        while(i < j){
+//            while( q[++i] < x );
+//            while( q[--j] > x) ;
+//            if(i < j){
+//                int t = q[i];
+//                q[i] = q[j];
+//                q[j] = t;
+//            }
+//        }
+//        quickSort(q, l, j);
+//        quickSort(q, j + 1, r);
+//    }
+    public static void quickSort(int[] arr,int l,int r){
+        if (l>=r)
+            return;
+        int x=arr[l];
+        int i=l-1;
+        int j=r+1;
+        while (i<j){
+            while (arr[++i]<x);
+            while (arr[--j]>x);
+            if (i<j){
+                int temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
             }
         }
-        quickSort(q, l, j);
-        quickSort(q, j + 1, r);
+        quickSort(arr,l,j);
+        quickSort(arr,j+1,r);
     }
-
 
     // for test
     public static void comparator(int[] arr) {
