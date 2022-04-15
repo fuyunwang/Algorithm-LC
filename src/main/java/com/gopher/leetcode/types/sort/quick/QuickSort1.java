@@ -28,8 +28,7 @@ public class QuickSort1 {
         if (l>=r)
             return;
         int x=arr[l];
-        int i=l-1;
-        int j=r+1;
+        int i=l-1,j=r+1;
         while (i<j){
             while (arr[++i]<x);
             while (arr[--j]>x);
