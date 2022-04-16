@@ -15,25 +15,23 @@ import java.util.List;
 public class Code257 {
     List<String> res=new ArrayList<>();
     public List<String> binaryTreePaths(TreeNode root) {
-        if (root==null)
-            return Collections.emptyList();
-        dfs(root,new StringBuilder());
+        backtrack(root,new StringBuilder());
         return res;
     }
-    void dfs(TreeNode root, StringBuilder sb){
+    void backtrack(TreeNode root, StringBuilder sb){
+        if (root==null){
+            return;
+        }
         sb.append(root.val);
         if (root.left==null&&root.right==null){
             res.add(sb.toString());
             return;
         }
         if (root.left!=null){
-            dfs(root.left,new StringBuilder(sb).append("->"));
-
+            backtrack(root.left,new StringBuilder(sb).append("->"));
         }
-
         if (root.right!=null){
-            dfs(root.right,new StringBuilder(sb).append("->"));
-
+            backtrack(root.right,new StringBuilder(sb).append("->"));
         }
     }
 }
