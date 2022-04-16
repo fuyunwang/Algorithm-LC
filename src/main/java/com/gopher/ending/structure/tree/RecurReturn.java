@@ -1,4 +1,4 @@
-package com.gopher.ending.backtrack;
+package com.gopher.ending.structure.tree;
 
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
