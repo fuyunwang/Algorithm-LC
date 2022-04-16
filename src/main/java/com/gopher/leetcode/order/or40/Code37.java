@@ -48,7 +48,6 @@ public class Code37 {
                 row[x][i]=col[y][i]=cell[x/3][y/3][i]=false;
             }
         }
-
         return false;
     }
 }

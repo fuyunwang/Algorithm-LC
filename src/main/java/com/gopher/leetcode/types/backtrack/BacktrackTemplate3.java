@@ -2,6 +2,8 @@ package com.gopher.leetcode.types.backtrack;
 
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -92,6 +94,30 @@ public class BacktrackTemplate3 {
             while (!nums.isEmpty()) sum += nums.pop();
             return sum;
         }
+    }
+
+    static class Code257{
+        List<String> res=new ArrayList<>();
+        public List<String> binaryTreePaths(TreeNode root) {
+            dfs(root,new StringBuilder());
+            return res;
+        }
+        void dfs(TreeNode root,StringBuilder sb){
+            if(root==null){
+                return;
+            }
+            sb.append(root.val);
+            if(root.left==null&&root.right==null){
+                res.add(sb.toString());
+                return;
+            }else{
+                dfs(root.left,new StringBuilder(sb).append("->"));
+                dfs(root.right,new StringBuilder(sb).append("->"));
+            }
+            sb.deleteCharAt(sb.length()-1);
+        }
+
+
     }
     static class Code988{
         String ans;
