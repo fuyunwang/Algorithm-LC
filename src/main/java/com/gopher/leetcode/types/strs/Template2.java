@@ -12,27 +12,24 @@ public class Template2 {
     static class Code763{
         // 划分字母区间
         public List<Integer> partitionLabels(String s) {
-            List<Integer> res = new ArrayList<>();
-            // 首先记录每一字符的最后索引
-            HashMap<Character, Integer> map = new HashMap<>();
+            List<Integer> res=new ArrayList<>();
+            Map<Character,Integer> map=new HashMap<>();
             for (int i = 0; i < s.length(); i++) {
-                map.put(s.charAt(i), i);
+                map.put(s.charAt(i),i);
             }
 
-            int p = 0;
-            while (p < s.length()) {
-                int index = map.get(s.charAt(p));
-                int maxindex = index;
-                for (int j = p; j <= index; j++) {
-                    if (map.get(s.charAt(j)) > maxindex) {  // 这段范围内其他字符的最大索引可以增加区间范围
-                        maxindex = map.get(s.charAt(j));    // 更新最大区间的索引
-                        if (maxindex > index) index = maxindex; // index始终作为边界值
-                    }
+            int p=0;
+            while (p<s.length()){
+                char c=s.charAt(p);
+                int pIndex=map.get(c);
+                for (int i = 0; i <= pIndex; i++) {
+                    char cur=s.charAt(i);
+                    pIndex=Math.max(pIndex,map.get(cur));
                 }
-
-                res.add(maxindex - p+1); // 最左索引和最右索引的数据长度
-                p = maxindex + 1;
+                res.add(pIndex-p+1);
+                p=pIndex+1;
             }
+
             return res;
         }
     }
