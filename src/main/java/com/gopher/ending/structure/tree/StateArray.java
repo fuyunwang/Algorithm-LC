@@ -9,6 +9,7 @@ import com.gopher.leetcode.types.structure.tree.TreeNode;
  * @Description: 状态数组类别要采用后序遍历
  */
 public class StateArray {
+
     static class Code979{
         // 二叉树中分配硬币，递归函数的定义：每棵子树对应节点数、金币数、操作数
         // 后序遍历，因为节点数、金币数、操作数必须由子树来确定
@@ -26,6 +27,7 @@ public class StateArray {
             return new int[]{x,y,Math.abs(x-y)+left[2]+right[2]};
         }
     }
+
     static class Code993{
         public boolean isCousins(TreeNode root, int x, int y) {
             int[] xRes=dfs(root,x,-1,0);
@@ -45,4 +47,5 @@ public class StateArray {
             return new int[]{left[0]+right[0],left[1]+right[1]};
         }
     }
+
 }

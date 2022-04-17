@@ -27,6 +27,7 @@ public class RecurReturn {
             return res;
         }
     }
+
     static class Code37{
         boolean[][] row;
         boolean[][] col;
@@ -71,6 +72,7 @@ public class RecurReturn {
             return false;
         }
     }
+
     static class Code79{
         boolean[][] visited;
         char[][] g;
@@ -115,6 +117,42 @@ public class RecurReturn {
             }
             visited[x][y]=false;
             return false;
+        }
+    }
+
+    static class Code938{
+        public int rangeSumBST(TreeNode root, int low, int high) {
+            return dfs(root,low,high);
+        }
+        int dfs(TreeNode root,int l,int high){
+            if(root==null){
+                return 0;
+            }
+            if(root.val<l||root.val>high){
+                return dfs(root.left,l,high)+dfs(root.right,l,high);
+            }
+            int res=0;
+            res+=root.val;
+            res+=dfs(root.left,l,high);
+            res+=dfs(root.right,l,high);
+            return res;
+        }
+    }
+
+    static class Code1026{
+        public int maxAncestorDiff(TreeNode root) {
+            return dfs(root,root.val,root.val);
+        }
+        int dfs(TreeNode root,int maxVal,int minVal){
+            if (root==null)
+                return 0;
+            int val=root.val;
+            int res=Math.max(Math.abs(val-maxVal),Math.abs(val-minVal));    // 在遍历到每一个点时更新结果
+            minVal=Math.min(minVal,val);    // 在遍历到每一个点时更新最值
+            maxVal=Math.max(maxVal,val);
+            res=Math.max(res,dfs(root.left,maxVal,minVal));
+            res=Math.max(res,dfs(root.right,maxVal,minVal));
+            return res;
         }
     }
 }
