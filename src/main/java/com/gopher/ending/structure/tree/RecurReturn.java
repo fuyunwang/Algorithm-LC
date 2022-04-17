@@ -120,6 +120,23 @@ public class RecurReturn {
         }
     }
 
+    static class Code543{
+        int res=0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root){ // 返回以当前节点的向下走最长的路径
+            if (root==null){
+                return 0;
+            }
+            int left=dfs(root.left);
+            int right=dfs(root.right);
+            res=Math.max(res,left+right);
+            return Math.max(left,right)+1;
+        }
+    }
+
     static class Code938{
         public int rangeSumBST(TreeNode root, int low, int high) {
             return dfs(root,low,high);
