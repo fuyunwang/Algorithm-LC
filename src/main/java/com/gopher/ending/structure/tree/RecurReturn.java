@@ -225,14 +225,39 @@ public class RecurReturn {
         }
     }
 
-    static class Code687_1 {
-        int res = 0;
+    static class Code437{
+        // 路径总和
+        public int pathSum(TreeNode root, int targetSum) {
+            if (root==null){
+                return 0;
+            }
+            int res=0;
+            res+=dfs(root,targetSum);
+            res+=pathSum(root.left,targetSum);
+            res+=pathSum(root.right,targetSum);
+            return res;
+        }
+        int dfs(TreeNode root,int targetSum){
+            if (root==null)
+                return 0;
+            int res=0;
+            if (root.val==targetSum)
+                res++;
+            res+=dfs(root.left,targetSum-root.val);
+            res+=dfs(root.right,targetSum-root.val);
+            return res;
+        }
+    }
 
+
+
+
+    static class Code687_1 {// 类似Code437
+        int res = 0;
         public int longestUnivaluePath(TreeNode root) {
             dfs(root);
             return res;
         }
-
         int dfs(TreeNode root) {
             if (root == null)
                 return 0;
@@ -246,9 +271,7 @@ public class RecurReturn {
             res = Math.max(res, r + l);
             return Math.max(l, r) + 1;
         }
-        
     }
-
     static class Code687 {
         // 类似863
         Map<TreeNode, List<TreeNode>> graph = new HashMap<>();
@@ -307,7 +330,6 @@ public class RecurReturn {
             return tempMax + res;
         }
     }
-
     static class Code863 {       // 从树中找到到目标节点指定距离的周围节点，构图
         Map<TreeNode, List<TreeNode>> graph = new HashMap<>();
         List<Integer> res = new ArrayList<>();
@@ -349,6 +371,4 @@ public class RecurReturn {
             }
         }
     }
-
-
 }
