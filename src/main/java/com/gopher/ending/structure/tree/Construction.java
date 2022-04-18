@@ -160,6 +160,15 @@ public class Construction {
     class Code889{
         // 前序和后序遍历构造二叉树
     }
+    class Code297{
+
+    }
+    class Code331{
+        // 验证前序遍历
+    }
+    class Code449{
+        // 序列化BST反序列化
+    }
 
     class Code1028{ // 全局索引，类似Code971翻转二叉树匹配先序遍历
         int idx=0;

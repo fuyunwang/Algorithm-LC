@@ -165,6 +165,7 @@ public class PathTraverse {
         }
     }
 
+    // 遍历过程中的修改
     static class Code814{   // 类似669
         // 每个节点都要有含1的子树，如果没有就把当前节点删除
         public TreeNode pruneTree(TreeNode root) {
@@ -186,12 +187,10 @@ public class PathTraverse {
             return root.val==1||root.left!=null||root.right!=null;
         }
     }
-
     static class Code1080{  // 类似题目814
         public TreeNode sufficientSubset(TreeNode root, int limit) {
             return dfs(root,0,limit);
         }
-
         TreeNode dfs(TreeNode root,int sum,int limit){
             if (root==null){
                 return null;
@@ -214,6 +213,9 @@ public class PathTraverse {
             }
             return root;
         }
+    }
+    static class Code450{
+
     }
 
 
@@ -241,7 +243,6 @@ public class PathTraverse {
             return getSubTree(root.right);
         }
     }
-
     static class Code867{   // 类似二叉树的直径，后序遍历，涉及到路径长度
         int res=0;
         public int longestUnivaluePath(TreeNode root) {
@@ -262,7 +263,6 @@ public class PathTraverse {
             return Math.max(l,r)+1;
         }
     }
-
     static class Code543{   // 二叉树的直径，类似867题目，涉及到路径长度
         int res=0;
         public int diameterOfBinaryTree(TreeNode root) {
@@ -278,5 +278,8 @@ public class PathTraverse {
             res=Math.max(res,left+right);
             return Math.max(left,right)+1;
         }
+    }
+    static class Code235_236{
+        // 最近公共祖先 LCA
     }
 }
