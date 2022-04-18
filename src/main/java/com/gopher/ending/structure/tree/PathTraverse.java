@@ -192,7 +192,7 @@ public class PathTraverse {
 
 
     static class Code865{
-        // 具有所有最深节点的最小子树
+        // 具有所有最深节点的最小子树，有点后续遍历的意思，涉及到深度
         public TreeNode subtreeWithAllDeepest(TreeNode root) {
             return getSubTree(root);
         }
@@ -216,7 +216,7 @@ public class PathTraverse {
         }
     }
 
-    static class Code867{   // 类似二叉树的直径
+    static class Code867{   // 类似二叉树的直径，后序遍历，涉及到路径长度
         int res=0;
         public int longestUnivaluePath(TreeNode root) {
             dfs(root);
@@ -237,7 +237,7 @@ public class PathTraverse {
         }
     }
 
-    static class Code543{   // 二叉树的直径，类似867题目
+    static class Code543{   // 二叉树的直径，类似867题目，涉及到路径长度
         int res=0;
         public int diameterOfBinaryTree(TreeNode root) {
             dfs(root);

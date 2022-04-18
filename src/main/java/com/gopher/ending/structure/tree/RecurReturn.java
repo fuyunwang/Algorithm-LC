@@ -139,7 +139,7 @@ public class RecurReturn {
         }
     }
 
-    static class Code938{
+    static class Code938{   // 二叉树的范围和，累加求和的典型
         public int rangeSumBST(TreeNode root, int low, int high) {
             return dfs(root,low,high);
         }
@@ -234,7 +234,7 @@ public class RecurReturn {
         }
     }
 
-    static class Code863{
+    static class Code863{       // 从树中找到到目标节点指定距离的周围节点，构图
         Map<TreeNode,List<TreeNode>> graph=new HashMap<>();
         List<Integer> res=new ArrayList<>();
         public List<Integer> distanceK(TreeNode root, TreeNode target, int k){

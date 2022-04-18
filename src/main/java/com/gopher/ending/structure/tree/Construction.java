@@ -9,6 +9,14 @@ import com.gopher.leetcode.types.structure.tree.TreeNode;
  * @Description:
  */
 public class Construction {
+    // 枚举可能性
+    static class Code894{
+
+    }
+    static class Code95{
+
+    }
+
     static class Code998{
         public TreeNode insertIntoMaxTree(TreeNode root, int val) {
             if (root==null){
@@ -52,7 +60,7 @@ public class Construction {
         // 根据前序遍历和后序遍历构造二叉树
     }
 
-    class Code1028{
+    class Code1028{ // 全局索引，类似Code971翻转二叉树匹配先序遍历
         int idx=0;
         public TreeNode recoverFromPreorder(String traversal) {
             return buildTree(traversal,0);
@@ -83,8 +91,9 @@ public class Construction {
         }
     }
 
+    class Code971{
 
-
+    }
 
 
 
