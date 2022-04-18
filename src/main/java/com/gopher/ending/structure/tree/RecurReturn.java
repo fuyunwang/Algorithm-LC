@@ -175,10 +175,69 @@ public class RecurReturn {
         }
     }
 
+
+    static class Code687{
+        // 类似863
+        Map<TreeNode, List<TreeNode>> graph=new HashMap<>();
+        int ans=0;
+        int curMax=0;
+        public int longestUnivaluePath(TreeNode root) {
+            if (root==null)
+                return 0;
+            construction(root);
+            dfs1(root);
+            return curMax-1;
+        }
+
+        void dfs1(TreeNode root){
+            if (root==null)
+                return;
+            ans=Math.max(ans,dfs(root,null,root.val));
+            dfs1(root.left);
+            dfs1(root.right);
+        }
+
+        void construction(TreeNode root){
+            if (root==null){
+                return;
+            }
+            if (root.left!=null){
+                graph.computeIfAbsent(root,l->new ArrayList<>()).add(root.left);
+                graph.computeIfAbsent(root.left,l->new ArrayList<>()).add(root);
+                construction(root.left);
+            }
+            if (root.right!=null){
+                graph.computeIfAbsent(root,l->new ArrayList<>()).add(root.right);
+                graph.computeIfAbsent(root.right,l->new ArrayList<>()).add(root);
+                construction(root.right);
+            }
+        }
+
+        int dfs(TreeNode root,TreeNode father,int val){
+            int res=0;
+            if (root==null||root.val!=val){
+                return res;
+            }
+
+            res=res+1;
+
+            int temp=0;
+            int tempMax=0;
+            for (TreeNode node:graph.getOrDefault(root,new ArrayList<>())){
+                if (node!=father){
+                    temp=dfs(node,root,val);
+                }
+                tempMax=Math.max(tempMax,temp);
+            }
+            curMax=Math.max(curMax,tempMax+res);
+            return tempMax+res;
+        }
+    }
+
     static class Code863{
         Map<TreeNode,List<TreeNode>> graph=new HashMap<>();
         List<Integer> res=new ArrayList<>();
-        public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        public List<Integer> distanceK(TreeNode root, TreeNode target, int k){
             if (root==null){
                 return Collections.emptyList();
             }
@@ -213,4 +272,6 @@ public class RecurReturn {
             }
         }
     }
+
+
 }

@@ -216,4 +216,41 @@ public class PathTraverse {
         }
     }
 
+    static class Code867{   // 类似二叉树的直径
+        int res=0;
+        public int longestUnivaluePath(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root){
+            if (root==null)
+                return 0;
+            int l=dfs(root.left),r=dfs(root.right);
+            if (root.left==null||root.left.val!=root.val){
+                l=0;
+            }
+            if (root.right==null||root.right.val!=root.val){
+                r=0;
+            }
+            res=Math.max(res,r+l);
+            return Math.max(l,r)+1;
+        }
+    }
+
+    static class Code543{   // 二叉树的直径，类似867题目
+        int res=0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root){ // 返回以当前节点的向下走最长的路径
+            if (root==null){
+                return 0;
+            }
+            int left=dfs(root.left);
+            int right=dfs(root.right);
+            res=Math.max(res,left+right);
+            return Math.max(left,right)+1;
+        }
+    }
 }
