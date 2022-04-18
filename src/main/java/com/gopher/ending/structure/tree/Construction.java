@@ -16,6 +16,27 @@ public class Construction {
     static class Code95{
 
     }
+    static class Code96{
+
+    }
+
+    static class Code637{
+        public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+            if (root1==null&&root2==null){
+                return null;
+            }
+            if (root1==null){
+                return root2;
+            }
+            if (root2==null){
+                return root1;
+            }
+            root1.val+=root2.val;
+            root1.left=mergeTrees(root1.left,root2.left);
+            root1.right=mergeTrees(root1.right,root2.right);
+            return root1;
+        }
+    }
 
     static class Code998{
         public TreeNode insertIntoMaxTree(TreeNode root, int val) {
@@ -55,9 +76,14 @@ public class Construction {
         }
     }
 
-
+    class Code105{
+        // 前序和中序遍历构造二叉树
+    }
+    class Code106{
+        // 中序和后序遍历构造二叉树
+    }
     class Code889{
-        // 根据前序遍历和后序遍历构造二叉树
+        // 前序和后序遍历构造二叉树
     }
 
     class Code1028{ // 全局索引，类似Code971翻转二叉树匹配先序遍历

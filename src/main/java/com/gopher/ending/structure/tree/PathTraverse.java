@@ -125,17 +125,43 @@ public class PathTraverse {
             }
             if (root.val<low){
                 TreeNode right=root.right;
-                // root=null;
                 return trimBST(right,low,high);
             }
             if (root.val>high){
                 TreeNode left=root.left;
-                // root=null;
                 return trimBST(left,low,high);
             }
             root.left=trimBST(root.left,low,high);
             root.right=trimBST(root.right,low,high);
             return root;
+        }
+    }
+
+    static class Code99{
+        TreeNode pre;
+        TreeNode res1,res2;
+        public void recoverTree(TreeNode root) {
+            dfs(root);
+            int temp=res1.val;
+            res1.val=res2.val;
+            res2.val=temp;
+        }
+        void dfs(TreeNode root){
+            if (root==null)
+                return;
+            dfs(root.left);
+            if (pre==null){
+                pre=root;
+            }else{
+                if (pre.val>root.val){
+                    if(res1==null){     // 只更新一次
+                        res1=pre;
+                    }
+                    res2=root;  // 找到可以交换的最后一位置
+                }
+                pre=root;
+            }
+            dfs(root.right);
         }
     }
 
