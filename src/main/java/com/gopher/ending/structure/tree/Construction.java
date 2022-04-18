@@ -53,10 +53,34 @@ public class Construction {
     }
 
     class Code1028{
-//        int idx=0;
-//        public TreeNode recoverFromPreorder(String traversal) {
-//
-//        }
+        int idx=0;
+        public TreeNode recoverFromPreorder(String traversal) {
+            return buildTree(traversal,0);
+        }
+        TreeNode buildTree(String str,int depth){
+            if (idx>=str.length()){
+                return null;
+            }
+            int d=0;
+            int temp=idx;
+            while (str.charAt(temp)=='-'){
+                temp++;
+                d++;
+            }
+            if (d!=depth){
+                return null;
+            }
+            idx=temp;
+            int start=idx;
+            while (idx<str.length()&&Character.isDigit(str.charAt(idx))){
+                idx++;
+            }
+            int val=Integer.parseInt(str.substring(start,idx));
+            TreeNode root=new TreeNode(val);
+            root.left=buildTree(str,depth+1);
+            root.right=buildTree(str,depth+1);
+            return root;
+        }
     }
 
 
@@ -91,4 +115,6 @@ public class Construction {
             dfs(root.right);
         }
     }
+
+
 }

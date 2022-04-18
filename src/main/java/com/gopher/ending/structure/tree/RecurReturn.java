@@ -2,6 +2,8 @@ package com.gopher.ending.structure.tree;
 
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
+import java.util.*;
+
 /**
  * @Title RecurReturn
  * @Author fyw
@@ -170,6 +172,45 @@ public class RecurReturn {
             res=Math.max(res,dfs(root.left,maxVal,minVal));
             res=Math.max(res,dfs(root.right,maxVal,minVal));
             return res;
+        }
+    }
+
+    static class Code863{
+        Map<TreeNode,List<TreeNode>> graph=new HashMap<>();
+        List<Integer> res=new ArrayList<>();
+        public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+            if (root==null){
+                return Collections.emptyList();
+            }
+            construction(root);
+            dfs(target,null,k);
+            return res;
+        }
+        void construction(TreeNode root){
+            if (root==null){
+                return;
+            }
+            if (root.left!=null){
+                graph.computeIfAbsent(root,l->new ArrayList<>()).add(root.left);
+                graph.computeIfAbsent(root.left,l->new ArrayList<>()).add(root);
+                construction(root.left);
+            }
+            if (root.right!=null){
+                graph.computeIfAbsent(root,l->new ArrayList<>()).add(root.right);
+                graph.computeIfAbsent(root.right,l->new ArrayList<>()).add(root);
+                construction(root.right);
+            }
+        }
+        void dfs(TreeNode root,TreeNode father,int k){
+            if (k==0){
+                res.add(root.val);
+                return;
+            }
+            for (TreeNode node:graph.getOrDefault(root,new ArrayList<>())){
+                if (node!=father){
+                    dfs(node,root,k-1);
+                }
+            }
         }
     }
 }

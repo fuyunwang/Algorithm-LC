@@ -189,4 +189,31 @@ public class PathTraverse {
             return root;
         }
     }
+
+
+    static class Code865{
+        // 具有所有最深节点的最小子树
+        public TreeNode subtreeWithAllDeepest(TreeNode root) {
+            return getSubTree(root);
+        }
+        int getDepth(TreeNode root){
+            if (root==null)
+                return 0;
+            return Math.max(getDepth(root.left),getDepth(root.right))+1;
+        }
+        TreeNode getSubTree(TreeNode root){
+            if (root==null)
+                return null;
+            int left=getDepth(root.left);
+            int right=getDepth(root.right);
+            if (left==right){
+                return root;
+            }
+            if (left>right){
+                return getSubTree(root.left);
+            }
+            return getSubTree(root.right);
+        }
+    }
+
 }
