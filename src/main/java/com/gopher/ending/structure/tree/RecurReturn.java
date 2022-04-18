@@ -11,7 +11,7 @@ import java.util.*;
  * @Description: 带有返回值的
  */
 public class RecurReturn {
-    static class Code1022{
+    static class Code1022{// 类似129，124
         public int sumRootToLeaf(TreeNode root) {
             return dfs(root,0);
         }
@@ -29,6 +29,13 @@ public class RecurReturn {
             return res;
         }
     }
+    static class Code124{
+        
+    }
+    static class Code129{
+
+    }
+
 
     static class Code37{
         boolean[][] row;
