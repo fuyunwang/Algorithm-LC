@@ -161,7 +161,7 @@ public class Construction {
         // 前序和后序遍历构造二叉树
     }
     class Code297{
-
+        // 二叉树的序列化和反序列化
     }
     class Code331{
         // 验证前序遍历

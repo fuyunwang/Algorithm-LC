@@ -32,9 +32,7 @@ public class RecurReturn {
         }
     }
 
-    static class Code124 {
 
-    }
 
     static class Code129 {
 
@@ -225,6 +223,22 @@ public class RecurReturn {
         }
     }
 
+    static class Code124 {  // 最大路径和
+        int result=Integer.MIN_VALUE;
+        public int oneSideMax(TreeNode root) {
+            if (root == null){
+                return 0;
+            }
+            int left=Math.max(0,oneSideMax(root.left));
+            int right=Math.max(0,oneSideMax(root.right));
+            result=Math.max(result,left+right+root.val);
+            return Math.max(left,right)+root.val;
+        }
+        public int maxPathSum(TreeNode root) {
+            oneSideMax(root);
+            return result;
+        }
+    }
     static class Code437{
         // 路径总和
         public int pathSum(TreeNode root, int targetSum) {
