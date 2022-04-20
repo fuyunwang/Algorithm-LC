@@ -205,35 +205,44 @@ public class Construction {
     }
     class Code297{
         // 二叉树的序列化和反序列化
-    }
-    class Code331{
-        // 验证前序遍历
-    }
-    class Code449{
-        // 序列化BST反序列化
-    }
-    static class Code652{
-        // 寻找重复的子树
-        public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-            List<TreeNode> res=new ArrayList<>();
-            Map<String,Integer> map=new HashMap<>();
-            dfs(root,res,map);
-            return res;
+        StringBuilder sb=new StringBuilder();
+        int u=0;
+        // Encodes a tree to a single string.
+        public String serialize(TreeNode root) {
+            preOrder(root);
+            return sb.toString();
         }
-        String dfs(TreeNode root,List<TreeNode> res,Map<String,Integer> map){   // 递归返回每一个节点对应树的表示，过程中存储结果
-            if (root==null)
-                return "";
-            String cur=String.valueOf(root.val)+",";
-            cur+=dfs(root.left,res,map)+",";
-            cur+=dfs(root.right,res,map);
-            map.put(cur,map.getOrDefault(cur,0)+1);
-            if (map.get(cur)==2){
-                res.add(root);
+        void preOrder(TreeNode root){
+            if (root==null){
+                sb.append("#,");
+                return;
             }
-            return cur;
+            sb.append(root.val).append(",");
+            preOrder(root.left);
+            preOrder(root.right);
+        }
+
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            return build(data);
+        }
+
+        TreeNode build(String data){
+            if (data.charAt(u)=='#'){
+                u+=2;
+                return null;
+            }
+            int k=u;
+            while (u<data.length()&&data.charAt(u)!=','){
+                u++;
+            }
+            TreeNode root=new TreeNode(Integer.parseInt(data.substring(k,u)));
+            u++;
+            root.left=build(data);
+            root.right=build(data);
+            return root;
         }
     }
-
     class Code1028{ // 全局索引，类似Code971翻转二叉树匹配先序遍历
         int idx=0;
         public TreeNode recoverFromPreorder(String traversal) {
@@ -264,10 +273,38 @@ public class Construction {
             return root;
         }
     }
-
     class Code971{
 
     }
+    class Code331{
+        // 验证前序遍历
+    }
+    class Code449{
+        // 序列化BST反序列化
+    }
+    static class Code652{
+        // 寻找重复的子树
+        public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+            List<TreeNode> res=new ArrayList<>();
+            Map<String,Integer> map=new HashMap<>();
+            dfs(root,res,map);
+            return res;
+        }
+        String dfs(TreeNode root,List<TreeNode> res,Map<String,Integer> map){   // 递归返回每一个节点对应树的表示，过程中存储结果
+            if (root==null)
+                return "";
+            String cur=String.valueOf(root.val)+",";
+            cur+=dfs(root.left,res,map)+",";
+            cur+=dfs(root.right,res,map);
+            map.put(cur,map.getOrDefault(cur,0)+1);
+            if (map.get(cur)==2){
+                res.add(root);
+            }
+            return cur;
+        }
+    }
+
+
 
 
 
