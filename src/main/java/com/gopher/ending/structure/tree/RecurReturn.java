@@ -11,7 +11,24 @@ import java.util.*;
  * @Description: 带有返回值的
  */
 public class RecurReturn {
-    static class Code1022 {// 类似129 |||| 带有求总和要求的，返回值具备两种性质。计算路径之和仍然保持前序遍历
+    static class Code404{
+        // 左叶子之和，判断一个节点是不是左叶子必须保证左儿子存在且没有叶子结点
+        public int sumOfLeftLeaves(TreeNode root) {
+            if (root==null){
+                return 0;
+            }
+            int res=0;
+            if (root.left!=null){
+                if (root.left.left==null&&root.left.right==null){
+                    res+=root.left.val;
+                }
+            }
+            res+=sumOfLeftLeaves(root.left);
+            res+=sumOfLeftLeaves(root.right);
+            return res;
+        }
+    }
+    static class Code1022 {// 类似129 404  |||| 带有求总和要求的，返回值具备两种性质。计算路径之和仍然保持前序遍历
         public int sumRootToLeaf(TreeNode root) {
             return dfs(root, 0);
         }
@@ -45,13 +62,59 @@ public class RecurReturn {
                 }
                 int l=Math.max(dfs(root.left),0);
                 int r=Math.max(dfs(root.right),0);
-                // 这里更新值可以保证在枚举每一个点时都能更新结果，避免了多次递归
+                // 这里更新值可以保证在枚举每一个点时都能更新结果，避免了多次递归。类似的题目Code508
                 res=Math.max(res,l+r+root.val);  // 注意必须包含当前节点
                 return Math.max(l,r)+root.val;  // +1 实现了路径更长，+root.val 实现了路径更大
             }
         }
-        static class Code{
-
+        static class Code508{
+            Map<Integer, Integer> map = new HashMap<>();
+            List<Integer> list = new ArrayList<>();
+            int maxCount = 0;
+            public int[] findFrequentTreeSum(TreeNode root) {
+                dfs(root);
+                return list.stream().mapToInt(Integer::intValue).toArray();
+            }
+            int dfs(TreeNode root) {
+                if (root == null) {
+                    return 0;
+                }
+                int sum = root.val + dfs(root.left) + dfs(root.right);//得到子树和
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+                if (map.get(sum) > maxCount) {
+                    list = new ArrayList<>();     // trick
+                    list.add(sum);
+                    maxCount = map.get(sum);
+                } else if (maxCount == map.get(sum)) {
+                    list.add(sum);
+                }
+                return sum;
+            }
+        }
+        static class Code437{
+            // 这里更新值可以保证在枚举每一个点时都能更新结果，采用多次递归
+            public int pathSum(TreeNode root, int targetSum) {
+                if (root==null){
+                    return 0;
+                }
+                int res=dfs(root,targetSum);
+                res+=pathSum(root.left,targetSum);
+                res+=pathSum(root.right,targetSum);
+                return res;
+            }
+            int dfs(TreeNode root,int targetSum){   // 返回以root为根时所有的可能结果
+                if (root==null){
+                    return 0;
+                }
+                int res=0;
+                targetSum-=root.val;
+                if (targetSum==0){
+                    res++;
+                }
+                res+=dfs(root.left,targetSum);
+                res+=dfs(root.right,targetSum);
+                return res;
+            }
         }
     }
 
@@ -85,37 +148,6 @@ public class RecurReturn {
         }
     }
 
-    static class Code508 {
-        Map<Integer, Integer> map = new HashMap<>();
-        List<Integer> list = new ArrayList<>();
-        int maxCount = 0;
-
-        public int[] findFrequentTreeSum(TreeNode root) {
-            dfs(root);
-
-            int[] res = new int[list.size()];
-            for (int i = 0; i < list.size(); i++) {
-                res[i] = list.get(i);
-            }
-            return res;
-        }
-
-        int dfs(TreeNode root) {
-            if (root == null) {
-                return 0;
-            }
-            int sum = root.val + dfs(root.left) + dfs(root.right);//得到子树和
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
-            if (map.get(sum) > maxCount) {
-                list = new ArrayList<>();     // trick
-                list.add(sum);
-                maxCount = map.get(sum);
-            } else if (maxCount == map.get(sum)) {
-                list.add(sum);
-            }
-            return sum;
-        }
-    }
 
     static class Code37 {
         boolean[][] row;
@@ -163,7 +195,6 @@ public class RecurReturn {
             return false;
         }
     }
-
     static class Code79 {
         boolean[][] visited;
         char[][] g;
