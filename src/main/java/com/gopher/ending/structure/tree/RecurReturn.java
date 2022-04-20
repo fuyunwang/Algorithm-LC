@@ -11,12 +11,10 @@ import java.util.*;
  * @Description: 带有返回值的
  */
 public class RecurReturn {
-    static class Code1022 {// 类似129，124
-
+    static class Code1022 {// 类似129 |||| 带有求总和要求的，返回值具备两种性质。计算路径之和仍然保持前序遍历
         public int sumRootToLeaf(TreeNode root) {
             return dfs(root, 0);
         }
-
         int dfs(TreeNode root, int x) {
             if (root == null) {
                 return 0;
@@ -32,10 +30,59 @@ public class RecurReturn {
         }
     }
 
+    static class CodePath{
+        // 与129、1022不同在于可以从任意节点开始到任意节点结束且不一定自上到下计算
+        // 一般采用后序遍历
+        static class Code124{
+            int res=Integer.MIN_VALUE;
+            public int maxPathSum(TreeNode root) {
+                dfs(root);
+                return res;
+            }
+            int dfs(TreeNode root){
+                if (root==null){
+                    return 0;
+                }
+                int l=Math.max(dfs(root.left),0);
+                int r=Math.max(dfs(root.right),0);
+                // 这里更新值可以保证在枚举每一个点时都能更新结果，避免了多次递归
+                res=Math.max(res,l+r+root.val);  // 注意必须包含当前节点
+                return Math.max(l,r)+root.val;  // +1 实现了路径更长，+root.val 实现了路径更大
+            }
+        }
+        static class Code{
 
+        }
+    }
 
-    static class Code129 {
-
+    static class CodeCal{
+        // 普通计数
+        static class Code222{
+            // 统计节点个数
+            public int countNodes(TreeNode root) {
+                return dfs(root);
+            }
+            int dfs(TreeNode root){
+                if (root==null)
+                    return 0;
+                int l=1;
+                int r=1;
+                TreeNode left=root.left;
+                TreeNode right=root.right;
+                while (left!=null){
+                    l++;
+                    left=left.left;
+                }
+                while (right!=null){
+                    r++;
+                    right=right.right;
+                }
+                if (l==r){
+                    return (1<<l)-1;
+                }
+                return dfs(root.left)+1+dfs(root.right);
+            }
+        }
     }
 
     static class Code508 {
@@ -168,12 +215,10 @@ public class RecurReturn {
 
     static class Code543 {
         int res = 0;
-
         public int diameterOfBinaryTree(TreeNode root) {
             dfs(root);
             return res;
         }
-
         int dfs(TreeNode root) { // 返回以当前节点的向下走最长的路径
             if (root == null) {
                 return 0;
@@ -223,22 +268,6 @@ public class RecurReturn {
         }
     }
 
-    static class Code124 {  // 最大路径和
-        int result=Integer.MIN_VALUE;
-        public int oneSideMax(TreeNode root) {
-            if (root == null){
-                return 0;
-            }
-            int left=Math.max(0,oneSideMax(root.left));
-            int right=Math.max(0,oneSideMax(root.right));
-            result=Math.max(result,left+right+root.val);
-            return Math.max(left,right)+root.val;
-        }
-        public int maxPathSum(TreeNode root) {
-            oneSideMax(root);
-            return result;
-        }
-    }
     static class Code437{
         // 路径总和
         public int pathSum(TreeNode root, int targetSum) {

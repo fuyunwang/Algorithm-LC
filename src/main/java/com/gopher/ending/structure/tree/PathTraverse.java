@@ -13,34 +13,44 @@ import java.util.List;
  * @Description:
  */
 public class PathTraverse {
-
+    class Code112{  // 自上而下的搜索需要前序遍历
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            return dfs(root,targetSum);
+        }
+        boolean dfs(TreeNode root,int targetSum){
+            if (root==null){
+                return false;
+            }
+            targetSum-=root.val;
+            if (root.left==null&&root.right==null){
+                return targetSum==0;
+            }
+            return dfs(root.left,targetSum)||dfs(root.right,targetSum);
+        }
+    }
     class Code113{
         // 路径总和
         List<List<Integer>> res=new LinkedList<>();
         public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-            backtrack(root,targetSum,new LinkedList<>());
+            dfs(root,targetSum,new LinkedList<>());
             return res;
         }
-        void backtrack(TreeNode root,int target,LinkedList<Integer> path){
-            if (root==null){
+
+        void dfs(TreeNode root,int targetSum,LinkedList<Integer> path){
+            if (root==null)
+                return;
+            path.add(root.val);
+            targetSum-=root.val;
+            if (root.left==null&&root.right==null&&targetSum==0){
+                res.add(new LinkedList<>(path));
                 return;
             }
-            path.addLast(root.val);
-            target-=root.val;
-            if (root.left==null&&root.right==null){
-                if (target==0){
-                    res.add(new LinkedList<>(path));
-                    return;
-                }else{
-                    return;
-                }
-            }
             if (root.left!=null){
-                backtrack(root.left,target,path);
+                dfs(root.left,targetSum,path);
                 path.removeLast();
             }
             if (root.right!=null){
-                backtrack(root.right,target,path);
+                dfs(root.right,targetSum,path);
                 path.removeLast();
             }
         }
@@ -279,7 +289,26 @@ public class PathTraverse {
             return Math.max(left,right)+1;
         }
     }
+
+
     static class Code235_236{
-        // 最近公共祖先 LCA
+        // 最近公共祖先 LCA，后序遍历
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if (root==null){
+                return null;
+            }
+            if (p==root||q==root){
+                return root;
+            }
+            TreeNode left=lowestCommonAncestor(root.left,p,q);
+            TreeNode right=lowestCommonAncestor(root.right,p,q);
+            if (left==null&&right==null){
+                //说明没找到
+                return null;
+            }
+            if (left!=null&&right!=null)
+                return root;
+            return left==null?right:left;
+        }
     }
 }
