@@ -289,7 +289,26 @@ public class PathTraverse {
             return Math.max(left,right)+1;
         }
     }
+
+
     static class Code235_236{
-        // 最近公共祖先 LCA
+        // 最近公共祖先 LCA，后序遍历
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if (root==null){
+                return null;
+            }
+            if (p==root||q==root){
+                return root;
+            }
+            TreeNode left=lowestCommonAncestor(root.left,p,q);
+            TreeNode right=lowestCommonAncestor(root.right,p,q);
+            if (left==null&&right==null){
+                //说明没找到
+                return null;
+            }
+            if (left!=null&&right!=null)
+                return root;
+            return left==null?right:left;
+        }
     }
 }
