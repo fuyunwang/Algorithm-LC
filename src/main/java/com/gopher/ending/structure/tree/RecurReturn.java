@@ -168,12 +168,10 @@ public class RecurReturn {
 
     static class Code543 {
         int res = 0;
-
         public int diameterOfBinaryTree(TreeNode root) {
             dfs(root);
             return res;
         }
-
         int dfs(TreeNode root) { // 返回以当前节点的向下走最长的路径
             if (root == null) {
                 return 0;

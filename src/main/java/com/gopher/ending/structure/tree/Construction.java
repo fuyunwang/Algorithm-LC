@@ -3,6 +3,11 @@ package com.gopher.ending.structure.tree;
 import com.gopher.leetcode.types.structure.linkedlist.ListNode;
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Title Construction
  * @Author fyw
@@ -150,12 +155,50 @@ public class Construction {
     }
 
 
-
+    // 树结构的存储与转化
     class Code105{
         // 前序和中序遍历构造二叉树
+        Map<Integer,Integer> map=new HashMap<>();
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            for (int i = 0; i < inorder.length; i++) {
+                map.put(inorder[i],i);
+            }
+            return build(preorder,inorder,0,preorder.length,0,inorder.length-1);
+        }
+        TreeNode build(int[] preorder,int[] inorder,int pl,int pr,int il,int ir){
+            if (pl>pr||il>ir)
+                return null;
+            int mid=map.get(preorder[pl]);
+            TreeNode root=new TreeNode(preorder[pl]);
+            int num=mid-il;
+            root.left=build(preorder,inorder,pl+1,pl+num,il,mid-1);
+            root.right=build(preorder,inorder,pl+1+num, pr,mid+1,ir);
+            return root;
+        }
     }
     class Code106{
         // 中序和后序遍历构造二叉树
+        Map<Integer,Integer> map=new HashMap<>();
+        public TreeNode buildTree(int[] inorder, int[] postorder) {
+            for (int i = 0; i < inorder.length; i++) {
+                map.put(inorder[i],i);
+            }
+            return build(inorder,postorder,0,inorder.length-1,0,postorder.length-1);
+        }
+        TreeNode build(int[] inorder,int[] postorder,int il,int ir,int pl,int pr){
+            if (il>ir||pl>pr)
+                return null;
+            TreeNode root=new TreeNode(postorder[pr]);
+            int index=map.get(postorder[pr]);
+            int leftNum=index-il;
+            int rightNum=ir-index;
+
+            root.left=build(inorder,postorder,il,index-1,pl,pl+leftNum-1);
+            root.right=build(inorder,postorder,index+1,ir,pl+leftNum,pl+leftNum+rightNum-1);
+
+            return root;
+
+        }
     }
     class Code889{
         // 前序和后序遍历构造二叉树
@@ -168,6 +211,27 @@ public class Construction {
     }
     class Code449{
         // 序列化BST反序列化
+    }
+    static class Code652{
+        // 寻找重复的子树
+        public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+            List<TreeNode> res=new ArrayList<>();
+            Map<String,Integer> map=new HashMap<>();
+            dfs(root,res,map);
+            return res;
+        }
+        String dfs(TreeNode root,List<TreeNode> res,Map<String,Integer> map){   // 递归返回每一个节点对应树的表示，过程中存储结果
+            if (root==null)
+                return "";
+            String cur=String.valueOf(root.val)+",";
+            cur+=dfs(root.left,res,map)+",";
+            cur+=dfs(root.right,res,map);
+            map.put(cur,map.getOrDefault(cur,0)+1);
+            if (map.get(cur)==2){
+                res.add(root);
+            }
+            return cur;
+        }
     }
 
     class Code1028{ // 全局索引，类似Code971翻转二叉树匹配先序遍历

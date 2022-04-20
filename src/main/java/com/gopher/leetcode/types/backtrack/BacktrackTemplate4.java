@@ -14,23 +14,27 @@ public class BacktrackTemplate4 {
     class Code113{
         List<List<Integer>> res=new LinkedList<>();
         public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-            LinkedList<Integer> path=new LinkedList<>();
-            if (root!=null) backtrack(root,targetSum,path);
+            dfs(root,targetSum,new LinkedList<>());
             return res;
         }
-        public void backtrack(TreeNode root,int targetSum,LinkedList<Integer> path){
+
+        void dfs(TreeNode root,int targetSum,LinkedList<Integer> path){
+            if (root==null)
+                return;
             path.add(root.val);
             targetSum-=root.val;
-            if (root.left==null&&root.right==null){
-                //已经是叶子结点，判断是否可以作为结果
-                if (targetSum==0){
-                    res.add(new LinkedList<>(path));
-                }
-            }else{
-                if (root.left!=null) backtrack(root.left,targetSum,path);
-                if (root.right!=null) backtrack(root.right,targetSum,path);
+            if (root.left==null&&root.right==null&&targetSum==0){
+                res.add(new LinkedList<>(path));
+                return;
             }
-            path.pollLast();
+            if (root.left!=null){
+                dfs(root.left,targetSum,path);
+                path.removeLast();
+            }
+            if (root.right!=null){
+                dfs(root.right,targetSum,path);
+                path.removeLast();
+            }
         }
     }
     class Code1079{
