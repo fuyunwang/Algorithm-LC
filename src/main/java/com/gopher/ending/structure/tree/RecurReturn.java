@@ -61,6 +61,27 @@ public class RecurReturn {
             return Math.max(l,r)+1;
         }
     }
+    static class Code687_1 {// 类似Code437
+        int res = 0;
+        public int longestUnivaluePath(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root) {
+            if (root == null)
+                return 0;
+            int l = dfs(root.left), r = dfs(root.right);
+            if (root.left == null || root.left.val != root.val) {
+                l = 0;
+            }
+            if (root.right == null || root.right.val != root.val) {
+                r = 0;
+            }
+            res = Math.max(res, r + l);
+            return Math.max(l, r) + 1;
+        }
+    }
+
 
     static class CodePath{
         /***
@@ -326,28 +347,6 @@ public class RecurReturn {
     }
 
 
-
-
-    static class Code687_1 {// 类似Code437
-        int res = 0;
-        public int longestUnivaluePath(TreeNode root) {
-            dfs(root);
-            return res;
-        }
-        int dfs(TreeNode root) {
-            if (root == null)
-                return 0;
-            int l = dfs(root.left), r = dfs(root.right);
-            if (root.left == null || root.left.val != root.val) {
-                l = 0;
-            }
-            if (root.right == null || root.right.val != root.val) {
-                r = 0;
-            }
-            res = Math.max(res, r + l);
-            return Math.max(l, r) + 1;
-        }
-    }
     static class Code687 {
         // 类似863
         Map<TreeNode, List<TreeNode>> graph = new HashMap<>();
