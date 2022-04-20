@@ -22,11 +22,11 @@ public class Construction {
     static class Code95{
 
     }
-    static class Code96{
+
+
+    static class Code450{
 
     }
-
-
     static class Code637{
         public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
             if (root1==null&&root2==null){
@@ -59,70 +59,7 @@ public class Construction {
             return root;
         }
     }
-    static class Code1008{
-        // 前序遍历构造二叉搜索树
-        public TreeNode bstFromPreorder(int[] preorder) {
-            TreeNode root=null;
-            for (int i = 0; i < preorder.length; i++) {
-                root=buildTree(root,preorder[i]);
-            }
-            return root;
-        }
-        TreeNode buildTree(TreeNode root,int x){    // 插入元素到BST
-            if (root==null){
-                return new TreeNode(x);
-            }
-            if (root.val<x){
-                root.right=buildTree(root.right,x);
-            }
-            if (root.val>x){
-                root.left=buildTree(root.left,x);
-            }
-            return root;
-        }
-    }
     // 二叉树与链表
-    static class Code108_109{
-        public TreeNode sortedArrayToBST(int[] nums) {
-            return buildTree1(nums,0,nums.length-1);
-        }
-        TreeNode buildTree1(int[] nums,int l,int r){
-            if (l>r){
-                return null;
-            }
-            int mid=(l+r)>>1;
-            TreeNode root=new TreeNode(nums[mid]);
-            root.right=buildTree1(nums,mid+1,r);
-            root.left=buildTree1(nums,l,mid-1);
-            return root;
-        }
-
-        public TreeNode sortedListToBST(ListNode head) {
-            return buildTree2(head);
-        }
-        TreeNode buildTree2(ListNode head){
-            if (head==null)
-                return null;
-            if (head.next==null){
-                return new TreeNode(head.val);
-            }
-            ListNode slow=head;
-            ListNode fast=head;
-            ListNode pre=null;
-            while (fast!=null&&fast.next!=null){
-                fast=fast.next.next;
-                pre=slow;
-                slow=slow.next;
-            }
-            ListNode mid=slow;
-            pre.next=null;
-            TreeNode root=new TreeNode(mid.val);
-            root.left=buildTree2(head);
-            root.right=buildTree2(mid.next);
-            return root;
-
-        }
-    }
     static class Code114{
         TreeNode pre=null;
         public void flatten(TreeNode root) {    // 遍历返回结果是逆序所以拼接之前的节点
@@ -303,9 +240,4 @@ public class Construction {
             return cur;
         }
     }
-
-
-
-
-
 }
