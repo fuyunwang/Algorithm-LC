@@ -25,7 +25,25 @@ public class Construction {
 
 
     static class Code450{
-
+        public TreeNode deleteNode(TreeNode root, int key) {
+            if (root==null)
+                return null;
+            if (root.val<key){
+                root.right=deleteNode(root.right,key);
+            }else if (root.val>key){
+                root.left=deleteNode(root.left,key);
+            }else{
+                if (root.left==null) return root.right;
+                if (root.right==null) return root.left;
+                TreeNode node=root.right;
+                while (node.left!=null){
+                    node=node.left;
+                }
+                node.left=root.left;
+                return root.right;
+            }
+            return root;
+        }
     }
     static class Code637{
         public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {

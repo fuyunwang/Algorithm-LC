@@ -46,8 +46,27 @@ public class RecurReturn {
             return res;
         }
     }
+    static class Code543{
+        int res=0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root){
+            if (root==null)
+                return 0;
+            int l=dfs(root.left);
+            int r=dfs(root.right);
+            res=Math.max(res,l+r);
+            return Math.max(l,r)+1;
+        }
+    }
 
     static class CodePath{
+        /***
+         * 最大路径和、最多次数和 都是确定一个值，所以不需要双重递归
+         * 路径总和III确定多个值需要双重递归
+         */
         // 与129、1022不同在于可以从任意节点开始到任意节点结束且不一定自上到下计算
         // 一般采用后序遍历
         static class Code124{
@@ -241,23 +260,6 @@ public class RecurReturn {
             }
             visited[x][y] = false;
             return false;
-        }
-    }
-
-    static class Code543 {
-        int res = 0;
-        public int diameterOfBinaryTree(TreeNode root) {
-            dfs(root);
-            return res;
-        }
-        int dfs(TreeNode root) { // 返回以当前节点的向下走最长的路径
-            if (root == null) {
-                return 0;
-            }
-            int left = dfs(root.left);
-            int right = dfs(root.right);
-            res = Math.max(res, left + right);
-            return Math.max(left, right) + 1;
         }
     }
 
