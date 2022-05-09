@@ -2,9 +2,7 @@ package com.gopher.ending.structure.tree;
 
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Title PathTraverse
@@ -309,6 +307,53 @@ public class PathTraverse {
             if (left!=null&&right!=null)
                 return root;
             return left==null?right:left;
+        }
+    }
+
+
+    // 找位置左下角
+    static class Code513{
+        int maxd=0;
+        TreeNode res=null;
+        public int findBottomLeftValue(TreeNode root) {
+            dfs(root,1);
+            return res.val;
+        }
+        void dfs(TreeNode root,int depth){
+            if (root==null)
+                return;
+            if (maxd<depth){
+                maxd=depth;
+                res=root;
+            }
+            dfs(root.left,depth+1);
+            dfs(root.right,depth+1);
+        }
+    }
+    static class Code515{
+        Map<Integer,Integer> max=new HashMap<>();       // 存每一层的最大值
+        int maxDepth;
+        public List<Integer> largestValues(TreeNode root) {
+            dfs(root,1);
+            List<Integer> res=new ArrayList<>();
+            for (int i = 1; i <= maxDepth; i++) {
+                res.add(max.get(i));
+            }
+            return res;
+        }
+        void dfs(TreeNode root,int depth){
+            if (root==null)
+                return;
+            // 记录下层数
+            if (depth>maxDepth){
+                maxDepth=depth;
+            }
+            if (!max.containsKey(depth)) max.put(depth,root.val);
+            else{
+                max.put(depth,Math.max(max.get(depth),root.val));
+            }
+            dfs(root.left,depth+1);
+            dfs(root.right,depth+1);
         }
     }
 }

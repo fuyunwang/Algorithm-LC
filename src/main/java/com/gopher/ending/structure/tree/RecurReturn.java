@@ -11,7 +11,24 @@ import java.util.*;
  * @Description: 带有返回值的
  */
 public class RecurReturn {
-    static class Code1022 {// 类似129 |||| 带有求总和要求的，返回值具备两种性质。计算路径之和仍然保持前序遍历
+    static class Code404{
+        // 左叶子之和，判断一个节点是不是左叶子必须保证左儿子存在且没有叶子结点
+        public int sumOfLeftLeaves(TreeNode root) {
+            if (root==null){
+                return 0;
+            }
+            int res=0;
+            if (root.left!=null){
+                if (root.left.left==null&&root.left.right==null){
+                    res+=root.left.val;
+                }
+            }
+            res+=sumOfLeftLeaves(root.left);
+            res+=sumOfLeftLeaves(root.right);
+            return res;
+        }
+    }
+    static class Code1022 {// 类似129 404  |||| 带有求总和要求的，返回值具备两种性质。计算路径之和仍然保持前序遍历
         public int sumRootToLeaf(TreeNode root) {
             return dfs(root, 0);
         }
@@ -29,8 +46,48 @@ public class RecurReturn {
             return res;
         }
     }
+    static class Code543{
+        int res=0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root){
+            if (root==null)
+                return 0;
+            int l=dfs(root.left);
+            int r=dfs(root.right);
+            res=Math.max(res,l+r);
+            return Math.max(l,r)+1;
+        }
+    }
+    static class Code687_1 {// 类似Code437
+        int res = 0;
+        public int longestUnivaluePath(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root) {
+            if (root == null)
+                return 0;
+            int l = dfs(root.left), r = dfs(root.right);
+            if (root.left == null || root.left.val != root.val) {
+                l = 0;
+            }
+            if (root.right == null || root.right.val != root.val) {
+                r = 0;
+            }
+            res = Math.max(res, r + l);
+            return Math.max(l, r) + 1;
+        }
+    }
+
 
     static class CodePath{
+        /***
+         * 最大路径和、最多次数和 都是确定一个值，所以不需要双重递归
+         * 路径总和III确定多个值需要双重递归
+         */
         // 与129、1022不同在于可以从任意节点开始到任意节点结束且不一定自上到下计算
         // 一般采用后序遍历
         static class Code124{
@@ -45,13 +102,59 @@ public class RecurReturn {
                 }
                 int l=Math.max(dfs(root.left),0);
                 int r=Math.max(dfs(root.right),0);
-                // 这里更新值可以保证在枚举每一个点时都能更新结果，避免了多次递归
+                // 这里更新值可以保证在枚举每一个点时都能更新结果，避免了多次递归。类似的题目Code508
                 res=Math.max(res,l+r+root.val);  // 注意必须包含当前节点
                 return Math.max(l,r)+root.val;  // +1 实现了路径更长，+root.val 实现了路径更大
             }
         }
-        static class Code{
-
+        static class Code508{
+            Map<Integer, Integer> map = new HashMap<>();
+            List<Integer> list = new ArrayList<>();
+            int maxCount = 0;
+            public int[] findFrequentTreeSum(TreeNode root) {
+                dfs(root);
+                return list.stream().mapToInt(Integer::intValue).toArray();
+            }
+            int dfs(TreeNode root) {
+                if (root == null) {
+                    return 0;
+                }
+                int sum = root.val + dfs(root.left) + dfs(root.right);//得到子树和
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+                if (map.get(sum) > maxCount) {
+                    list = new ArrayList<>();     // trick
+                    list.add(sum);
+                    maxCount = map.get(sum);
+                } else if (maxCount == map.get(sum)) {
+                    list.add(sum);
+                }
+                return sum;
+            }
+        }
+        static class Code437{
+            // 这里更新值可以保证在枚举每一个点时都能更新结果，采用多次递归
+            public int pathSum(TreeNode root, int targetSum) {
+                if (root==null){
+                    return 0;
+                }
+                int res=dfs(root,targetSum);
+                res+=pathSum(root.left,targetSum);
+                res+=pathSum(root.right,targetSum);
+                return res;
+            }
+            int dfs(TreeNode root,int targetSum){   // 返回以root为根时所有的可能结果
+                if (root==null){
+                    return 0;
+                }
+                int res=0;
+                targetSum-=root.val;
+                if (targetSum==0){
+                    res++;
+                }
+                res+=dfs(root.left,targetSum);
+                res+=dfs(root.right,targetSum);
+                return res;
+            }
         }
     }
 
@@ -85,37 +188,6 @@ public class RecurReturn {
         }
     }
 
-    static class Code508 {
-        Map<Integer, Integer> map = new HashMap<>();
-        List<Integer> list = new ArrayList<>();
-        int maxCount = 0;
-
-        public int[] findFrequentTreeSum(TreeNode root) {
-            dfs(root);
-
-            int[] res = new int[list.size()];
-            for (int i = 0; i < list.size(); i++) {
-                res[i] = list.get(i);
-            }
-            return res;
-        }
-
-        int dfs(TreeNode root) {
-            if (root == null) {
-                return 0;
-            }
-            int sum = root.val + dfs(root.left) + dfs(root.right);//得到子树和
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
-            if (map.get(sum) > maxCount) {
-                list = new ArrayList<>();     // trick
-                list.add(sum);
-                maxCount = map.get(sum);
-            } else if (maxCount == map.get(sum)) {
-                list.add(sum);
-            }
-            return sum;
-        }
-    }
 
     static class Code37 {
         boolean[][] row;
@@ -163,7 +235,6 @@ public class RecurReturn {
             return false;
         }
     }
-
     static class Code79 {
         boolean[][] visited;
         char[][] g;
@@ -210,23 +281,6 @@ public class RecurReturn {
             }
             visited[x][y] = false;
             return false;
-        }
-    }
-
-    static class Code543 {
-        int res = 0;
-        public int diameterOfBinaryTree(TreeNode root) {
-            dfs(root);
-            return res;
-        }
-        int dfs(TreeNode root) { // 返回以当前节点的向下走最长的路径
-            if (root == null) {
-                return 0;
-            }
-            int left = dfs(root.left);
-            int right = dfs(root.right);
-            res = Math.max(res, left + right);
-            return Math.max(left, right) + 1;
         }
     }
 
@@ -293,28 +347,6 @@ public class RecurReturn {
     }
 
 
-
-
-    static class Code687_1 {// 类似Code437
-        int res = 0;
-        public int longestUnivaluePath(TreeNode root) {
-            dfs(root);
-            return res;
-        }
-        int dfs(TreeNode root) {
-            if (root == null)
-                return 0;
-            int l = dfs(root.left), r = dfs(root.right);
-            if (root.left == null || root.left.val != root.val) {
-                l = 0;
-            }
-            if (root.right == null || root.right.val != root.val) {
-                r = 0;
-            }
-            res = Math.max(res, r + l);
-            return Math.max(l, r) + 1;
-        }
-    }
     static class Code687 {
         // 类似863
         Map<TreeNode, List<TreeNode>> graph = new HashMap<>();

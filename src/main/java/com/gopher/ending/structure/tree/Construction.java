@@ -25,7 +25,25 @@ public class Construction {
 
 
     static class Code450{
-
+        public TreeNode deleteNode(TreeNode root, int key) {
+            if (root==null)
+                return null;
+            if (root.val<key){
+                root.right=deleteNode(root.right,key);
+            }else if (root.val>key){
+                root.left=deleteNode(root.left,key);
+            }else{
+                if (root.left==null) return root.right;
+                if (root.right==null) return root.left;
+                TreeNode node=root.right;
+                while (node.left!=null){
+                    node=node.left;
+                }
+                node.left=root.left;
+                return root.right;
+            }
+            return root;
+        }
     }
     static class Code637{
         public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
@@ -210,34 +228,78 @@ public class Construction {
             return root;
         }
     }
+    class Code652{
+        List<TreeNode> res=new ArrayList<>();
+        Map<String,Integer> map=new HashMap<>();
+        public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        String dfs(TreeNode root){
+            if (root==null){
+                return "#";
+            }
+            String path=String.valueOf(root.val)+",";
+            path+=dfs(root.left)+",";
+            path+=dfs(root.right);
+            map.put(path,map.getOrDefault(path,0)+1);
+            if (map.get(path)==2){
+                res.add(root);
+            }
+            return path;
+        }
+    }
     class Code971{
-
+        // 类似331
+        int u=0;
+        List<Integer> res=new ArrayList<>();
+        public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
+            if (root==null){
+                return new ArrayList<Integer>(){{add(-1);}};
+            }
+            if (!dfs(root,voyage))
+                return new ArrayList<Integer>(){{add(-1);}};
+            return res;
+        }
+        boolean dfs(TreeNode root,int[] v){
+            if (root==null){
+                return true;
+            }
+            if (root.val!=v[u])
+                return false;
+            u++;
+            if (root.left!=null&&root.left.val!=v[u]){
+                res.add(root.val);
+                return dfs(root.right,v)&&dfs(root.left,v);
+            }else{
+                return dfs(root.left,v)&&dfs(root.right,v);
+            }
+        }
     }
     class Code331{
         // 验证前序遍历
+        int u=0;
+        public boolean isValidSerialization(String preorder) {
+            preorder=preorder+",";
+            if (!dfs(preorder))
+                return false;
+            return u==preorder.length();
+        }
+        boolean dfs(String preorder){
+            if (u==preorder.length()){  // 递归的过程中出现了提前截止，说明不可能正确构造
+                return false;
+            }
+            if (preorder.charAt(u)=='#'){
+                u+=2;
+                return true;        // 当前节点截止到空节点，可以正确构造
+            }
+            while (u<preorder.length()&&preorder.charAt(u)!=',')    // 截取非逗号部分
+                u++;
+            u++; // 跳过逗号
+            return dfs(preorder)&&dfs(preorder);
+        }
     }
     class Code449{
         // 序列化BST反序列化
-    }
-    static class Code652{
-        // 寻找重复的子树
-        public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-            List<TreeNode> res=new ArrayList<>();
-            Map<String,Integer> map=new HashMap<>();
-            dfs(root,res,map);
-            return res;
-        }
-        String dfs(TreeNode root,List<TreeNode> res,Map<String,Integer> map){   // 递归返回每一个节点对应树的表示，过程中存储结果
-            if (root==null)
-                return "";
-            String cur=String.valueOf(root.val)+",";
-            cur+=dfs(root.left,res,map)+",";
-            cur+=dfs(root.right,res,map);
-            map.put(cur,map.getOrDefault(cur,0)+1);
-            if (map.get(cur)==2){
-                res.add(root);
-            }
-            return cur;
-        }
     }
 }
