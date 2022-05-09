@@ -18,7 +18,20 @@ public class ValReturnTemplate {
 
     }
     static class Code543{
-
+        // 二叉树直径
+        int res=0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            dfs(root);
+            return res;
+        }
+        int dfs(TreeNode root){
+            if (root==null)
+                return 0;
+            int l=dfs(root.left);
+            int r=dfs(root.right);
+            res=Math.max(res,l+r);
+            return Math.max(l,r)+1;
+        }
     }
 
     static class Code687{
