@@ -33,7 +33,6 @@ public class PathTraverseTemplate {
             return root.val==1||root.left!=null||root.right!=null;
         }
     }
-
     // LCA 865、
     static class Code235_236{
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
@@ -189,8 +188,10 @@ public class PathTraverseTemplate {
             sb.append((char)(root.val+'a'));
             if (root.left==null&&root.right==null){
                 sb.reverse();
-                if (ans==null||sb.toString().compareTo(ans)<0) {ans=sb.toString();
-                    return;}
+                if (ans==null||sb.toString().compareTo(ans)<0) {
+                    ans=sb.toString();
+                    return;
+                }
                 sb.reverse();
             }else{
                 dfs(root.left,new StringBuilder(sb));
