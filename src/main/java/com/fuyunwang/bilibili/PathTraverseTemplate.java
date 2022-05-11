@@ -201,33 +201,6 @@ public class PathTraverseTemplate {
         }
     }
 
-    static class Code971{
-        int u=0;    // 含全局索引的题目
-        List<Integer> res=new ArrayList<>();
-        public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
-            if (root==null){
-                return new ArrayList<Integer>(){{add(-1);}};
-            }
-            if (!dfs(root,voyage))
-                return new ArrayList<Integer>(){{add(-1);}};
-            return res;
-        }
-        boolean dfs(TreeNode root,int[] v){
-            if (root==null){
-                return true;
-            }
-            if (root.val!=v[u])
-                return false;
-            u++;
-            if (root.left!=null&&root.left.val!=v[u]){
-                res.add(root.val);
-                return dfs(root.right,v)&&dfs(root.left,v);
-            }else{
-                return dfs(root.left,v)&&dfs(root.right,v);
-            }
-        }
-    }
-
 
     static class Code513{
         int maxd=0;
@@ -371,4 +344,86 @@ public class PathTraverseTemplate {
             }
         }
     }
+
+
+    class Code331{
+        int u=0;
+        public boolean isValidSerialization(String preorder) {
+            preorder=preorder+",";
+            if (!dfs(preorder))
+                return false;
+            return u==preorder.length();
+        }
+        boolean dfs(String preorder){
+            if (u==preorder.length()){  // 递归的过程中出现了提前截止，说明不可能正确构造
+                return false;
+            }
+            if (preorder.charAt(u)=='#'){
+                u+=2;
+                return true;        // 当前节点截止到空节点，可以正确构造
+            }
+            while (u<preorder.length()&&preorder.charAt(u)!=',')    // 截取非逗号部分
+                u++;
+            u++; // 跳过逗号
+            return dfs(preorder)&&dfs(preorder);
+        }
+    }
+    class Code971{
+        int u=0;    // 含全局索引的题目
+        List<Integer> res=new ArrayList<>();
+        public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
+            if (root==null){
+                return new ArrayList<Integer>(){{add(-1);}};
+            }
+            if (!dfs(root,voyage))
+                return new ArrayList<Integer>(){{add(-1);}};
+            return res;
+        }
+        boolean dfs(TreeNode root,int[] v){
+            if (root==null){
+                return true;
+            }
+            if (root.val!=v[u])
+                return false;
+            u++;
+            if (root.left!=null&&root.left.val!=v[u]){
+                res.add(root.val);
+                return dfs(root.right,v)&&dfs(root.left,v);
+            }else{
+                return dfs(root.left,v)&&dfs(root.right,v);
+            }
+        }
+    }
+
+    class Code1028{
+        int idx=0;
+        public TreeNode recoverFromPreorder(String traversal) {
+            return buildTree(traversal,0);
+        }
+        TreeNode buildTree(String str,int depth){
+            if (idx>=str.length()){
+                return null;
+            }
+            int d=0;
+            int temp=idx;
+            while (str.charAt(temp)=='-'){
+                temp++;
+                d++;
+            }
+            if (d!=depth){
+                return null;
+            }
+            idx=temp;
+            int start=idx;
+            while (idx<str.length()&&Character.isDigit(str.charAt(idx))){
+                idx++;
+            }
+            int val=Integer.parseInt(str.substring(start,idx));
+            TreeNode root=new TreeNode(val);
+            root.left=buildTree(str,depth+1);
+            root.right=buildTree(str,depth+1);
+            return root;
+        }
+    }
+
 }
