@@ -345,7 +345,43 @@ public class PathTraverseTemplate {
         }
     }
 
+    static class Code297{
 
+        StringBuilder sb=new StringBuilder();
+        int u=0;
+        public String serialize(TreeNode root) {
+            preOrder(root);
+            return sb.toString();
+        }
+        private void preOrder(TreeNode root){
+            if (root==null){
+                sb.append("#,");
+                return;
+            }
+            sb.append(root.val).append(",");
+            preOrder(root.left);
+            preOrder(root.right);
+        }
+
+        public TreeNode deserialize(String data) {
+            return build(data);
+        }
+        TreeNode build(String data){
+            if (data.charAt(u)=='#'){
+                u+=2;
+                return null;
+            }
+            int k=u;
+            while (u<data.length()&&data.charAt(u)!=','){
+                u++;
+            }
+            TreeNode root=new TreeNode(Integer.parseInt(data.substring(k,u)));
+            u++;
+            root.left=build(data);
+            root.right=build(data);
+            return root;
+        }
+    }
     class Code331{
         int u=0;
         public boolean isValidSerialization(String preorder) {
