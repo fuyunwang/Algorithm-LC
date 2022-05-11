@@ -67,7 +67,7 @@ public class SerialTemplate {
                 return root;
             int idx=map.get(pre[prestart+1]);
             int leftNum=idx-poststart;
-            root.left=helper(pre,post,prestart+1,prestart+1+leftNum,poststart,idx);
+            root.left=helper(pre,post,prestart+1,prestart+leftNum+1,poststart,idx);
             root.right=helper(pre,post,prestart+leftNum+2,preend,idx+1,postend-1);
             return root;
         }
