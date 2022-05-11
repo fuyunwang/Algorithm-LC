@@ -2,10 +2,7 @@ package com.fuyunwang.bilibili;
 
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Title SerialTemplate
@@ -55,20 +52,23 @@ public class SerialTemplate {
         }
     }
     static class Code889{
+        Map<Integer,Integer> map=new HashMap<>();
         public TreeNode constructFromPrePost(int[] pre, int[] post) {
+            for (int i = 0; i < post.length; i++) {
+                map.put(post[i],i);
+            }
             return helper(pre,post,0,pre.length-1,0,post.length-1);
         }
         public TreeNode helper(int[] pre,int[] post,int prestart,int preend,int poststart,int postend){
-            if(prestart>preend||poststart>postend)return null;
+            if (prestart>preend)
+                return null;
             TreeNode root=new TreeNode(pre[prestart]);
-            if (prestart == preend)
+            if (preend==prestart)
                 return root;
-            int index=0;
-            while(post[index]!=pre[prestart+1]){
-                index++;
-            }
-            root.left=helper(pre,post,prestart+1,prestart+1+index-poststart,poststart,index);
-            root.right=helper(pre,post,prestart+2+index-poststart,preend,index+1,preend-1);
+            int idx=map.get(pre[prestart+1]);
+            int leftNum=idx-poststart;
+            root.left=helper(pre,post,prestart+1,prestart+1+leftNum,poststart,idx);
+            root.right=helper(pre,post,prestart+leftNum+2,preend,idx+1,postend-1);
             return root;
         }
     }
