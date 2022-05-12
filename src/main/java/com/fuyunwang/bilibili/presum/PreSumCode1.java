@@ -12,26 +12,26 @@ import java.util.Map;
  */
 public class PreSumCode1 {
     class Code303_304{
-        class NumMatrix {
-            int[][] sum;
-            public NumMatrix(int[][] matrix) {
-                if (matrix.length!=0&&matrix[0].length!=0){
-                    sum=new int[matrix.length+1][matrix[0].length+1];
-                    for (int i = 1; i <= sum.length; i++) {
-                        for (int j = 1; j <= sum[0].length; j++) {
-                            matrix[i][j]=sum[i-1][j]+sum[i][j-1]+matrix[i-1][j-1]-sum[i-1][j-1];
-                        }
-                    }
-                }
-            }
-            public int sumRegion(int row1, int col1, int row2, int col2) {
-                row1++;
-                col1++;
-                row2++;
-                col2++;
-                return sum[row2][row2]-sum[row2][col1-1]-sum[row1-1][col2]+sum[row1-1][col1-1];
-            }
-        }
+//        class NumMatrix {
+//            int[][] sum;
+//            public NumMatrix(int[][] matrix) {
+//                if (matrix.length!=0&&matrix[0].length!=0){
+//                    sum=new int[matrix.length+1][matrix[0].length+1];
+//                    for (int i = 1; i <= sum.length; i++) {
+//                        for (int j = 1; j <= sum[0].length; j++) {
+//                            matrix[i][j]=sum[i-1][j]+sum[i][j-1]+matrix[i-1][j-1]-sum[i-1][j-1];
+//                        }
+//                    }
+//                }
+//            }
+//            public int sumRegion(int row1, int col1, int row2, int col2) {
+//                row1++;
+//                col1++;
+//                row2++;
+//                col2++;
+//                return sum[row2][row2]-sum[row2][col1-1]-sum[row1-1][col2]+sum[row1-1][col1-1];
+//            }
+//        }
     }
     class Code523{  // 560、523、862、930
         public boolean checkSubarraySum(int[] nums, int k) {
@@ -198,8 +198,23 @@ public class PreSumCode1 {
             return res;
         }
     }
-    class Code926{  // 又有点类似525
-
+    class Code926{  // 又有点类似525、经典前缀和
+        // 本质上将一个序列变成前面一堆0后面一堆1
+        // 需要统计每个分界点前1的个数和分界点后0的个数即可
+        // 设索引i处于最后一个0的位置那么 si (n-i)-(sn-si) 就分别为所求
+        public int minFlipsMonoIncr(String s) {
+            int n=s.length();
+            int[] sum=new int[n+1];
+            for (int i = 1; i <= n; i++) {
+                sum[i]=sum[i-1]+s.charAt(i-1)-'0';
+            }
+            // 索引的枚举是以0的个数来的，所以边界条件应该是全变成1的情况
+            int res=n-sum[n];
+            for (int i = 1; i <= n; i++) {
+                res=Math.min(res,2*sum[i]+(n-i)-(sum[n]));
+            }
+            return res;
+        }
     }
     class Code995{
 
@@ -243,6 +258,6 @@ public class PreSumCode1 {
     }
     class Code1124{
         // 也是一个返回最大长度的问题
-
+        
     }
 }
