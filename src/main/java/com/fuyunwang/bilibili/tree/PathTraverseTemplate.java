@@ -1,4 +1,4 @@
-package com.fuyunwang.bilibili;
+package com.fuyunwang.bilibili.tree;
 
 import com.gopher.leetcode.types.structure.tree.TreeNode;
 
