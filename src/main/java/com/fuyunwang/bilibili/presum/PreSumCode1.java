@@ -23,6 +23,6 @@ public class PreSumCode1 {
 
     }
     class Code1190{
-        
+
     }
 }
