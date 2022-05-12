@@ -12,9 +12,28 @@ import java.util.Map;
  */
 public class PreSumCode1 {
     class Code303_304{
-
+        class NumMatrix {
+            int[][] sum;
+            public NumMatrix(int[][] matrix) {
+                if (matrix.length!=0&&matrix[0].length!=0){
+                    sum=new int[matrix.length+1][matrix[0].length+1];
+                    for (int i = 1; i <= sum.length; i++) {
+                        for (int j = 1; j <= sum[0].length; j++) {
+                            matrix[i][j]=sum[i-1][j]+sum[i][j-1]+matrix[i-1][j-1]-sum[i-1][j-1];
+                        }
+                    }
+                }
+            }
+            public int sumRegion(int row1, int col1, int row2, int col2) {
+                row1++;
+                col1++;
+                row2++;
+                col2++;
+                return sum[row2][row2]-sum[row2][col1-1]-sum[row1-1][col2]+sum[row1-1][col1-1];
+            }
+        }
     }
-    class Code523{  // 560、523、862
+    class Code523{  // 560、523、862、930
         public boolean checkSubarraySum(int[] nums, int k) {
             if (k==0){
                 for (int i = 0; i < nums.length; i++) {
@@ -93,20 +112,40 @@ public class PreSumCode1 {
     class Code862{
 
     }
-    class Code926{
 
-    }
-    class Code930{
-
+    class Code930{  // 560题的简化
+        public int numSubarraysWithSum(int[] nums, int goal) {
+            int res=0;
+            HashMap<Integer,Integer> map=new HashMap<>();// 存储前缀和以及次数
+            map.put(0,1);
+            int preSum=0;
+            for (int i = 0; i < nums.length; i++) {
+                preSum+=nums[i];
+                res+=map.getOrDefault(preSum-goal,0);
+                map.put(preSum,map.getOrDefault(preSum,0)+1);
+            }
+            return res;
+        }
     }
     class Code974{
-
+        public int subarraysDivByK(int[] nums, int k) {     // Si与Sj在mod k的前提下是同余的
+            int[] sum=new int[nums.length+1];
+            for (int i = 1; i <= nums.length; i++) {
+                sum[i]=sum[i-1]+nums[i-1];
+            }
+            int res=0;
+            Map<Integer,Integer> map=new HashMap<>();
+            map.put(0,1);
+            for (int i = 1; i <= nums.length; i++) {
+                res+=map.getOrDefault((sum[i]%k+k)%k,0);
+                map.put((sum[i]%k+k)%k,map.getOrDefault((sum[i]%k+k)%k,0)+1);
+            }
+            return res;
+        }
     }
-    class Code995{
 
-    }
 
-    class Code209{
+    class Code209{ // 209 926 1004 1052
         public int minSubArrayLen(int target, int[] nums) {// 子数组问题考虑560题目
             int sum=0;
             int res=Integer.MAX_VALUE;
@@ -159,15 +198,48 @@ public class PreSumCode1 {
             return res;
         }
     }
+    class Code926{  // 又有点类似525
+
+    }
+    class Code995{
+
+    }
 
     class Code1074{
         // 二维数组前缀和+85题最大矩形的思想
     }
+    // 统计类型题目用差分
     class Code1094{
-
+        public boolean carPooling(int[][] trips, int capacity) {
+            int[] d=new int[trips.length];
+            for (int i = 0; i < trips.length; i++) {
+                d[trips[i][0]]+=trips[i][2];
+                d[trips[i][1]]-=trips[i][2];
+            }
+            int preSum=0;
+            for (int i = 0; i < d.length; i++) {
+                preSum+=d[i];
+                if (preSum>capacity){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
     class Code1109{
-
+        public int[] corpFlightBookings(int[][] bookings, int n) {
+            int[] d=new int[n];
+            for (int i = 0; i < bookings.length; i++) {
+                d[bookings[i][0]-1]+=bookings[i][2];
+                if (bookings[i][1]<n){
+                    d[bookings[i][1]]-=bookings[i][2];
+                }
+            }
+            for (int i = 1; i < n; i++) {
+                d[i]+=d[i-1];
+            }
+            return d;
+        }
     }
     class Code1124{
         // 也是一个返回最大长度的问题
