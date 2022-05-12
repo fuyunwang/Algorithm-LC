@@ -81,6 +81,15 @@ public class PreSumCode1 {
     class Code930{
 
     }
+    class Code974{
+
+    }
+    class Code995{
+
+    }
+    class Code1004{
+
+    }
     class Code1052{
         // 爱生气的书店老板
     }
@@ -90,7 +99,10 @@ public class PreSumCode1 {
     class Code1094{
 
     }
-    class Code1190{
+    class Code1109{
+
+    }
+    class Code1124{
 
     }
 }
