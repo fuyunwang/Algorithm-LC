@@ -53,6 +53,47 @@ public class Code36_37 {
         }
     }
     static class Code37{
+        boolean[][] row=new boolean[9][9];
+        boolean[][] col=new boolean[9][9];
+        boolean[][][] cell=new boolean[3][3][9];
+        char[][] g;
 
+        public void solveSudoku(char[][] board) {
+            if (board==null||board.length==0||board[0].length==0)
+                return;
+            g=board;
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    if (g[i][j]!='.'){
+                        int cur=g[i][j]-'1';
+                        row[i][cur]=col[j][cur]=cell[i/3][j/3][cur]=true;
+                    }
+                }
+            }
+            dfs(0,0);
+        }
+
+        boolean dfs(int x,int y){
+            if (y==9){
+                x++;
+                y=0;
+            }
+            if (x==9)
+                return true;
+            if (g[x][y]!='.')
+                return dfs(x,y+1);  // 进入下一列
+            for (int i = 0; i < 9; i++) {
+                if (!row[x][i]&&!col[y][i]&&!cell[x/3][y/3][i]){
+                    row[x][i]=col[y][i]=cell[x/3][y/3][i]=true;
+                    char cur= (char) (i+'1');
+                    g[x][y]=cur;
+                    if (dfs(x,y+1))
+                        return true;
+                    g[x][y]='.';
+                    row[x][i]=col[y][i]=cell[x/3][y/3][i]=false;
+                }
+            }
+            return false;
+        }
     }
 }
