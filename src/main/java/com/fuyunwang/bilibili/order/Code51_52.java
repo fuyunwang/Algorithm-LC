@@ -13,23 +13,22 @@ import java.util.List;
 public class Code51_52 {
     static class Code51{
         int N=20;
-        List<List<String>> res=new ArrayList<>();
-        char[][] g;
         boolean[] row=new boolean[N];
-        boolean[] dg=new boolean[N];
-        boolean[] udg=new boolean[N];
+        boolean[] dg=new boolean[N];    // 对角线1
+        boolean[] udg=new boolean[N];   // 对角线2
+        char[][] g;
         int n;
+        List<List<String>> res=new ArrayList<>();
         public List<List<String>> solveNQueens(int n) {
             this.n=n;
             g=new char[N][N];
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < g.length; i++) {
                 Arrays.fill(g[i],'.');
             }
             dfs(0);
             return res;
         }
-
-        void dfs(int y){    // 与数独一样，采用x、y来遍历整个矩阵
+        void dfs(int y){
             if (y==n){
                 List<String> path=new ArrayList<>();
                 for (int i = 0; i < n; i++) {
@@ -42,7 +41,6 @@ public class Code51_52 {
                 res.add(path);
                 return;
             }
-
             for (int i = 0; i < n; i++) {
                 if (!row[i]&&!udg[y-i+n]&&!dg[y+i]){
                     row[i]=udg[y-i+n]=dg[y+i]=true;
@@ -55,21 +53,19 @@ public class Code51_52 {
         }
     }
     static class Code52{
-        int n;
         boolean[] row;
-        boolean[] dg;
-        boolean[] udg;
+        boolean[] dg;    // 对角线1
+        boolean[] udg;   // 对角线2
+        int n;
         char[][] g;
-
         public int totalNQueens(int n) {
             this.n=n;
-            row=new boolean[n];
-            dg=new boolean[n*2];
-            udg=new boolean[n*2];
             g=new char[n][n];
-            return dfs(0);  // 枚举策略，外层参数枚举每一列，内层循环枚举每一行
+            row=new boolean[n];
+            dg=new boolean[2*n];
+            udg=new boolean[2*n];
+            return dfs(0);
         }
-
         int dfs(int y){
             if (y==n){
                 return 1;

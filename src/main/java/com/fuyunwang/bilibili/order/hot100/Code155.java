@@ -10,33 +10,35 @@ import java.util.Stack;
  */
 public class Code155 {
     class MinStack {
-        Stack<Integer> stack1=new Stack<>();
-        Stack<Integer> stack2=new Stack<>();
+        Stack<Integer> minStack;
+        Stack<Integer> oriStack;
         public MinStack() {
+            minStack=new Stack<>();
+            oriStack=new Stack<>();
         }
 
         public void push(int val) {
-            if (stack1.isEmpty()){
-                stack1.push(val);
+            oriStack.push(val);
+            if (minStack.isEmpty()||minStack.peek()>=val){
+                minStack.push(val);
+            }else{
+                minStack.push(minStack.peek());
             }
-            if (stack1.peek()<val){
-                stack1.push(stack1.peek());
-            }
-            stack2.push(val);
         }
 
         public void pop() {
-            stack1.pop();
-            stack2.pop();
+            if (!oriStack.isEmpty()){
+                oriStack.pop();
+                minStack.pop();
+            }
         }
 
         public int top() {
-            stack1.pop();
-            return stack2.pop();
+            return oriStack.peek();
         }
 
         public int getMin() {
-            return stack1.peek();
+            return minStack.peek();
         }
     }
 }
