@@ -12,6 +12,7 @@ public class Code907 {
     /**
      * 单调栈
      * 类似于最大矩形、接雨水
+     * 思想类似891
      */
     public int sumSubarrayMins(int[] arr) {
         Stack<Integer> stack=new Stack<>();
