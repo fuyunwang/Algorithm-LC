@@ -15,11 +15,8 @@ public class Code713 {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         int n=nums.length;
         int[] sum=new int[n+10];
-        sum[0]=1;
-        for (int i = 1; i <= n; i++) {
-            sum[i]=sum[i-1]*nums[i-1];
+        for (int i = 0,j=0; i < ; i++) {
+
         }
-        int res=1;
-        
     }
 }
