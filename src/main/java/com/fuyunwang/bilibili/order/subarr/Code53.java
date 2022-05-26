@@ -9,7 +9,7 @@ package com.fuyunwang.bilibili.order.subarr;
  */
 public class Code53 {
     /**
-     * f[i]表示所有以nums[i]结尾的区间中，最大值是多少
+     * f[i]表示所有以nums[i]结尾形成的子数组中，最大值是多少
      * f[i]=Math.max(nums[i],f[i-1]+nums[i])
      */
     public int maxSubArray(int[] nums) {

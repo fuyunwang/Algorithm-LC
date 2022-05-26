@@ -13,6 +13,7 @@ import java.util.Map;
 public class Code325 {
     /**
      * 类似题目 523、525、560、862、930
+     * 最长长度问题，不具备单调性用前缀和+哈希
      * @param nums
      * @param k
      * @return
