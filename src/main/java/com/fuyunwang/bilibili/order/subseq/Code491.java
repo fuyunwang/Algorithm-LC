@@ -1,5 +1,7 @@
 package com.fuyunwang.bilibili.order.subseq;
 
+import java.util.List;
+
 /**
  * @Title Code491
  * @Author fyw
@@ -7,4 +9,7 @@ package com.fuyunwang.bilibili.order.subseq;
  * @Description
  */
 public class Code491 {
+    public List<List<Integer>> findSubsequences(int[] nums) {
+
+    }
 }

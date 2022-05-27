@@ -1,9 +1,6 @@
 package com.gopher.leetcode.types.backtrack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Title BacktrackTemplate1
@@ -209,4 +206,38 @@ public class BacktrackTemplate1 {
         }
     }
 
+
+    class Code491{
+        boolean[] visited;
+        List<List<Integer>> res=new LinkedList<>();
+        public List<List<Integer>> findSubsequences(int[] nums) {
+            visited=new boolean[nums.length];
+            backtrack(nums,0,new LinkedList<>());
+            return res;
+        }
+        void backtrack(int[] nums,int start,LinkedList<Integer> path){
+            if (path.size()>=2)
+                res.add(new LinkedList<>(path));
+            if (start== nums.length)
+                return;
+            HashSet<Integer> set=new HashSet<>();
+            for (int i = start; i <nums.length ; i++) { // 本题不一定有序，去重的方式要改变
+                if (set.contains(nums[i]))
+                    continue;
+                set.add(nums[i]);
+//               if (!visited[i]){
+//                   if (i>0&&!visited[i-1]&&nums[i]==nums[i-1]){
+//                       continue;
+//                   }
+                   if (path.isEmpty()||path.peekLast()<=nums[i]){
+                       visited[i]=true;
+                       path.addLast(nums[i]);
+                       backtrack(nums,i+1,path);
+                       visited[i]=false;
+                       path.removeLast();
+                   }
+//               }
+            }
+        }
+    }
 }
