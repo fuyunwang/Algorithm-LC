@@ -43,7 +43,7 @@ public class Code907 {
         long res=0;
         long MOD= (long) (1e9+7);
         for (int i = 0; i < n; i++) {
-            res+=(arr[i]*(i-l[i])*(r[i]-i))%MOD;
+            res+=(arr[i]*(long)(i-l[i])*(r[i]-i))%MOD;
         }
         return (int) (res%MOD);
     }
