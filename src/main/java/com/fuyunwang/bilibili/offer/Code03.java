@@ -27,4 +27,10 @@ public class Code03 {
             arr[j]=temp;
         }
     }
+    static class Method2{
+        public int findRepeatNumber(int[] nums) {
+
+        }
+
+    }
 }
