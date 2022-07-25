@@ -7,4 +7,5 @@ package com.gopher.leetcode.order.or50;
  * @Description: 接雨水
  */
 public class Code42 {
+
 }
