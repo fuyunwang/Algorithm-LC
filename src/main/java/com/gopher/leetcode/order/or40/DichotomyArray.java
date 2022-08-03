@@ -23,7 +23,7 @@ public class DichotomyArray {
                     l=mid+1;
                 }
             }
-            System.out.println(l); // 查找到的左边界
+            System.out.println(r); // 查找到的左边界
             // 查找右边界
             l=0;r=n-1;
             while (l<r) {
